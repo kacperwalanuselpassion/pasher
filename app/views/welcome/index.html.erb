@@ -3,21 +3,50 @@
 
 
     <div class="new-order">
-      <form ng-submit="add()">
-        <input type="text" ng-model="order.name" placeholder="name"/>
-        <input type="text" ng-model="order.founder" placeholder="founder"/>
-        <input type="text" ng-model="order.ordered_at" placeholder="ordered_at"/>
-        <input type="submit" name="create-order" value="create-order" />
+      <form ng-submit="add()" class="form-horizontal">
+        <div class="control-group">
+          <div class="controls">
+            <input type="text" ng-model="order.name" placeholder="name"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <input type="text" ng-model="order.founder" placeholder="founder"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <input type="text" ng-model="order.ordered_at" placeholder="ordered_at"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <input type="submit" name="create-order" class="btn btn-primary" value="create-order"/>
+          </div>
+        </div>
       </form>
     </div>
 
+    <div class="order-wrapper">
+      <ul class="order" ng-repeat="order in orders">
+        <li>
+          <button class="btn-large">{{order.name}} {{order.ordered_at | date:'H:mm' }} {{order.founder}}</button>
+          <a ng-click="remove(order._id)">X</a>
 
-
-    <ul class="order" ng-repeat="order in orders">
-      <li>{{order.name}}</li>
-      <pre> {{order | json}} </pre>
-      <a ng-click="remove(order._id)">remove</a>
-    </ul>
+          <div class="order-details">
+            <p>koszt dostawy: {{order.price}}</p>
+            <ul>
+              <!--<ul class="order-details" ng-repeat="dish in order.dishes">-->
+              <!--<li>{{dish.user_id}} {{dish.description}} {{dish.price}} <a ng-click="remove(dish._id)">X</a></li>-->
+              <li>kacper pizza 20zl <a>X</a></li>
+              <li>kacper pizza 20zl <a>X</a></li>
+              <li>kacper pizza 20zl <a>X</a></li>
+            </ul>
+          </div>
+        </li>
+        <!--<pre> {{order | json}} </pre>-->
+      </ul>
+    </div>
 
   </div>
 </div>
