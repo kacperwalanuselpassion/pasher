@@ -16,4 +16,5 @@
 //= require ng/angular-strap.min
 //= require ng/bootstrap.min
 //= require ng/angular-flash
+//= require ng/bootstrap-timepicker
 //= require app

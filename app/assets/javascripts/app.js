@@ -31,7 +31,6 @@ app.controller('OrdersController', ['$scope', 'Order', function ($scope, Order) 
     };
 
     $scope.add = function() {
-        $scope.order.ordered_at = new Date();
         Order.save($scope.order, function(data){ init(); });
     };
 
