@@ -1,14 +1,30 @@
 module Storage
   class Order
-    def self.all
-      def self.all
-        [self.find(1)] * 5
+    class << self
+
+      def all
+        collection.find()
       end
 
-    end
+      def find id
+        response = collection.find_one(id: id)
 
-    def self.find id
-      ::Order.new({name: 'KFC', delivery_cost: '10', founder: 'fafsf'})
+        ::Order.new(response)
+      end
+
+      def save(order)
+        collection.save(order.attributes)
+      end
+
+
+      private
+      def collection
+        driver.db['orders']
+      end
+
+      def driver
+        Mongo::MongoClient.from_uri ENV['MONGOHQ_URL']
+      end
     end
   end
 end

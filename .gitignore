@@ -15,3 +15,4 @@ capybara-*.html
 rerun.txt
 /config/database.yml
 .idea/
+/.env

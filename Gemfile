@@ -23,6 +23,10 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-debugger'
   gem 'pry'
+  gem 'dotenv'
+  gem 'dotenv-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 gem 'sass-rails', '~> 4.0.0'
