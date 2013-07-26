@@ -14,12 +14,10 @@ class OrdersController < ApplicationController
   end
 
   def update
-    binding.pry
     @order = Storage::Order.find(params[:id])
     @order.update_attributes(params[:order])
 
     Storage::Order.update(@order)
-
     head :no_content
   end
 

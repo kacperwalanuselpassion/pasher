@@ -17,8 +17,7 @@ module Storage
       end
 
       def update(order)
-        binding.pry
-        collection.update( {_id: order._id}, order.attributes, false )
+        collection.update( {_id: BSON::ObjectId(order._id) }, order.attributes)
       end
 
 
