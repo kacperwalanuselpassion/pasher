@@ -1,4 +1,5 @@
 Gapi::Application.routes.draw do
+  get "welcome/index"
   resources :orders, defaults: { format: 'json' }
-  root to: 'orders#index'
+  root to: 'welcome#index'
 end

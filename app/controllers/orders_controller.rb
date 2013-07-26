@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Storage::Order.all
-    respond_with @orders
+    respond_with @orders, root: false
   end
 
   def new
@@ -15,6 +15,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     Storage::Order.save(@order)
+
+    respond_with @order
   end
 
   #def edit
@@ -26,5 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    @order = Storage::Order.find(params[:id])
+    Storage::Order.remove(@order)
   end
 end

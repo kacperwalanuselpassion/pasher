@@ -3,7 +3,7 @@ module Storage
     class << self
 
       def all
-        collection.find()
+        collection.find().sort({_id: -1}).map {|response|  ::Order.new(response)}
       end
 
       def find id

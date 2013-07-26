@@ -1,0 +1,23 @@
+<div div="container" ng-app="app">
+  <div ng-controller="OrdersController">
+
+
+    <div class="new-order">
+      <form ng-submit="add()">
+        <input type="text" ng-model="order.name" placeholder="name"/>
+        <input type="text" ng-model="order.founder" placeholder="founder"/>
+        <input type="text" ng-model="order.ordered_at" placeholder="ordered_at"/>
+        <input type="submit" name="create-order" value="create-order" />
+      </form>
+    </div>
+
+
+
+    <ul class="order" ng-repeat="order in orders">
+      <li>{{order.name}}</li>
+      <pre> {{order | json}} </pre>
+      <a ng-click="remove(order.id)">remove</a>
+    </ul>
+
+  </div>
+</div>

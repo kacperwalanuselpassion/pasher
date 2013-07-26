@@ -10,4 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require_tree .
+//= require ng/jquery.min
+//= require ng/angular.min
+//= require ng/angular-resource.min
+//= require ng/angular-strap.min
+//= require ng/bootstrap.min
+//= require ng/angular-flash
+//= require app
