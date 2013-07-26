@@ -13,6 +13,17 @@ class OrdersController < ApplicationController
     respond_with @order
   end
 
+  def update
+    binding.pry
+    @order = Storage::Order.find(params[:id])
+    @order.update_attributes(params[:order])
+
+    Storage::Order.update(@order)
+
+    head :no_content
+  end
+
+
   def show
     @order = Storage::Order.find(params[:id])
     respond_with @order

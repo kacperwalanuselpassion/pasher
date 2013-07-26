@@ -13,13 +13,18 @@ module Storage
       end
 
       def save(order)
-        collection.save(order.attributes)
+        collection.save( order.attributes )
       end
+
+      def update(order)
+        binding.pry
+        collection.update( {_id: order._id}, order.attributes, false )
+      end
+
 
       def remove(id)
-        collection.remove(_id: BSON::ObjectId(id))
+        collection.remove( _id: BSON::ObjectId(id) )
       end
-
 
       private
       def collection
