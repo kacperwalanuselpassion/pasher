@@ -6,14 +6,15 @@ class OrdersController < ApplicationController
     respond_with @orders
   end
 
-  #def new
-  #end
+  def new
+  end
 
   def update
   end
 
   def create
-    @new_order = Order.create(params[:order])
+    @order = Order.new(params[:order])
+    Storage::Order.save(@order)
   end
 
   #def edit

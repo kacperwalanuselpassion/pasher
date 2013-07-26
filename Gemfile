@@ -27,6 +27,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rspec-rails'
 end
 
 gem 'sass-rails', '~> 4.0.0'
