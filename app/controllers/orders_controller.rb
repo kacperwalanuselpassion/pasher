@@ -1,9 +1,8 @@
 class OrdersController < ApplicationController
-
   respond_to :json
 
   def index
-    @orders = Order.all
+    @orders = Storage::Order.all
 
     respond_with @orders
   end
@@ -21,7 +20,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = Storage::Order.find(params[:id])
   end
 
   def destroy
