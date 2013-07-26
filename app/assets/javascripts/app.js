@@ -44,7 +44,7 @@ app.controller('OrdersController', ['$scope', 'Order', function ($scope, Order) 
     };
 
     $scope.save = function(order) {
-        Order.update({id:order._id}, function(data){ init(); });
+        Order.update({id:order._id}, {order: order}, function(data){ init(); });
     };
 
 
