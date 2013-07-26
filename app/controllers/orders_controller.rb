@@ -6,12 +6,6 @@ class OrdersController < ApplicationController
     respond_with @orders, root: false
   end
 
-  def new
-  end
-
-  def update
-  end
-
   def create
     @order = Order.new(params[:order])
     Storage::Order.save(@order)
@@ -19,16 +13,13 @@ class OrdersController < ApplicationController
     respond_with @order
   end
 
-  #def edit
-  #end
-
   def show
     @order = Storage::Order.find(params[:id])
     respond_with @order
   end
 
   def destroy
-    @order = Storage::Order.find(params[:id])
-    Storage::Order.remove(@order)
+    Storage::Order.remove(params[:id])
+    head :no_content
   end
 end
