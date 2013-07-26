@@ -6,5 +6,4 @@ class Order
     @delivery_cost = attributes[:delivery_cost]
     @founder = attributes[:founder]
   end
-
 end
