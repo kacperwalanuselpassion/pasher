@@ -17,7 +17,17 @@
       <li>{{order.name}}</li>
       <pre> {{order | json}} </pre>
       <a ng-click="remove(order._id)">remove</a>
+      <a ng-click="show(order)">show</a>
     </ul>
 
+  </div>
+
+  <div ng-controller="DishesController">
+    <h2> michy {{order.name}}</h2>
+    <form ng-submit="add()">
+      <input type="text" ng-model="dish.name" />
+      <textarea ng-model="dish.description"></textarea>
+      <input type="submit" name="add-dish-to-order" value="add-dish-to-order" />
+    </form>
   </div>
 </div>
