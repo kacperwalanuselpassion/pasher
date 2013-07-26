@@ -3,6 +3,7 @@
 
 
     <div class="new-order">
+      <h2>new order</h2>
       <form ng-submit="add()" class="form-horizontal">
         <div class="control-group">
           <div class="controls">
@@ -28,20 +29,20 @@
     </div>
 
     <div class="order-wrapper">
+      <h2>orders</h2>
       <ul class="order" ng-repeat="order in orders">
         <li>
-          <button class="btn-large">{{order.name}} {{order.ordered_at | date:'H:mm' }} {{order.founder}}</button>
+          <button class="btn-large btn btn-success">{{order.name}} {{order.ordered_at | date:'H:mm' }}
+            {{order.founder}}
+          </button>
           <a ng-click="remove(order._id)">X</a>
           <a ng-click="show(order)">show</a>
 
           <div class="order-details">
-            <p>koszt dostawy: {{order.price}}</p>
-            <ul>
-              <!--<ul class="order-details" ng-repeat="dish in order.dishes">-->
-              <!--<li>{{dish.user_id}} {{dish.description}} {{dish.price}} <a ng-click="remove(dish._id)">X</a></li>-->
-              <li>kacper pizza 20zl <a>X</a></li>
-              <li>kacper pizza 20zl <a>X</a></li>
-              <li>kacper pizza 20zl <a>X</a></li>
+            <!--<p>koszt dostawy: {{order.price}}</p>-->
+            <!--<ul>-->
+            <ul class="order-details" ng-repeat="dish in order.dishes">
+              <li>{{dish.user_id}} {{dish.description}} {{dish.price}} <a ng-click="remove(dish._id)">X</a></li>
             </ul>
           </div>
         </li>
@@ -50,12 +51,30 @@
     </div>
   </div>
 
-  <div ng-controller="DishesController">
-    <h2> michy {{order.name}}</h2>
-    <form ng-submit="add()">
-      <input type="text" ng-model="dish.name" />
-      <textarea ng-model="dish.description"></textarea>
-      <input type="submit" name="add-dish-to-order" value="add-dish-to-order" />
+  <div ng-controller="DishesController" class="add-dish">
+    <h2>dishes {{order.name}}</h2>
+
+    <form ng-submit="add()" class="form-horizontal">
+      <div class="control-group">
+        <div class="controls">
+          <input type="text" ng-model="dish.user_id" placeholder="user"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <input type="text" ng-model="dish.price" placeholder="price"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <textarea ng-model="dish.description" placeholder="description"></textarea>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <input type="submit" name="add-dish-to-order" class="btn btn-primary" value="add-dish-to-order"/>
+        </div>
+      </div>
     </form>
   </div>
 </div>

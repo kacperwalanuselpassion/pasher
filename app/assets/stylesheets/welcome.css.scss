@@ -1,11 +1,37 @@
+$pageWidth: 600px;
+
+.new-order {
+  width: 100%;
+  background: #ece;
+  padding: 30px 0 50px 0;
+  margin: 0;
+  text-align: center;
+
+  .controls {
+    margin-left: 0;
+  }
+  .form-horizontal {
+    margin: 0 auto;
+    width: $pageWidth;
+    padding: 0;
+  }
+}
+
 .order-wrapper {
   width: 100%;
+  background: #cee;
+  padding: 30px 0 50px 0;
+  text-align: center;
   ul.order {
-    width: 600px;
+    //background: #cdd;
+    width: $pageWidth;
     margin: 0 auto;
     padding: 0;
-    text-align: center;
     list-style-type: none;
+    li {
+      padding: 0;
+      margin: 15px 0;
+    }
     .order-details ul {
       padding: 0;
       margin: 0;
@@ -15,5 +41,20 @@
         margin: 0;
       }
     }
+  }
+}
+
+.add-dish {
+  width: 100%;
+  background: #ace;
+  padding: 30px 0 50px 0;
+  text-align: center;
+  .controls {
+    margin-left: 0;
+    text-align: center;
+  }
+  .form-horizontal {
+    margin: 0 auto;
+    width: $pageWidth;
   }
 }
