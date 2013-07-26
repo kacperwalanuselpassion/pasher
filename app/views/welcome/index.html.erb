@@ -16,7 +16,7 @@
     <ul class="order" ng-repeat="order in orders">
       <li>{{order.name}}</li>
       <pre> {{order | json}} </pre>
-      <a ng-click="remove(order.id)">remove</a>
+      <a ng-click="remove(order._id)">remove</a>
     </ul>
 
   </div>

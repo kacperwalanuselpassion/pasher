@@ -21,7 +21,6 @@ class Order
       delivery_cost: @delivery_cost,
       founder: @founder,
       dishes: @dishes,
-      _id: @_id,
       dishes: @dishes,
       ordered_at: @ordered_at,
       active: @active

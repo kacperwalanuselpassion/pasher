@@ -7,13 +7,17 @@ module Storage
       end
 
       def find id
-        response = collection.find_one(id: id)
+        response = collection.find_one(_id: BSON::ObjectId(id))
 
         ::Order.new(response)
       end
 
       def save(order)
         collection.save(order.attributes)
+      end
+
+      def remove(id)
+        collection.remove(_id: BSON::ObjectId(id))
       end
 
 
