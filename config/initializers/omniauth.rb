@@ -11,7 +11,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   Rails.logger.warn('Auth Domain is not specified. Users are allowed to authenticate using any domain.') if auth_domain.blank?
   Rails.logger.warn('SSL CA File is not specified. Problems may occur when authenticating using Google OAuth 2.0.') if ssl_ca_file.blank?
 
-  oauth2_options                  = {access_type: 'online'}
+  oauth2_options                  = {access_type: 'online', name: 'google_login', approval_prompt: ''}
   oauth2_options[:hd]             = auth_domain if auth_domain.present?
   oauth2_options[:client_options] = {ssl: {ca_file: ssl_ca_file}} if ssl_ca_file.present?
 
