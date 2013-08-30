@@ -7,6 +7,12 @@
 </head>
 <body>
 
+<%= link_to "Sign in", "/auth/google_login" %>
+<% if current_user %>
+    <%= link_to "Sign out", "/sign_out"%>
+    You're logged in as <%= current_user.name %>
+<% end %>
+
 <%= yield %>
 
 <%= javascript_include_tag "application" %>
