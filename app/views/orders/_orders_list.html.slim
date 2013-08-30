@@ -57,4 +57,5 @@ ul.orders-list ng-repeat="order in orders"
             th
               | {{order.total_sum}} PLN
             th
+              button.btn.btn-xs.btn-primary ng-click="finalize(order._id)" finalize
   /pre | {{order | json}}

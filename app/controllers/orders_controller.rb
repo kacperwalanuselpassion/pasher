@@ -29,4 +29,10 @@ class OrdersController < ApplicationController
     OrderManager.new(current_user).remove(params[:id])
     head :no_content
   end
+
+  def finalize
+    @order = Storage::Order.find(params[:id])
+
+    @order.update_attributes(params[:order])
+  end
 end

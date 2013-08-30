@@ -64,6 +64,13 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.$emit('DISH_REMOVED', order);
     };
 
+    $scope.finalize = function (id) {
+        $.ajax({
+            url: 'order_finalize',
+            data: {id: id}
+        });
+    };
+
     $scope.save = function(order) {
         Order.update({id:order._id}, {order: order}, function(data){ init(); });
     };

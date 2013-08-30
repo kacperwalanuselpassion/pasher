@@ -6,11 +6,11 @@ module Storage
         collection.find().sort({_id: -1}).map {|response|  ::Order.new(response)}
       end
 
-      def find id
-        response = collection.find_one(_id: BSON::ObjectId(id))
+        def find id
+          response = collection.find_one(_id: BSON::ObjectId(id))
 
-        ::Order.new(response)
-      end
+          ::Order.new(response)
+        end
 
       def save(order)
         collection.save( order.attributes )
