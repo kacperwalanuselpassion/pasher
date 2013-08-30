@@ -11,6 +11,7 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
 
     $rootScope.$on('ORDER_SELECTED', function(event,message) {
         $scope.order = message;
+        $('.add-dish-wrapper').slideDown('slow');
     });
 
     $scope.add = function() {
@@ -37,11 +38,12 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     };
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
-        $scope.save(order)
+        $('.add-dish-wrapper').slideUp('slow');
+        $scope.save(order);
     });
 
     $rootScope.$on('DISH_REMOVED', function(event,order) {
-        $scope.save(order)
+        $scope.save(order);
     });
 
     $scope.add = function() {
