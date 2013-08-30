@@ -3,7 +3,7 @@ ul.orders-list ng-repeat="order in orders"
   li
     button.btn-large.btn.btn-success ng-click="show(order)"
       | {{order.name}} {{order.ordered_at | date:'H:mm' }}
-      | {{order.founder}}
+      | {{order.founder.name}}
     a.lead.text-danger ng-click="remove(order._id)"
       span.glyphicon.glyphicon-remove
     .order-details

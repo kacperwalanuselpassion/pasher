@@ -6,7 +6,7 @@ class OrderCreator
 
   def save
     @order = Order.new(@order_params)
-    @order.founder = @user.name
+    @order.founder_uid = @user.uid
     Storage::Order.save(@order)
     @order
   end
