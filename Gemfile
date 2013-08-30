@@ -5,6 +5,9 @@ gem 'active_model_serializers'
 gem 'state_machine'
 gem 'mongo'
 gem 'bson_ext'
+gem 'mysql2'
+gem 'omniauth-google-oauth2'
+gem 'protected_attributes'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
