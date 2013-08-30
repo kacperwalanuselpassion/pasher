@@ -24,6 +24,6 @@ ul.orders-list ng-repeat="order in orders"
             td
               | {{dish.price}}
             td
-              a.lead ng-click="remove(dish._id)"
+              a.lead ng-click="removeDish(order, dish)"
                 span.glyphicon.glyphicon-remove.text-danger
   /pre | {{order | json}}

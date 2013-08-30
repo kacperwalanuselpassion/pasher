@@ -40,6 +40,10 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.save(order)
     });
 
+    $rootScope.$on('DISH_REMOVED', function(event,order) {
+        $scope.save(order)
+    });
+
     $scope.add = function() {
         Order.save($scope.order, function(data){ init(); });
     };
@@ -50,6 +54,12 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 
     $scope.remove = function(id) {
         Order.remove({id:id}, function(data){ init(); });
+    };
+
+    $scope.removeDish = function(order, dish) {
+        var index = order.dishes.indexOf(dish);
+        order.dishes.splice(index,1);
+        $scope.$emit('DISH_REMOVED', order);
     };
 
     $scope.save = function(order) {
