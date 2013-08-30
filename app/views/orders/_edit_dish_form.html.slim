@@ -1,6 +1,6 @@
 h2
   | Add dish to
-  span.text-info
+  strong.text-info
     |  {{order.name}}
 a.pull-right.btn-close-new-dish close
 .row
@@ -10,4 +10,4 @@ a.pull-right.btn-close-new-dish close
     .form-group
       input.form-control ng-model="dish.price" placeholder="Price of your meal" type="number" step="any" required=''
     .form-group
-      input.btn.btn-primary name="add-dish-to-order" type="submit" value="Add dish to order"
+      input.btn.btn-success name="add-dish-to-order" type="submit" value="Add dish to order"
