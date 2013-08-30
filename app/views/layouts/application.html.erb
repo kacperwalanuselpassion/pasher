@@ -6,12 +6,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class='no-display' id='data' data-user-name='<%= current_user.name %>'></div>
-<%= link_to "Sign in", "/auth/google_login" %>
-<% if current_user %>
-    <%= link_to "Sign out", "/sign_out"%>
-    You're logged in as <%= current_user.name %>
-<% end %>
+<div class="sign-out-menu">
+    <% unless current_user %>
+        <%= link_to "Sign in", "/auth/google_login" %>
+    <% else %>
+      You're logged in as <%= current_user.name %>
+      |
+      <%= link_to "Sign out", "/sign_out"%>
+        <div class='no-display' id='data' data-user-name='<%= current_user.name %>'></div>
+    <% end %>
+</div>
 
 <%= yield %>
 

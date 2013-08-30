@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = OrderCreator.new(current_user, params[:order]).save
+    @order = OrderManager.new(current_user).save(params[:order])
     respond_with @order
   end
 
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    Storage::Order.remove(params[:id])
+    OrderManager.new(current_user).remove(params[:id])
     head :no_content
   end
 end
