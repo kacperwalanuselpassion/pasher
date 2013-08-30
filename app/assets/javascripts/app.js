@@ -33,6 +33,14 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
 app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($scope, $rootScope, Order) {
     $scope.order = {};
 
+    $scope.isActive = function(order) {
+        return order.active;
+    };
+
+    $scope.isFinalized = function(order) {
+        return !order.active;
+    }
+
     var init = function(){
         $scope.orders = Order.query();
     };
@@ -47,6 +55,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     });
 
     $scope.add = function() {
+        $scope.order.active = true;
         Order.save($scope.order, function(data){ init(); });
     };
 
@@ -68,7 +77,8 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $.ajax({
             url: 'order_finalize',
             data: {id: id}
-        });
+        }).done(function (data) { init(); }
+        ).fail(function(jqXHR, textStatus) { console.log(jqXHR, textStatus) });
     };
 
     $scope.save = function(order) {

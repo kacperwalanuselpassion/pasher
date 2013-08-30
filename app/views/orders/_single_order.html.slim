@@ -1,0 +1,63 @@
+button.btn-large.btn.btn-success ng-click="show(order)"
+  table.order-description
+    tr
+      td
+        | Restaurant:
+      td
+        strong
+          | {{order.name}}
+    tr
+      td
+        | Ordered at:
+      td
+        strong
+          | {{order.ordered_at | date:'H:mm' }}
+    tr
+      td
+        | Created by:
+      td
+        strong
+          | {{order.founder.name}}
+.order-details
+  p
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th Ordered by
+        th Dish
+        th Price
+        - if active
+          th
+            button.btn.btn-xs.btn-danger ng-click="remove(order._id)" remove order
+    tbody
+      tr ng-repeat="dish in order.dishes"
+        td
+          | {{dish.user_id}}
+        td
+          | {{dish.description}}
+        td
+          | {{dish.price}} PLN
+        - if active
+          td
+            a.text-danger ng-click="removeDish(order, dish)"
+              span remove
+    tfoot
+      tr ng-show="order.delivery_cost"
+        td
+        td
+          | Delivery cost
+        td
+          | {{order.delivery_cost}} PLN
+        - if active
+          td
+      tr
+        th
+        th
+        th
+          | {{order.total_sum}} PLN
+        - if active
+          th
+            button.btn.btn-xs.btn-primary ng-click="finalize(order._id)" finalize
+  - unless active
+    .alert.alert-info
+      | Executor: {{ order.executor }}

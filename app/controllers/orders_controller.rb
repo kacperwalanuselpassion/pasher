@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = OrderManager.new(current_user).save(params[:order])
+    @order.active = true
     respond_with @order
   end
 
@@ -33,6 +34,16 @@ class OrdersController < ApplicationController
   def finalize
     @order = Storage::Order.find(params[:id])
 
-    @order.update_attributes(params[:order])
+    members = @order.dishes.map{|m| m['user_id']}
+
+    @order.executor = members.sample
+    @order.active = false
+
+    if Storage::Order.update(@order)
+      render json: {executor: @order.executor}
+    else
+      render json: {error: 'Eror saving order.'}
+    end
+
   end
 end

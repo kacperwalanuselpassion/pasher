@@ -2,7 +2,7 @@ class Order
   extend ActiveModel::Naming
   include ActiveModel::SerializerSupport
 
-  attr_accessor :name, :delivery_cost, :founder_uid, :_id, :ordered_at
+  attr_accessor :name, :delivery_cost, :founder_uid, :_id, :ordered_at, :active, :executor
   attr_accessor :dishes
 
   def initialize(attributes)
@@ -17,7 +17,8 @@ class Order
       dishes: @dishes,
       dishes: @dishes,
       ordered_at: @ordered_at,
-      active: @active
+      active: @active,
+      executor: @executor
     }
   end
 
@@ -29,6 +30,7 @@ class Order
     @dishes = attributes['dishes'] || []
     @ordered_at = attributes['ordered_at']
     @active     = !!attributes['active']
+    @executor = attributes['executor']
   end
 
   def add_dish(dish)

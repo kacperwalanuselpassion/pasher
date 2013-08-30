@@ -1,61 +1,11 @@
 button.btn-add-order.btn.btn-primary Add new order
+
 h2 Active orders
-ul.orders-list ng-repeat="order in orders"
+ul.orders-list ng-repeat="order in orders | filter:isActive"
   li
-    button.btn-large.btn.btn-success ng-click="show(order)"
-      table.order-description
-        tr
-          td
-            | Restaurant:
-          td
-            strong
-              | {{order.name}}
-        tr
-          td
-            | Ordered at:
-          td
-            strong
-              | {{order.ordered_at | date:'H:mm' }}
-        tr
-          td
-            | Created by:
-          td
-            strong
-              | {{order.founder.name}}
-    .order-details
-      p
-      table.table.table-striped.table-hover
-        thead
-          tr
-            th Ordered by
-            th Dish
-            th Price
-            th
-              button.btn.btn-xs.btn-danger ng-click="remove(order._id)" remove order
-        tbody
-          tr ng-repeat="dish in order.dishes"
-            td
-              | {{dish.user_id}}
-            td
-              | {{dish.description}}
-            td
-              | {{dish.price}} PLN
-            td
-              a.text-danger ng-click="removeDish(order, dish)"
-                span remove
-          tr ng-show="order.delivery_cost"
-            td
-            td
-              | Delivery cost
-            td
-              | {{order.delivery_cost}} PLN
-            td
-        tfoot
-          tr
-            th
-            th
-            th
-              | {{order.total_sum}} PLN
-            th
-              button.btn.btn-xs.btn-primary ng-click="finalize(order._id)" finalize
-  /pre | {{order | json}}
+    = render partial: 'orders/single_order', locals: {active: true}
+
+h2 Finalized orders
+ul.orders-list ng-repeat="order in orders | filter:isFinalized"
+  li
+    = render partial: 'orders/single_order', locals: {active: false}
