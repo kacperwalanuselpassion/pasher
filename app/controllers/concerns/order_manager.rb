@@ -1,4 +1,4 @@
-class OrderCreator
+class OrderManager
   def initialize(user, order_params)
     @user = user
     @order_params = order_params
