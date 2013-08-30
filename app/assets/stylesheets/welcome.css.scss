@@ -2,6 +2,10 @@
   display: none;
 }
 
+a {
+  cursor: pointer;
+}
+
 .new-order-wrapper {
   background: #dec;
   .new-order {
@@ -26,9 +30,6 @@
     li {
       padding: 0;
       margin: 15px 0;
-      a {
-        cursor: pointer;
-      }
     }
     .order-description {
       text-align: left;

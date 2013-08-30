@@ -1,4 +1,13 @@
+#data.no-display data-user-name="#{current_user.name}"
 div ng-app="app"
+  .sign-out-menu.clearfix
+    .pull-left
+      = "You're logged in as "
+      strong
+        = current_user.name
+    .pull-right
+      = link_to 'Sign out', '/sign_out'
+
   div ng-controller="OrdersController"
 
     .new-order-wrapper.row.no-display

@@ -5,6 +5,9 @@ h2
 a.pull-right.btn-close-new-dish close
 .row
   form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
-    textarea.form-control ng-model="dish.description" placeholder="What do you order?" required=''
-    input.form-control ng-model="dish.price" placeholder="Price of your meal" type="number" step="any" required=''
-    input.btn.btn-primary name="add-dish-to-order" type="submit" value="Add dish to order"
+    .form-group
+      textarea.form-control ng-model="dish.description" placeholder="What do you order?" required=''
+    .form-group
+      input.form-control ng-model="dish.price" placeholder="Price of your meal" type="number" step="any" required=''
+    .form-group
+      input.btn.btn-primary name="add-dish-to-order" type="submit" value="Add dish to order"
