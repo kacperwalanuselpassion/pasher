@@ -1,0 +1,63 @@
+div ng-app="app"
+  div ng-controller="OrdersController"
+    .new-order-wrapper.row
+      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
+        .new-order.text-center
+          h2 New order
+          .row
+            form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
+              input.form-control ng-model="order.name" placeholder="Where do you order?" type="text"
+              input.form-control ng-model="order.founder" placeholder="Your nickname" type="text"
+              .input-group
+                input.form-control bs-timepicker="" ng-model="order.ordered_at" placeholder="Estimated time of ordering" type="text"
+                span.input-group-addon.btn data-toggle="timepicker" type="button"
+                  span.glyphicon.glyphicon-time
+              input.btn.btn-primary name="create-order" type="submit" value="Create order"
+    .orders-wrapper.row
+      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
+        .orders.text-center
+          h2 Active orders
+          ul.orders-list ng-repeat="order in orders"
+            li
+              button.btn-large.btn.btn-success ng-click="show(order)"
+                | {{order.name}} {{order.ordered_at | date:'H:mm' }}
+                | {{order.founder}}
+              a.text-danger ng-click="remove(order._id)"
+                span.glyphicon.glyphicon-remove
+              a.text-success ng-click="show(order)"
+                span.glyphicon.glyphicon-plus
+              a ng-click="save(order)"
+                | save
+              .order-details
+                p koszt dostawy: {{order.price}}
+                table.table.table-striped.table-hover
+                  thead
+                    tr
+                      th Ordered by
+                      th Dish
+                      th Price
+                  tbody
+                    tr ng-repeat="dish in order.dishes"
+                      td
+                        | {{dish.user_id}}
+                      td
+                        | {{dish.description}}
+                      td
+                        | {{dish.price}}
+                      td
+                        a ng-click="remove(dish._id)"
+                          span.glyphicon.glyphicon-remove.text-danger
+            /pre | {{order | json}}
+    .add-dish-wrapper.row ng-controller="DishesController" ng-show="order._id"
+      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
+        .add-dish.text-center
+          h2
+            | Add dish to
+            span.text-info
+              |  {{order.name}}
+          .row
+            form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
+              input.form-control ng-model="dish.user_id" placeholder="Your nickname" type="text"
+              textarea.form-control ng-model="dish.description" placeholder="What do you order?"
+              input.form-control ng-model="dish.price" placeholder="Price of your meal" type="text"
+              input.btn.btn-primary name="add-dish-to-order" type="submit" value="Add dish to order"

@@ -8,7 +8,6 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
     $scope.dish  = {};
 
     $rootScope.$on('ORDER_SELECTED', function(event,message) {
-        console.log(message);
         $scope.order = message;
     });
 
@@ -24,7 +23,7 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
 }]);
 
 app.controller('OrdersController', ['$scope', 'Order', function ($scope, Order) {
-    $scope.order  = {};
+    $scope.order = {};
 
     var init = function(){
         $scope.orders = Order.query();
