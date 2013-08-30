@@ -4,8 +4,10 @@ var app = angular.module('app', ['flash', '$strap.directives', 'ngResource']);
 //     $routeProvider.when('/', { templateUrl: '/assets/patents/index.html', controller: 'OrdersController' });
 // }]);
 app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $rootScope) {
-    $scope.order = {};
-    $scope.dish  = {};
+    var initEmpty = function() {
+        $scope.order = {};
+        $scope.dish  = {};
+    };
 
     $rootScope.$on('ORDER_SELECTED', function(event,message) {
         $scope.order = message;
@@ -13,6 +15,8 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
 
     $scope.add = function() {
         $scope.order.dishes.push($scope.dish);
+        $scope.$emit('DISH_ADDED', $scope.order);
+        initEmpty();
     };
 
     $scope.remove = function(dish) {
@@ -20,14 +24,20 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
         $scope.dishes.splice(index,1);
     };
 
+    initEmpty();
+
 }]);
 
-app.controller('OrdersController', ['$scope', 'Order', function ($scope, Order) {
+app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($scope, $rootScope, Order) {
     $scope.order = {};
 
     var init = function(){
         $scope.orders = Order.query();
     };
+
+    $rootScope.$on('DISH_ADDED', function(event,order) {
+        $scope.save(order)
+    });
 
     $scope.add = function() {
         Order.save($scope.order, function(data){ init(); });
@@ -44,7 +54,6 @@ app.controller('OrdersController', ['$scope', 'Order', function ($scope, Order) 
     $scope.save = function(order) {
         Order.update({id:order._id}, {order: order}, function(data){ init(); });
     };
-
 
     init();
 
