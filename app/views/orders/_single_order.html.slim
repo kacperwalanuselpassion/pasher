@@ -1,23 +1,9 @@
-button.btn-large.btn.btn-primary ng-click="show(order)"
-  table.order-description
-    tr
-      td
-        | Restaurant:
-      td
-        strong
-          | {{order.name}}
-    tr
-      td
-        | Ordered at:
-      td
-        strong
-          | {{order.ordered_at | date:'H:mm' }}
-    tr
-      td
-        | Created by:
-      td
-        strong
-          | {{order.founder.name}}
+- if active
+  button.btn-large.btn.btn-primary ng-click="show(order)"
+    = render partial: 'orders/order_button'
+- else
+  button.btn-large.btn.btn-danger ng-click="remove(order._id)"
+    = render partial: 'orders/order_button'
 .order-details
   p.url-field
     a ng-show="order.url" href="{{ order.url }}"
@@ -61,5 +47,5 @@ button.btn-large.btn.btn-primary ng-click="show(order)"
           th
             button.btn.btn-xs.btn-success ng-click="finalize(order._id)" finalize
   - unless active
-    .alert.alert-info
+    .alert.alert-info ng-show="order.executor"
       | Executor: {{ order.executor }}
