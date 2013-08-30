@@ -6,13 +6,12 @@ div ng-app="app"
         .new-order.text-center
           = render partial: 'orders/edit_order_form'
 
-    .orders-wrapper.row
-      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
-        .orders.text-center
-          = render partial: 'orders/orders_list'
-
-    .add-dish-wrapper.row ng-controller="DishesController" ng-show="order._id"
+    .add-dish-wrapper.row.no-display ng-controller="DishesController"
       .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
         .add-dish.text-center
           = render partial: 'orders/edit_dish_form'
 
+    .orders-wrapper.row
+      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
+        .orders.text-center
+          = render partial: 'orders/orders_list'

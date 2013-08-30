@@ -22,8 +22,6 @@ ul.orders-list ng-repeat="order in orders"
           td
             strong
               | {{order.founder.name}}
-    a.lead.text-danger ng-click="remove(order._id)"
-      span.glyphicon.glyphicon-remove
     .order-details
       p koszt dostawy: {{order.price}}
       table.table.table-striped.table-hover
@@ -32,6 +30,8 @@ ul.orders-list ng-repeat="order in orders"
             th Ordered by
             th Dish
             th Price
+            th
+              button.btn.btn-xs.btn-danger ng-click="remove(order._id)" remove order
         tbody
           tr ng-repeat="dish in order.dishes"
             td
@@ -41,6 +41,6 @@ ul.orders-list ng-repeat="order in orders"
             td
               | {{dish.price}} PLN
             td
-              a.lead ng-click="removeDish(order, dish)"
-                span.glyphicon.glyphicon-remove.text-danger
+              a.text-danger ng-click="removeDish(order, dish)"
+                span remove
   /pre | {{order | json}}
