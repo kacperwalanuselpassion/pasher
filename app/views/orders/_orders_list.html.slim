@@ -3,8 +3,25 @@ h2 Active orders
 ul.orders-list ng-repeat="order in orders"
   li
     button.btn-large.btn.btn-success ng-click="show(order)"
-      | {{order.name}} {{order.ordered_at | date:'H:mm' }}
-      | {{order.founder.name}}
+      table.order-description
+        tr
+          td
+            | Restaurant:
+          td
+            strong
+              | {{order.name}}
+        tr
+          td
+            | Ordered at:
+          td
+            strong
+              | {{order.ordered_at | date:'H:mm' }}
+        tr
+          td
+            | Created by:
+          td
+            strong
+              | {{order.founder.name}}
     a.lead.text-danger ng-click="remove(order._id)"
       span.glyphicon.glyphicon-remove
     .order-details
