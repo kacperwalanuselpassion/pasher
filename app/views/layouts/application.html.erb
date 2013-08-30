@@ -6,7 +6,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<div class='no-display' id='data' data-user-name='<%= current_user.name %>'></div>
 <%= link_to "Sign in", "/auth/google_login" %>
 <% if current_user %>
     <%= link_to "Sign out", "/sign_out"%>
