@@ -6,15 +6,21 @@ a {
   cursor: pointer;
 }
 
-.new-order-wrapper {
-  background: #eee;
-  .new-order {
-    padding: 20px 0;
-    margin: 0 auto;
-    max-width: 90%;
-  }
+.required, input[required], textarea[required] {
+  border-color: #b94a48;
 }
 
+
+.new-order-wrapper
+{
+  background: #eee;
+.new-order {
+  padding: 20px 0;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+}
 
 .orders-wrapper {
   background: #fdfdfd;
