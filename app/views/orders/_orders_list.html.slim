@@ -23,7 +23,7 @@ ul.orders-list ng-repeat="order in orders"
             strong
               | {{order.founder.name}}
     .order-details
-      p koszt dostawy: {{order.price}}
+      p
       table.table.table-striped.table-hover
         thead
           tr
@@ -43,4 +43,18 @@ ul.orders-list ng-repeat="order in orders"
             td
               a.text-danger ng-click="removeDish(order, dish)"
                 span remove
+          tr ng-show="order.delivery_cost"
+            td
+            td
+              | Delivery cost
+            td
+              | {{order.delivery_cost}} PLN
+            td
+        tfoot
+          tr
+            th
+            th
+            th
+              | {{order.total_sum}} PLN
+            th
   /pre | {{order | json}}
