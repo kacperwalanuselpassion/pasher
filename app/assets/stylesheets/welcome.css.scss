@@ -1,12 +1,5 @@
-$pageWidth: 700px;
-@mixin gradient-bg($from, $to) {
-  background-color: $from;
-// background-image: url(images/fallback-gradient.png);
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
-  background-image: -webkit-linear-gradient(top, $from, $to);
-  background-image: -moz-linear-gradient(top, $from, $to);
-  background-image: -ms-linear-gradient(top, $from, $to);
-  background-image: -o-linear-gradient(top, $from, $to);
+.no-display {
+  display: none;
 }
 
 .new-order-wrapper {
@@ -15,11 +8,6 @@ $pageWidth: 700px;
     padding: 20px 0;
     margin: 0 auto;
     max-width: 90%;
-    .form-horizontal {
-      margin: 0 auto;
-      width: $pageWidth;
-      padding: 0;
-    }
   }
 }
 
