@@ -7,9 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(params[:order])
-    Storage::Order.save(@order)
-
+    @order = OrderCreator.new(current_user, params[:order]).save
     respond_with @order
   end
 
