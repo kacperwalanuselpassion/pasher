@@ -19,7 +19,9 @@ button.btn-large.btn.btn-primary ng-click="show(order)"
         strong
           | {{order.founder.name}}
 .order-details
-  p
+  p.url-field
+    a ng-show="order.url" href="{{ order.url }}"
+      | {{ order.name }}
   table.table.table-striped.table-hover
     thead
       tr
