@@ -1,9 +1,9 @@
 h2 New order
 .row
   form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
-    input.form-control ng-model="order.name" placeholder="Where do you order?" type="text"
+    input.form-control ng-model="order.name" placeholder="Where do you order?" type="text" required=''
     .input-group
-      input.form-control bs-timepicker="" ng-model="order.ordered_at" placeholder="Estimated time of ordering" type="text"
+      input.form-control bs-timepicker="" ng-model="order.ordered_at" placeholder="Estimated time of ordering" type="text" required=''
       span.input-group-addon.btn data-toggle="timepicker" type="button"
         span.glyphicon.glyphicon-time
     input.btn.btn-primary name="create-order" type="submit" value="Create order"
