@@ -5,7 +5,7 @@ gem 'active_model_serializers'
 gem 'state_machine'
 gem 'mongo'
 gem 'bson_ext'
-gem 'mysql2'
+gem 'pg'
 gem 'omniauth-google-oauth2'
 gem 'protected_attributes'
 
