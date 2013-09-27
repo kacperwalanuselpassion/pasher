@@ -27,7 +27,6 @@ group :development, :test do
   gem 'pry-debugger'
   gem 'pry'
   gem 'dotenv'
-  gem 'dotenv-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails'
