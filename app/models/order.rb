@@ -32,16 +32,18 @@ class Order
     @ordered_at = attributes['ordered_at']
     @active     = !!attributes['active']
     @executor = attributes['executor']
-    @url = attributes['url']
+    @url = parse_url(attributes['url'])
   end
 
   def add_dish(dish)
     dishes << dish
   end
 
-  def url
-    unless @url.nil? || @url[/^:\/\//]
-      @url = 'http://' + @url
+  def parse_url(url)
+    if url.nil? || url[/:\/\//]
+      url
+    else
+      'http://' + url
     end
   end
 end
