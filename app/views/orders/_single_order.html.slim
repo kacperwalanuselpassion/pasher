@@ -2,7 +2,7 @@
   button.btn-large.btn.btn-primary ng-click="show(order)"
     = render partial: 'orders/order_button'
 - else
-  button.btn-large.btn.btn-danger ng-click="remove(order._id)"
+  button.btn-large.btn.btn-danger ng-click="removeOrder(order)"
     = render partial: 'orders/order_button'
 .order-details
   p.url-field
@@ -16,7 +16,7 @@
         th Price
         - if active
           th
-            button.btn.btn-xs.btn-danger ng-click="remove(order._id)" remove order
+            button.btn.btn-xs.btn-danger ng-click="removeOrder(order)" remove order
     tbody
       tr ng-repeat="dish in order.dishes"
         td

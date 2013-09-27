@@ -21,11 +21,6 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
         initEmpty();
     };
 
-    $scope.remove = function(dish) {
-        var index = $scope.dishes.indexOf(dish);
-        $scope.dishes.splice(index,1);
-    };
-
     initEmpty();
 
 }]);
@@ -63,14 +58,17 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.$emit('ORDER_SELECTED', order);
     };
 
-    $scope.remove = function(id) {
-        Order.remove({id:id}, function(data){ init(); });
+    $scope.removeOrder = function(order) {
+        if (confirm('Are you sure you want to remove order ' + order.name + '?'))
+            Order.remove({id:order._id}, function(data){ init(); });
     };
 
     $scope.removeDish = function(order, dish) {
         var index = order.dishes.indexOf(dish);
-        order.dishes.splice(index,1);
-        $scope.$emit('DISH_REMOVED', order);
+        if (confirm('Are you sure you want to remove dish ' + dish.description + '?')) {
+            order.dishes.splice(index,1);
+            $scope.$emit('DISH_REMOVED', order);
+        }
     };
 
     $scope.finalize = function (id) {
