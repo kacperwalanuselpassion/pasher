@@ -27,7 +27,11 @@ module Storage
 
       private
       def collection
-        driver.db['orders']
+        driver.db(database_name)['orders']
+      end
+
+      def database_name
+        ENV['MONGOHQ_URL'].split('/')[-1]
       end
 
       def driver
