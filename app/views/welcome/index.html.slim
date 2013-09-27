@@ -1,12 +1,19 @@
 #data.no-display data-user-name="#{current_user.name}"
 div ng-app="app"
-  .sign-out-menu.clearfix
-    .pull-left
-      = "You're logged in as "
-      strong
-        = current_user.name
-    .pull-right
-      = link_to 'Sign out', '/sign_out'
+  nav.navbar.navbar-default role='navigation'
+    .navbar-header
+      button.navbar-toggle type='button' data-toggle='collapse' data-target='.navbar-pasher-collapse'
+      a.navbar-brand href='#' El Pasher
+    .collapse.navbar-collapse.navbar-pasher-collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          = link_to 'I have a problem with this app', 'https://github.com/godot/pasher/issues/new'
+        li
+          = link_to 'Sign out', '/sign_out'
+  .logged-in-text
+    = "You're logged in as "
+    strong
+      = current_user.name
 
   div ng-controller="OrdersController"
 
