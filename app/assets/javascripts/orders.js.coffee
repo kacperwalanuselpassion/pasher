@@ -19,6 +19,7 @@ class window.Order
 
     @closeNewOrderButton.on 'click', (event) =>
       @newOrderDiv.slideUp('slow')
+      @newOrderButton.removeClass('hide')
     @closeNewDishButton.on 'click', (event) =>
       @newDishDiv.slideUp('slow')
 
