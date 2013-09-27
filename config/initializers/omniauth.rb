@@ -1,4 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
+  Rails.logger.info(Rails.env)
   google_client_id     = ENV['GOOGLE_CLIENT_ID']
   google_client_secret = ENV['GOOGLE_CLIENT_SECRET']
   auth_domain          = ENV['AUTH_DOMAIN']
