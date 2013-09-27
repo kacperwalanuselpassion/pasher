@@ -1,7 +1,6 @@
 class OrderSerializer < ActiveModel::Serializer
   self.root = false
 
-
   attributes :_id, :name, :ordered_at, :founder, :founder_uid, :active, :dishes, :delivery_cost, :total_sum, :executor, :url
 
   def founder

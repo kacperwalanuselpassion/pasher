@@ -3,6 +3,33 @@ var app = angular.module('app', ['flash', '$strap.directives', 'ngResource']);
 // app.config( ['$routeProvider', function ($routeProvider) {
 //     $routeProvider.when('/', { templateUrl: '/assets/patents/index.html', controller: 'OrdersController' });
 // }]);
+
+app.factory('Order', ['$resource', function($resource) {
+    var service = $resource(
+        '/orders/:id',
+        {id:'@id'},
+        {
+            query:   {method:'GET',  params:{}, isArray:true},
+            update:  {method:'PUT' }
+        }
+    );
+    return service;
+}]);
+
+
+app.factory('ChatMessageDAO', ['$resource', function ($resource) {
+    var service = $resource(
+        '/chat_messages/:id',
+        {},
+        {
+            index: { method: 'GET', isArray: true },
+            create: { method: 'POST' },
+            destroy: { method: 'DELETE' }
+        }
+    );
+    return service;
+}]);
+
 app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $rootScope) {
     var initEmpty = function() {
         $scope.order = {};
@@ -38,6 +65,14 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 
     var init = function(){
         $scope.orders = Order.query();
+        $scope.anyActiveOrders = false;
+        $scope.anyFinalizedOrders = false;
+        for (order in $scope.orders) {
+            if ($scope.orders[order].active)
+                $scope.anyActiveOrders = true;
+            else
+                $scope.anyFinalizedOrders = true;
+        }
     };
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
@@ -87,15 +122,17 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 
 }]);
 
+app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', function ($scope, $rootScope, ChatMessageDAO) {
+    var init = function() {
+        $scope.chatMessages = ChatMessageDAO.index();
+        $scope.chatMessageText = '';
+    };
 
-app.factory('Order', ['$resource', function($resource) {
-    var service = $resource(
-        '/orders/:id',
-        {id:'@id'},
-        {
-            query:   {method:'GET',  params:{}, isArray:true},
-            update:  {method:'PUT' }
-        }
-    );
-    return service;
+    $scope.sendMessage = function() {
+        ChatMessageDAO.create({text: $scope.chatMessageText}, function(data) {
+            init();
+        })
+    };
+
+    init();
 }]);

@@ -3,31 +3,38 @@ div ng-app="app"
   nav.navbar.navbar-default role='navigation'
     .navbar-header
       button.navbar-toggle type='button' data-toggle='collapse' data-target='.navbar-pasher-collapse'
-      a.navbar-brand href='#' El Pasher
+      a href='#'
+        = image_tag image_path('pasher_logo.png'), class: 'pasher-logo'
     .collapse.navbar-collapse.navbar-pasher-collapse
       ul.nav.navbar-nav.navbar-right
         li
-          = link_to 'I have a problem with this app', 'https://github.com/godot/pasher/issues/new', title: 'Report an issue on GitHub'
+          = link_to 'Add new order', '#', class: 'btn-add-order'
         li
-          = link_to 'Sign out', '/sign_out'
-  .logged-in-text
-    = "You're logged in as "
-    strong
-      = current_user.name
+          = link_to 'Report a problem', 'https://github.com/godot/pasher/issues/new', title: 'Report an issue on GitHub'
+        li.dropdown
+          a.dropdown-toggle data-toggle='dropdown' href='#'
+            = current_user.name
+            b.caret
+          ul.dropdown-menu
+            li
+              = link_to 'Sign out', '/sign_out'
 
-  div ng-controller="OrdersController"
 
-    .new-order-wrapper.row.no-display
-      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
-        .new-order.text-center
-          = render partial: 'orders/edit_order_form'
+  .row
+    .pasher-wrapper.col-lg-8.col-md-8.col-sm-12.col-xs-12.col-lg-push-4.col-md-push-4
+      div ng-controller="OrdersController"
 
-    .add-dish-wrapper.row.no-display ng-controller="DishesController"
-      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
-        .add-dish.text-center
-          = render partial: 'orders/edit_dish_form'
+        .new-order-wrapper.row.no-display
+          .new-order.text-center
+            = render partial: 'orders/edit_order_form'
 
-    .orders-wrapper.row
-      .col-lg-8.col-md-8.col-sm-8.col-xs-12.col-lg-offset-2.col-md-offset-2.col-sm-offset-2
-        .orders.text-center
-          = render partial: 'orders/orders_list'
+        .add-dish-wrapper.row.no-display ng-controller="DishesController"
+          .add-dish.text-center
+            = render partial: 'orders/edit_dish_form'
+
+        .orders-wrapper.row
+          .orders.text-center
+            = render partial: 'orders/orders_list'
+
+    .chat-wrapper.col-lg-4.col-md-4.col-sm-12.col-xs-12.col-lg-pull-8.col-md-pull-8
+      = render partial: 'chat/chat'

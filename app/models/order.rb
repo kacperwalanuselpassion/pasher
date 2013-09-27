@@ -15,11 +15,10 @@ class Order
       delivery_cost: @delivery_cost,
       founder_uid: @founder_uid,
       dishes: @dishes,
-      dishes: @dishes,
       ordered_at: @ordered_at,
       active: @active,
       executor: @executor,
-      url: url
+      url: @url
     }
   end
 
@@ -39,6 +38,7 @@ class Order
     dishes << dish
   end
 
+  protected
   def parse_url(url)
     if url.nil? || url[/:\/\//]
       url

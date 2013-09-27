@@ -7,6 +7,7 @@ Gapi::Application.routes.draw do
 
   get 'order_finalize', to: 'orders#finalize'
   resources :orders, defaults: { format: 'json' }
+  resources :chat_messages, defaults: { format: 'json' }
 
   root to: 'welcome#index'
 end
