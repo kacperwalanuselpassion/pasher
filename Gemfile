@@ -33,6 +33,10 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 gem 'haml'
 gem 'slim'
 gem 'sass-rails', '~> 4.0.0'
