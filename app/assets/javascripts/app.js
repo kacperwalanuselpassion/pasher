@@ -124,8 +124,13 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 
 app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', function ($scope, $rootScope, ChatMessageDAO) {
     var init = function() {
-        $scope.chatMessages = ChatMessageDAO.index();
         $scope.chatMessageText = '';
+        chatPolling();
+    };
+
+    var chatPolling = function() {
+        $scope.chatMessages = ChatMessageDAO.index();
+        setTimeout(chatPolling, 1000);
     };
 
     $scope.sendMessage = function() {
