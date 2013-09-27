@@ -8,8 +8,6 @@ gem 'bson_ext'
 gem 'mysql2'
 gem 'omniauth-google-oauth2'
 gem 'protected_attributes'
-gem 'dotenv'
-gem 'dotenv-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -25,8 +23,10 @@ end
 #
 group :development, :test do
   gem 'quiet_assets'
+  gem 'dotenv-rails'
   gem 'pry-debugger'
   gem 'pry'
+  gem 'dotenv'
   gem 'dotenv-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
