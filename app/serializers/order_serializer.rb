@@ -12,6 +12,7 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def total_sum
+    return if dishes.nil?
     dishes.map{|d| d['price'] || 0}.sum + (object.delivery_cost || 0)
   end
 end

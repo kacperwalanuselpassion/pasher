@@ -47,7 +47,7 @@ class Order
         @dishes << dish
       end
     end
-    @dishes = @dishes.uniq
+    @dishes = @dishes.try(:uniq)
   end
 
   def parse_url(url)
