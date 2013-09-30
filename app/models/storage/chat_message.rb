@@ -3,8 +3,7 @@ module Storage
     class << self
 
       def all(limit = 50)
-        skipped = collection.count() - limit
-        collection.find().skip(skipped).sort({_id: 1}).map { |response| ::ChatMessage.new(response) }
+        collection.find().sort({_id: -1}).limit(limit).map { |response| ::ChatMessage.new(response) }
       end
 
       def save(chat_message)

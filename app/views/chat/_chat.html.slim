@@ -1,4 +1,7 @@
 #chat ng-controller='ChatController'
+  form method='post' ng-submit='sendMessage()'
+    input.form-control type='text' ng-model='chatMessageText'
+
   ul
     li ng-repeat='message in chatMessages'
       .message-author
@@ -6,5 +9,3 @@
       .message-text
         | {{ message.text }}
 
-  form method='post' ng-submit='sendMessage()'
-    input.form-control type='text' ng-model='chatMessageText'
