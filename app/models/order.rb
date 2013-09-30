@@ -27,7 +27,7 @@ class Order
     @name = attributes['name']
     @delivery_cost = attributes['delivery_cost']
     @founder_uid = attributes['founder_uid']
-    @dishes = attributes['dishes'] || []
+    update_dishes(attributes['dishes'])
     @ordered_at = attributes['ordered_at']
     @active     = !!attributes['active']
     @executor = attributes['executor']
@@ -39,6 +39,13 @@ class Order
   end
 
   protected
+  def update_dishes(new_dishes)
+    new_dishes.each do |dish|
+      @dishes << dish
+    end
+    @dishes = @dishes.uniq
+  end
+
   def parse_url(url)
     if url.nil? || url[/:\/\//]
       url
