@@ -63,16 +63,19 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         return !order.active;
     }
 
-    var init = function(){
-        $scope.orders = Order.query();
-        $scope.anyActiveOrders = false;
-        $scope.anyFinalizedOrders = false;
+    var initializeActiveAndFinalized = function() {
         for (order in $scope.orders) {
             if ($scope.orders[order].active)
                 $scope.anyActiveOrders = true;
             else
                 $scope.anyFinalizedOrders = true;
         }
+    };
+
+    var init = function(){
+        $scope.anyActiveOrders = false;
+        $scope.anyFinalizedOrders = false;
+        $scope.orders = Order.query(initializeActiveAndFinalized);
     };
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
@@ -87,6 +90,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     $scope.add = function() {
         $scope.order.active = true;
         Order.save($scope.order, function(data){ init(); });
+        $scope.order = {};
     };
 
     $scope.show = function(order) {
