@@ -40,8 +40,12 @@ class Order
 
   protected
   def update_dishes(new_dishes)
-    new_dishes.each do |dish|
-      @dishes << dish
+    if @dishes.nil?
+      @dishes = new_dishes
+    else
+      new_dishes.each do |dish|
+        @dishes << dish
+      end
     end
     @dishes = @dishes.uniq
   end
