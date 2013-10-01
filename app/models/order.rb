@@ -40,6 +40,7 @@ class Order
 
   protected
   def update_dishes(new_dishes)
+    new_dishes ||= []
     if @dishes.nil?
       @dishes = new_dishes
     else
