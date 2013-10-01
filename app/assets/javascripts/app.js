@@ -47,6 +47,8 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
 
     $scope.add = function() {
         $scope.dish.user_id = $('#data').data('user-name');
+        if ($scope.order.dishes == undefined || $scope.order.dishes == null)
+            $scope.order.dishes = [];
         $scope.order.dishes.push($scope.dish);
         $scope.$emit('DISH_ADDED', $scope.order);
         initEmpty();
