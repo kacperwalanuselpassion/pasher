@@ -1,3 +1,7 @@
+CHAT_POLLING_INTERVAL = 2000;
+ORDERS_POLLING_INTERVAL = 4500;
+
+
 var app = angular.module('app', ['flash', '$strap.directives', 'ngResource']);
 
 // app.config( ['$routeProvider', function ($routeProvider) {
@@ -78,6 +82,11 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.orders = Order.query(initializeActiveAndFinalized);
     };
 
+    $scope.refreshOrders = function() {
+        init();
+        setTimeout($scope.refreshOrders, ORDERS_POLLING_INTERVAL);
+    };
+
     $rootScope.$on('DISH_ADDED', function(event,order) {
         $('.add-dish-wrapper').slideUp('slow');
         $scope.save(order);
@@ -134,7 +143,7 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
 
     var chatPolling = function() {
         $scope.chatMessages = ChatMessageDAO.index();
-        setTimeout(chatPolling, 1000);
+        setTimeout(chatPolling, CHAT_POLLING_INTERVAL);
     };
 
     $scope.sendMessage = function() {
