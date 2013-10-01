@@ -14,7 +14,18 @@ app.factory('Order', ['$resource', function($resource) {
         {id:'@id'},
         {
             query:   {method:'GET',  params:{}, isArray:true},
-            update:  {method:'PUT' }
+            update:  {method:'PUT' },
+        }
+    );
+    return service;
+}]);
+
+app.factory('DishDAO', ['$resource', function($resource) {
+    var service = $resource(
+        '/orders/:id/remove_dish',
+        {id:'@id'},
+        {
+            destroy: { method: 'DELETE' }
         }
     );
     return service;
@@ -58,7 +69,7 @@ app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $r
 
 }]);
 
-app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($scope, $rootScope, Order) {
+app.controller('OrdersController', ['$scope', '$rootScope', 'Order', 'DishDAO', function ($scope, $rootScope, Order, DishDAO) {
     $scope.order = {};
 
     $scope.isActive = function(order) {
@@ -94,8 +105,9 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.save(order);
     });
 
-    $rootScope.$on('DISH_REMOVED', function(event,order) {
-        $scope.save(order);
+    $rootScope.$on('DISH_REMOVED', function(event,order,dish) {
+        console.log(dish);
+        DishDAO.destroy({id: order._id, dish: JSON.stringify(dish)}, function(data) { init(); });
     });
 
     $scope.add = function() {
@@ -114,10 +126,8 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     };
 
     $scope.removeDish = function(order, dish) {
-        var index = order.dishes.indexOf(dish);
         if (confirm('Are you sure you want to remove dish ' + dish.description + '?')) {
-            order.dishes.splice(index,1);
-            $scope.$emit('DISH_REMOVED', order);
+            $scope.$emit('DISH_REMOVED', order, dish);
         }
     };
 

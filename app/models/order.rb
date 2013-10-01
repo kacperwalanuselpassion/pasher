@@ -38,6 +38,11 @@ class Order
     dishes << dish
   end
 
+  def remove_dish(dish)
+    dishes.delete(dish)
+    Storage::Order.update(self)
+  end
+
   protected
   def update_dishes(new_dishes)
     new_dishes ||= []
