@@ -1,3 +1,4 @@
+CONFIG = $('#pasher-config').data('config')
 CHAT_POLLING_INTERVAL = 2000;
 ORDERS_POLLING_INTERVAL = 4500;
 
@@ -164,5 +165,5 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
         })
     };
 
-    init();
+    if(CONFIG.chat.on == 1) { init(); }
 }]);
