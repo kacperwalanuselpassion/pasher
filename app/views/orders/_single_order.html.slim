@@ -27,7 +27,7 @@
           | {{dish.price}} PLN
         - if active
           td
-            a.text-danger ng-click="removeDish(order, dish)"
+            a.text-danger ng-click="removeDish(dish)"
               span remove
     tfoot
       tr ng-show="order.delivery_cost"

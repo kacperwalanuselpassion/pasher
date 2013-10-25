@@ -15,23 +15,23 @@ app.factory('Order', ['$resource', function($resource) {
         {id:'@id'},
         {
             query:   {method:'GET',  params:{}, isArray:true},
-            update:  {method:'PUT' },
+            update:  {method:'PUT' }
         }
     );
     return service;
 }]);
 
-app.factory('DishDAO', ['$resource', function($resource) {
+app.factory('Dish', ['$resource', function($resource) {
     var service = $resource(
-        '/orders/:id/remove_dish',
+        '/dishes/:id',
         {id:'@id'},
         {
-            destroy: { method: 'DELETE' }
+            query:   {method:'GET',  params:{}, isArray:true},
+            update:  {method:'PUT' }
         }
     );
     return service;
 }]);
-
 
 app.factory('ChatMessageDAO', ['$resource', function ($resource) {
     var service = $resource(
@@ -46,31 +46,27 @@ app.factory('ChatMessageDAO', ['$resource', function ($resource) {
     return service;
 }]);
 
-app.controller('DishesController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($scope, $rootScope, Dish) {
     var initEmpty = function() {
         $scope.order = {};
         $scope.dish  = {};
     };
 
-    $rootScope.$on('ORDER_SELECTED', function(event,message) {
-        $scope.order = message;
-        $('.add-dish-wrapper').slideDown('slow');
-    });
-
     $scope.add = function() {
-        $scope.dish.user_id = $('#data').data('user-name');
-        if ($scope.order.dishes == undefined || $scope.order.dishes == null)
-            $scope.order.dishes = [];
-        $scope.order.dishes.push($scope.dish);
-        $scope.$emit('DISH_ADDED', $scope.order);
+        $scope.dish.order_uid = $scope.order._id
+        Dish.save($scope.dish, function(data){ $scope.$emit('DISH_ADDED'); });
         initEmpty();
     };
 
-    initEmpty();
+    $rootScope.$on('REMOVING_DISH', function(event, dish) {
+        $('.add-dish-wrapper').slideUp('slow');
+        Dish.remove({id: dish._id}, function(data){ $scope.$emit('DISH_REMOVED'); });
+    });
 
+    initEmpty();
 }]);
 
-app.controller('OrdersController', ['$scope', '$rootScope', 'Order', 'DishDAO', function ($scope, $rootScope, Order, DishDAO) {
+app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($scope, $rootScope, Order) {
     $scope.order = {};
 
     $scope.isActive = function(order) {
@@ -103,12 +99,11 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', 'DishDAO', 
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
         $('.add-dish-wrapper').slideUp('slow');
-        $scope.save(order);
+        init();
     });
 
-    $rootScope.$on('DISH_REMOVED', function(event,order,dish) {
-        console.log(dish);
-        DishDAO.destroy({id: order._id, dish: JSON.stringify(dish)}, function(data) { init(); });
+    $rootScope.$on('DISH_REMOVED', function(event) {
+        init();
     });
 
     $scope.add = function() {
@@ -118,7 +113,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', 'DishDAO', 
     };
 
     $scope.show = function(order) {
-        $scope.$emit('ORDER_SELECTED', order);
+        $('.add-dish-wrapper').slideDown('slow');
     };
 
     $scope.removeOrder = function(order) {
@@ -126,9 +121,9 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', 'DishDAO', 
             Order.remove({id:order._id}, function(data){ init(); });
     };
 
-    $scope.removeDish = function(order, dish) {
+    $scope.removeDish = function(dish) {
         if (confirm('Are you sure you want to remove dish ' + dish.description + '?')) {
-            $scope.$emit('DISH_REMOVED', order, dish);
+            $scope.$emit('REMOVING_DISH', dish);
         }
     };
 
@@ -145,7 +140,6 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', 'DishDAO', 
     };
 
     init();
-
 }]);
 
 app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', function ($scope, $rootScope, ChatMessageDAO) {

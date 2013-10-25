@@ -20,15 +20,6 @@ class OrdersController < ApplicationController
     head :no_content
   end
 
-  def remove_dish
-    require 'json'
-    @order = Storage::Order.find(params[:id])
-    @order.remove_dish(JSON.parse(params['dish']).slice('description', 'price', 'user_id'))
-
-    Storage::Order.update(@order)
-    head :no_content
-  end
-
   def show
     @order = Storage::Order.find(params[:id])
     respond_with @order
@@ -52,6 +43,5 @@ class OrdersController < ApplicationController
     else
       render json: {error: 'Eror saving order.'}
     end
-
   end
 end

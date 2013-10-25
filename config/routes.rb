@@ -6,11 +6,8 @@ Gapi::Application.routes.draw do
   match "/auth/google_login/callback" => "sessions#create", via: [:get, :post]
 
   get 'order_finalize', to: 'orders#finalize'
-  resources :orders, defaults: { format: 'json' } do
-    member do
-      delete :remove_dish
-    end
-  end
+  resources :orders, defaults: { format: 'json' }
+  resources :dishes, defaults: { format: 'json' }
   resources :chat_messages, defaults: { format: 'json' }
 
   root to: 'welcome#index'
