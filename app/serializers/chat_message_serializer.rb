@@ -4,7 +4,9 @@ class ChatMessageSerializer < ActiveModel::Serializer
   attributes :text, :sender_name, :sender_uid, :_id, :timestamp
 
   def timestamp
-    minutes_ago = ((Time.now.utc - object.created_at) / 60).to_i rescue ''
+    return '' unless object.created_at
+
+    minutes_ago = ((Time.now.utc - object.created_at) / 60).to_i
     if minutes_ago < 60
       "#{minutes_ago} min ago"
     elsif minutes_ago < 60 * 24
