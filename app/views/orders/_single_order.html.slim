@@ -46,9 +46,10 @@
           td
       tr
         th
+          | Dishes: {{order.dishes.length}}
         th
         th
-          | {{order.total_sum}} PLN
+          | Total cost: {{order.total_sum}} PLN
         - if active
           th
             button.btn.btn-xs.btn-success ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order)" finalize
