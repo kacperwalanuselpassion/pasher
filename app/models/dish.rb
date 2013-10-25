@@ -27,4 +27,8 @@ class Dish
     @user_uid = attributes['user_uid'].to_s
     @order_uid = attributes['order_uid'].to_s
   end
+
+  def user
+    User.find_by_uid(user_uid)
+  end
 end
