@@ -140,6 +140,17 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.order = {};
     };
 
+    $scope.edit = function() {
+        Order.update({id: $scope.order._id}, {order: $scope.order}, function(data){ init(); });
+        $scope.order = {};
+        $('.edit-order-wrapper').slideUp('slow')
+    };
+
+    $scope.editOrder = function(order) {
+        $scope.order = order;
+        $('.edit-order-wrapper').slideDown('slow')
+    }
+
     $scope.show = function(order) {
         $('.add-dish-wrapper').slideDown('slow');
         $scope.$emit('ORDER_SELECTED', order);

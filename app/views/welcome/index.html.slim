@@ -26,6 +26,10 @@ div ng-app="app"
 
         .new-order-wrapper.row.no-display
           .new-order.text-center
+            = render partial: 'orders/add_order_form'
+
+        .edit-order-wrapper.row.no-display
+          .edit-order.text-center
             = render partial: 'orders/edit_order_form'
 
         .add-dish-wrapper.row.no-display ng-controller="DishesController"

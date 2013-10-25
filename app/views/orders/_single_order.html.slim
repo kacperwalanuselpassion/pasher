@@ -16,8 +16,9 @@
         th Price
         - if active
           th
-            button.btn.btn-xs.btn-danger ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" remove order
+            button.btn.btn-xs.btn-edit-order ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" edit order
           th
+            button.btn.btn-xs.btn-danger ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" remove order
     tbody
       tr ng-repeat="dish in order.dishes"
         td
@@ -41,6 +42,7 @@
         td
           | {{order.delivery_cost}} PLN
         - if active
+          td
           td
       tr
         th
