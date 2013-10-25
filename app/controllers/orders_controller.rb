@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   def finalize
     @order = Storage::Order.find(params[:id])
 
-    members = @order.dishes.map{|m| m['user_id']}
+    members = @order.dishes.map{ |order| order.user_uid }
 
     @order.executor = members.sample
     @order.active = false
