@@ -17,6 +17,7 @@
         - if active
           th
             button.btn.btn-xs.btn-danger ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" remove order
+          th
     tbody
       tr ng-repeat="dish in order.dishes"
         td
@@ -49,6 +50,7 @@
         - if active
           th
             button.btn.btn-xs.btn-success ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order)" finalize
+          th
   - unless active
     .alert.alert-info ng-show="order.executor"
       | Executor: {{ order.executor }}
