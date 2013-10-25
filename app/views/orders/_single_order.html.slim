@@ -6,7 +6,7 @@
     = render partial: 'orders/order_button'
 .order-details
   p.url-field
-    a ng-show="order.url" href="{{ order.url }}"
+    a ng-show="order.url" href="{{ order.url }}" target="_BLANK"
       | {{ order.name }}
   table.table.table-striped.table-hover
     thead
