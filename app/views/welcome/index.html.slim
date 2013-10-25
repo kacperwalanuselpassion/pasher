@@ -30,7 +30,11 @@ div ng-app="app"
 
         .add-dish-wrapper.row.no-display ng-controller="DishesController"
           .add-dish.text-center
-            = render partial: 'orders/edit_dish_form'
+            = render partial: 'dishes/add_dish_form'
+
+        .edit-dish-wrapper.row.no-display ng-controller="DishesController"
+          .add-dish.text-center
+            = render partial: 'dishes/edit_dish_form'
 
         .orders-wrapper.row
           .orders.text-center

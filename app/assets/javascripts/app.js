@@ -52,9 +52,8 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
         $scope.dish  = {};
     };
 
-    $rootScope.$on('ORDER_SELECTED', function(event,message) {
-        $scope.order = message;
-        $('.add-dish-wrapper').slideDown('slow');
+    $rootScope.$on('ORDER_SELECTED', function(event, order) {
+        $scope.order = order;
     });
 
     $scope.add = function() {
@@ -63,9 +62,19 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
         initEmpty();
     };
 
+    $scope.edit = function() {
+        Dish.update({id: $scope.dish._id},{dish: $scope.dish}, function(data){ $scope.$emit('DISH_UPDATED'); });
+        initEmpty();
+    };
+
     $rootScope.$on('REMOVING_DISH', function(event, dish) {
         $('.add-dish-wrapper').slideUp('slow');
         Dish.remove({id: dish._id}, function(data){ $scope.$emit('DISH_REMOVED'); });
+    });
+
+    $rootScope.$on('EDITING_DISH', function(event, dish) {
+        $scope.dish = dish;
+        $('.edit-dish-wrapper').slideDown('slow');
     });
 
     initEmpty();
@@ -81,6 +90,10 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 
     $scope.belongsToCurrentUser = function(order) {
         return order.founder_uid == $scope.currentUser;
+    }
+
+    $scope.dishBelongsToCurrentUser = function(dish) {
+        return dish.user_uid == $scope.currentUser;
     }
 
     $scope.isFinalized = function(order) {
@@ -112,6 +125,11 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         init();
     });
 
+    $rootScope.$on('DISH_UPDATED', function(event,order) {
+        $('.edit-dish-wrapper').slideUp('slow');
+        init();
+    });
+
     $rootScope.$on('DISH_REMOVED', function(event) {
         init();
     });
@@ -136,6 +154,10 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         if (confirm('Are you sure you want to remove dish ' + dish.description + '?')) {
             $scope.$emit('REMOVING_DISH', dish);
         }
+    };
+
+    $scope.editDish = function(dish) {
+        $scope.$emit('EDITING_DISH', dish);
     };
 
     $scope.finalize = function (id) {

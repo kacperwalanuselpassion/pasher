@@ -1,0 +1,15 @@
+h2
+  | Edit your dish
+  strong.text-info
+    |  {{order.name}}
+a.pull-right.btn-close-new-dish close
+.row
+  form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="edit()"
+    .form-group
+      textarea.form-control ng-model="dish.description" placeholder="What do you order?" required=''
+    .form-group
+      input.form-control ng-model="dish.price" placeholder="Price of your meal" type="number" step="any" required=''
+    .form-group.no-display
+      input ng-model="dish._id"
+    .form-group
+      input.btn.btn-success name="add-dish-to-order" type="submit" value="Edit your dish"

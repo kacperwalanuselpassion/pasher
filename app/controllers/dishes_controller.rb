@@ -11,13 +11,13 @@ class DishesController < ApplicationController
     respond_with @dish
   end
 
-  #def update
-  #  @dish = Storage::Dish.find(params[:id])
-  #  @dish.update_attributes(params[:dish])
-  #
-  #  Storage::Dish.update(@dish)
-  #  head :no_content
-  #end
+  def update
+    @dish = Storage::Dish.find(params[:id])
+    @dish.update_attributes(params[:dish])
+
+    Storage::Dish.update(@dish)
+    head :no_content
+  end
 
   #def show
   #  @dish = Storage::Dish.find(params[:id])
