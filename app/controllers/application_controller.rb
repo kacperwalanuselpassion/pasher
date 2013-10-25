@@ -6,11 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :pasher_config
 
   def pasher_config
-    {}.tap do |config|
-      config[:chat] = {}.tap do |chat_config|
-        chat_config[:on] = ENV['CHAT_ON']
-      end
-    end
+    PasherConfig::CONFIG
   end
 
   private

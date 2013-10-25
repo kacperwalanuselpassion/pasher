@@ -1,7 +1,4 @@
-CONFIG = $('#pasher-config').data('config')
-CHAT_POLLING_INTERVAL = 2000;
-ORDERS_POLLING_INTERVAL = 5000;
-
+CONFIG = $('#pasher-config').data('config');
 
 var app = angular.module('app', ['flash', '$strap.directives', 'ngResource']);
 
@@ -117,7 +114,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 
     ($scope.refreshOrders = function() {
         init();
-        setTimeout($scope.refreshOrders, ORDERS_POLLING_INTERVAL);
+        setTimeout($scope.refreshOrders, CONFIG.orders.polling_interval);
     })();
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
@@ -194,7 +191,7 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
 
     var chatPolling = function() {
         $scope.chatMessages = ChatMessageDAO.index();
-        setTimeout(chatPolling, CHAT_POLLING_INTERVAL);
+        setTimeout(chatPolling, CONFIG.chat.polling_interval);
     };
 
     $scope.sendMessage = function() {
@@ -203,5 +200,5 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
         })
     };
 
-    if(CONFIG.chat.on == 1) { init(); }
+    if(CONFIG.chat.on) { init(); }
 }]);
