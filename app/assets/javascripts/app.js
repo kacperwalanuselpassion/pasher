@@ -1,6 +1,6 @@
 CONFIG = $('#pasher-config').data('config')
 CHAT_POLLING_INTERVAL = 2000;
-ORDERS_POLLING_INTERVAL = 4500;
+ORDERS_POLLING_INTERVAL = 5000;
 
 
 var app = angular.module('app', ['flash', '$strap.directives', 'ngResource']);
@@ -95,12 +95,12 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.anyActiveOrders = false;
         $scope.anyFinalizedOrders = false;
         $scope.orders = Order.query(initializeActiveAndFinalized);
-        setTimeout($scope.refreshOrders, ORDERS_POLLING_INTERVAL);
     };
 
-    $scope.refreshOrders = function() {
+    ($scope.refreshOrders = function() {
         init();
-    };
+        setTimeout($scope.refreshOrders, ORDERS_POLLING_INTERVAL);
+    })();
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
         $('.add-dish-wrapper').slideUp('slow');
