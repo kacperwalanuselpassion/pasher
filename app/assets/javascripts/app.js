@@ -73,10 +73,15 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
 
 app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($scope, $rootScope, Order) {
     $scope.order = {};
+    $scope.currentUser = $('#data').data('user-uid');
 
     $scope.isActive = function(order) {
         return order.active;
     };
+
+    $scope.belongsToCurrentUser = function(order) {
+        return order.founder_uid == $scope.currentUser;
+    }
 
     $scope.isFinalized = function(order) {
         return !order.active;

@@ -16,7 +16,7 @@
         th Price
         - if active
           th
-            button.btn.btn-xs.btn-danger ng-click="removeOrder(order)" remove order
+            button.btn.btn-xs.btn-danger ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" remove order
     tbody
       tr ng-repeat="dish in order.dishes"
         td
@@ -27,7 +27,7 @@
           | {{dish.price}} PLN
         - if active
           td
-            a.text-danger ng-click="removeDish(dish)"
+            a.text-danger ng-click="removeDish(dish)" ng-show="belongsToCurrentUser(order)"
               span remove
     tfoot
       tr ng-show="order.delivery_cost"
@@ -45,7 +45,7 @@
           | {{order.total_sum}} PLN
         - if active
           th
-            button.btn.btn-xs.btn-success ng-click="finalize(order._id)" finalize
+            button.btn.btn-xs.btn-success ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order)" finalize
   - unless active
     .alert.alert-info ng-show="order.executor"
       | Executor: {{ order.executor }}
