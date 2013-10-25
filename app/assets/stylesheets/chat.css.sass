@@ -2,7 +2,7 @@
   position: fixed
   bottom: 0px
   right: 0px
-  width: 400px
+  width: 500px
   border: 1px solid black
   background-color: rgb(144, 238, 144)
   font-size: small
@@ -20,15 +20,21 @@
       overflow-y: scroll
       height: 150px
       list-style-type: none
-      padding: .1em 0 0 1em
+      padding: .1em 0 0 0.5em
       border-top: 1px dotted black
       li
         .message-author
+          margin-left: .4em
           display: inline
           font-weight: bold
         .message-text
           margin-left: .4em
           display: inline
+        .message-created-at
+          margin-left: 0
+          display: inline
+          font-size: smaller
+          color: dimgray
     form
       .input-wrapper
         margin: 10px auto

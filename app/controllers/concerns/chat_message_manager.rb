@@ -7,6 +7,7 @@ class ChatMessageManager
     @chat_message = ChatMessage.new(chat_message_params)
     @chat_message.sender_uid = @user.uid
     @chat_message.sender_name = @user.name
+    @chat_message.created_at = Time.now.utc
     Storage::ChatMessage.save(@chat_message)
     @chat_message
   end

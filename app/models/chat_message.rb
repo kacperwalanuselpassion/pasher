@@ -2,7 +2,7 @@ class ChatMessage
   extend ActiveModel::Naming
   include ActiveModel::SerializerSupport
 
-  attr_accessor :text, :sender_name, :sender_uid, :_id
+  attr_accessor :text, :sender_name, :sender_uid, :_id, :created_at
 
   def initialize(attributes)
     update_attributes(attributes)
@@ -13,7 +13,7 @@ class ChatMessage
         text: @text,
         sender_name: @sender_name,
         sender_uid: @sender_uid,
-        #created_at: @created_at
+        created_at: @created_at
     }
   end
 
@@ -22,6 +22,6 @@ class ChatMessage
     @text = attributes['text']
     @sender_name = attributes['sender_name']
     @sender_uid = attributes['sender_uid']
-    #@created_at = attributes['created_at']
+    @created_at = attributes['created_at']
   end
 end

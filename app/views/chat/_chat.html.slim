@@ -6,6 +6,8 @@
     | _
   ul
     li ng-repeat='message in chatMessages'
+      .message-created-at
+        | [{{ message.timestamp }}]
       .message-author
         | {{ message.sender_name }}:
       .message-text
