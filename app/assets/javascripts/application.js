@@ -19,3 +19,5 @@
 //= require ng/bootstrap-timepicker
 //= require app
 //= require orders
+//= require chat
+//= require chat_toggler

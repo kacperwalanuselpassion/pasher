@@ -21,7 +21,7 @@ div ng-app="app"
 
 
   .row
-    .pasher-wrapper.col-lg-8.col-md-8.col-sm-12.col-xs-12.col-lg-push-4.col-md-push-4
+    .pasher-wrapper
       div ng-controller="OrdersController"
 
         .new-order-wrapper.row.no-display
@@ -40,5 +40,5 @@ div ng-app="app"
           .orders.text-center
             = render partial: 'orders/orders_list'
 
-    .chat-wrapper.col-lg-4.col-md-4.col-sm-12.col-xs-12.col-lg-pull-8.col-md-pull-8
+    .chat-wrapper
       = render partial: 'chat/chat'

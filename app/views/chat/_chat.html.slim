@@ -1,7 +1,9 @@
 #chat ng-controller='ChatController'
   form method='post' ng-submit='sendMessage()'
-    input.form-control type='text' ng-model='chatMessageText'
-
+    .input-wrapper
+      input.form-control type='text' ng-model='chatMessageText'
+  span.chat-toggler
+    | _
   ul
     li ng-repeat='message in chatMessages'
       .message-author
