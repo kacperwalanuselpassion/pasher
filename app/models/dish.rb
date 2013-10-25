@@ -2,7 +2,7 @@ class Dish
   extend ActiveModel::Naming
   include ActiveModel::SerializerSupport
 
-  attr_accessor :name, :description, :price, :user_uid, :order_uid
+  attr_accessor :_id, :name, :description, :price, :user_uid, :order_uid
 
   def initialize(attributes)
     update_attributes(attributes)

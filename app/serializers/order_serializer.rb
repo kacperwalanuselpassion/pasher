@@ -1,7 +1,8 @@
 class OrderSerializer < ActiveModel::Serializer
   self.root = false
 
-  attributes :_id, :name, :ordered_at, :founder, :founder_uid, :active, :dishes, :delivery_cost, :total_sum, :executor, :url
+  attributes :_id, :name, :ordered_at, :founder, :founder_uid, :active, :delivery_cost, :total_sum, :executor, :url
+  has_many :dishes
 
   def founder
     founder = User.where(uid: object.founder_uid).first

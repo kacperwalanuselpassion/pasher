@@ -52,6 +52,11 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
         $scope.dish  = {};
     };
 
+    $rootScope.$on('ORDER_SELECTED', function(event,message) {
+        $scope.order = message;
+        $('.add-dish-wrapper').slideDown('slow');
+    });
+
     $scope.add = function() {
         $scope.dish.order_uid = $scope.order._id
         Dish.save($scope.dish, function(data){ $scope.$emit('DISH_ADDED'); });
@@ -90,11 +95,11 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.anyActiveOrders = false;
         $scope.anyFinalizedOrders = false;
         $scope.orders = Order.query(initializeActiveAndFinalized);
+        setTimeout($scope.refreshOrders, ORDERS_POLLING_INTERVAL);
     };
 
     $scope.refreshOrders = function() {
         init();
-        setTimeout($scope.refreshOrders, ORDERS_POLLING_INTERVAL);
     };
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
@@ -114,6 +119,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 
     $scope.show = function(order) {
         $('.add-dish-wrapper').slideDown('slow');
+        $scope.$emit('ORDER_SELECTED', order);
     };
 
     $scope.removeOrder = function(order) {
