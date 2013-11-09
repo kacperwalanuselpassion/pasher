@@ -34,6 +34,9 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass-rails (3.0.2.1)
+      railties (>= 3.1.0)
+      sass-rails (>= 3.1.0)
     bson (1.9.1)
     bson_ext (1.9.1)
       bson (~> 1.9.1)
@@ -193,6 +196,7 @@ DEPENDENCIES
   active_model_serializers
   better_errors
   binding_of_caller
+  bootstrap-sass-rails
   bson_ext
   coffee-rails (~> 4.0.0)
   dotenv

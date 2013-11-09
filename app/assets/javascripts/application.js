@@ -14,8 +14,8 @@
 //= require ng/angular.min
 //= require ng/angular-resource.min
 //= require ng/angular-strap.min
-//= require ng/bootstrap.min
 //= require ng/angular-flash
+//= require twitter/bootstrap
 //= require ng/bootstrap-timepicker
 //= require app
 //= require orders
