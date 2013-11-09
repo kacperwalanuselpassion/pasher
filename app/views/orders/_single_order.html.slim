@@ -1,8 +1,76 @@
+.order
+  .row.order-sub-header
+    .col-md-10.col-md-push-2
+      button.btn.btn-success.pull-left Dodaj zamówienie
+      h5.pull-right
+        label Utworzone przez:
+        strong  Kamil Starski
+      .clearfix
+  .row
+    .col-md-10.col-md-push-2
+      table.order-details.table.table-bordered
+        tbody
+          tr
+            td
+              strong Kotlet schabowy
+            td Kamil Starski
+            td 15 PLN
+          tr
+            td
+              strong Kotlet schabowy panierowany + zistrongniaki + surówka z kwaszonej kapusty
+            td Konrad Księżopolski
+            td 30 PLN
+          tr
+            td
+              strong Barszcz czerwony z kołdunami
+            td Gracjan Grala
+            td 15 PLN
+          tr
+            td
+              strong Filet z mintaja panierowany + kasza + mizeria
+            td Kamil Starski
+            td 10 PLN
+          tr.active
+            td
+              strong Stek wieprzowy z cebulką + kopytka + marchewka
+            td Natalia Berowska
+            td
+              strong 30
+              |  PLN
+        tfoot
+          tr
+            th 5 zamówień
+            th
+              button.btn.btn-info Losuj
+            th 105 PLN
+    .order-header.col-md-2.col-md-pull-10.row
+      .col-xs-6.col-md-12
+        h4.order-header
+          .header-image
+          label Lokal:
+          strong  Aleksander
+      .col-xs-6.col-md-12
+        h4.order-header
+          .header-image
+          label Pozostały czas:
+          strong  20 min
+      .col-xs-6.col-md-12
+        h4.order-header
+          .header-image
+          label Min. zamówienie:
+          strong  20 zł
+      .col-xs-6.col-md-12
+        h4.order-header
+          .header-image
+          label Koszt dostawy:
+          strong  5 zł
+
+
 - if active
   button.btn-large.btn.btn-primary ng-click="show(order)"
     = render partial: 'orders/order_button'
 - else
-  button.btn-large.btn.btn-danger ng-click="removeOrder(order)"
+  button.btn-large.btn.btn-danger ng-click="rstrongoveOrder(order)"
     = render partial: 'orders/order_button'
 .order-details
   p.url-field
@@ -18,7 +86,7 @@
           th
             button.btn.btn-xs.btn-edit-order ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" edit order
           th
-            button.btn.btn-xs.btn-danger ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" remove order
+            button.btn.btn-xs.btn-danger ng-click="rstrongoveOrder(order)" ng-show="belongsToCurrentUser(order)" rstrongove order
     tbody
       tr ng-repeat="dish in order.dishes"
         td
@@ -32,8 +100,8 @@
             a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
               span edit
           td
-            a.text-danger ng-click="removeDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
-              span remove
+            a.text-danger ng-click="rstrongoveDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
+              span rstrongove
     tfoot
       tr ng-show="order.delivery_cost"
         td

@@ -8,7 +8,7 @@ div ng-app="app"
     .collapse.navbar-collapse.navbar-pasher-collapse
       ul.nav.navbar-nav.navbar-right
         li
-          = link_to 'Add new order', '#', class: 'btn-add-order'
+          = button_tag 'Add new order', class: 'btn-add-order btn btn-primary navbar-btn'
         li
           = link_to 'Report a problem', 'https://github.com/godot/pasher/issues/new', title: 'Report an issue on GitHub'
         li.dropdown

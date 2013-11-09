@@ -115,7 +115,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     ($scope.refreshOrders = function() {
         init();
         setTimeout($scope.refreshOrders, CONFIG.orders.polling_interval);
-    })();
+    });
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
         $('.add-dish-wrapper').slideUp('slow');
