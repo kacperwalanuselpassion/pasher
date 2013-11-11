@@ -1,9 +1,8 @@
 .orders-wrapper
 
   .orders
-    padding: 20px 0
-    margin: 0 auto
-    max-width: 95%
+    margin: 0
+    padding-bottom: 20px
 
   ul.orders-list
     margin: 0
@@ -11,9 +10,19 @@
     list-style-type: none
 
     li
-      padding: 0
-      margin: 15px 0
+      padding: 1em 4em
+      margin: 0
+      border-top: 1px solid #CFD1D3
+      padding-top: 3em
+      &.active-order
+        background: #F4F4F4
+      &.finalized-order
+        background: #ECECEC
+
       .order-header
+        text-align: left
+        label
+          display: block
         strong
           color: #676F74
 
@@ -44,24 +53,21 @@
             padding: 8px 14px
             line-height: 2.5
 
-  .header-image
-    background-position: center center
+  .order-header-column
+    background-position: center left
     background-repeat: no-repeat
-    float: left
-
-  .icon-pointer
-    background: image-url('icon_pointer.png')
-    width: 24px
-    height: 33px
-  .icon-clock
-    background: image-url('icon_clock.png')
-    width: 32px
-    height: 33px
-  .icon-truck
-    background: image-url('icon_truck.png')
-    width: 34px
-    height: 24px
-  .icon-paperclip
-    background: image-url('icon_paperclip.png')
-    width: 32px
-    height: 32px
+    padding-left: 55px  
+    margin-bottom: 15px
+    label
+      margin: 0
+  @media (min-width: 992px)
+    .order-header-column
+      margin-left: 30px
+  .bullet-pointer
+    background-image: image-url('icon_pointer.png')
+  .bullet-clock
+    background-image: image-url('icon_clock.png')
+  .bullet-truck
+    background-image: image-url('icon_truck.png')
+  .bullet-paperclip
+    background-image: image-url('icon_paperclip.png')

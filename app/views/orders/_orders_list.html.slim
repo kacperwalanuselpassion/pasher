@@ -1,15 +1,7 @@
-/button.btn-add-order.btn.btn-success Add new order
-
-h2 Active orders
-div ng-hide='anyActiveOrders'
-  p No active orders. But you can add one!
 ul.orders-list ng-repeat="order in orders | filter:isActive"
-  li
+  li.active-order
     = render partial: 'orders/single_order', locals: {active: true}
 
-h2 Finalized orders
-div ng-hide='anyFinalizedOrders'
-  p No finalized orders.
 ul.orders-list ng-repeat="order in orders | filter:isFinalized"
-  li
+  li.finalized-order
     = render partial: 'orders/single_order', locals: {active: false}

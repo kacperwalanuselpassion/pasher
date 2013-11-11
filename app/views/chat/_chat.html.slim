@@ -2,8 +2,8 @@
   form method='post' ng-submit='sendMessage()'
     .input-wrapper
       input.form-control type='text' ng-model='chatMessageText'
-  span.chat-toggler
-    | _
+  a.chat-toggler
+    span.glyphicon.glyphicon-open
   ul
     li ng-repeat='message in chatMessages'
       .message-created-at

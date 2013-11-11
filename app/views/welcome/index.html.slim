@@ -19,30 +19,28 @@ div ng-app="app"
             li
               = link_to 'Sign out', '/sign_out'
 
+  .pasher-wrapper
+    div ng-controller="OrdersController"
 
-  .row
-    .pasher-wrapper
-      div ng-controller="OrdersController"
+      .new-order-wrapper.no-display
+        .new-order.text-center
+          = render partial: 'orders/add_order_form'
 
-        .new-order-wrapper.row.no-display
-          .new-order.text-center
-            = render partial: 'orders/add_order_form'
+      .edit-order-wrapper.no-display
+        .edit-order.text-center
+          = render partial: 'orders/edit_order_form'
 
-        .edit-order-wrapper.row.no-display
-          .edit-order.text-center
-            = render partial: 'orders/edit_order_form'
+      .add-dish-wrapper.no-display ng-controller="DishesController"
+        .add-dish.text-center
+          = render partial: 'dishes/add_dish_form'
 
-        .add-dish-wrapper.row.no-display ng-controller="DishesController"
-          .add-dish.text-center
-            = render partial: 'dishes/add_dish_form'
+      .edit-dish-wrapper.no-display ng-controller="DishesController"
+        .add-dish.text-center
+          = render partial: 'dishes/edit_dish_form'
 
-        .edit-dish-wrapper.row.no-display ng-controller="DishesController"
-          .add-dish.text-center
-            = render partial: 'dishes/edit_dish_form'
+      .orders-wrapper
+        .orders.text-center
+          = render partial: 'orders/orders_list'
 
-        .orders-wrapper.row
-          .orders.text-center
-            = render partial: 'orders/orders_list'
-
-    .chat-wrapper.minimalized
-      = render partial: 'chat/chat'
+  .chat-wrapper.minimalized
+    = render partial: 'chat/chat'

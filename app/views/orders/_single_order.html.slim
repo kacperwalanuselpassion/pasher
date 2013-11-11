@@ -1,127 +1,65 @@
 .order
   .row.order-sub-header
-    .col-md-10.col-md-push-2
-      button.btn.btn-success.pull-left Dodaj zamówienie
+    .col-md-9.col-md-push-3
+      .inline-buttons
+        - if active
+          button.btn.btn-success.pull-left ng-click="show(order)" Dodaj danie
+          button.btn.btn-default.pull-left ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" Edytuj zamówienie
+        button.btn.btn-danger.pull-left ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" Usuń zamówienie
       h5.pull-right
         label Utworzone przez:
-        strong  Kamil Starski
+        strong 
+          |  {{ order.founder.name }}
       .clearfix
   .row
-    .col-md-10.col-md-push-2
+    .col-md-9.col-md-push-3
       table.order-details.table.table-bordered
         tbody
-          tr
+          tr ng-repeat="dish in order.dishes"
             td
-              strong Kotlet schabowy
-            td Kamil Starski
-            td 15 PLN
-          tr
+              strong
+                | {{ dish.description }}
             td
-              strong Kotlet schabowy panierowany + zistrongniaki + surówka z kwaszonej kapusty
-            td Konrad Księżopolski
-            td 30 PLN
-          tr
+              | {{ dish.user_name }}
             td
-              strong Barszcz czerwony z kołdunami
-            td Gracjan Grala
-            td 15 PLN
-          tr
-            td
-              strong Filet z mintaja panierowany + kasza + mizeria
-            td Kamil Starski
-            td 10 PLN
-          tr.active
-            td
-              strong Stek wieprzowy z cebulką + kopytka + marchewka
-            td Natalia Berowska
-            td
-              strong 30
+              strong
+                | {{dish.price}}
               |  PLN
+            - if active
+              td
+                a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
+                  span.glyphicon.glyphicon-edit
+              td
+                a ng-click="removeDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
+                  span.glyphicon.glyphicon-trash
         tfoot
           tr
-            th 5 zamówień
             th
-              button.btn.btn-info Losuj
-            th 105 PLN
-    .order-header.col-md-2.col-md-pull-10.row
-      .col-xs-6.col-md-12
-        h4.order-header
-          .header-image.icon-pointer
-          label Lokal:
-          strong  Aleksander
-      .col-xs-6.col-md-12
-        h4.order-header
-          .header-image.icon-clock
-          label Pozostały czas:
-          strong  20 min
-      .col-xs-6.col-md-12
-        h4.order-header
-          .header-image.icon-paperclip
-          label Min. zamówienie:
-          strong  20 zł
-      .col-xs-6.col-md-12
-        h4.order-header
-          .header-image.icon-truck
-          label Koszt dostawy:
-          strong  5 zł
-
-
-- if active
-  button.btn-large.btn.btn-primary ng-click="show(order)"
-    = render partial: 'orders/order_button'
-- else
-  button.btn-large.btn.btn-danger ng-click="rstrongoveOrder(order)"
-    = render partial: 'orders/order_button'
-.order-details
-  p.url-field
-    a ng-show="order.url" href="{{ order.url }}" target="_BLANK"
-      | {{ order.name }}
-  table.table.table-striped.table-hover
-    thead
-      tr
-        th Ordered by
-        th Dish
-        th Price
-        - if active
-          th
-            button.btn.btn-xs.btn-edit-order ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" edit order
-          th
-            button.btn.btn-xs.btn-danger ng-click="rstrongoveOrder(order)" ng-show="belongsToCurrentUser(order)" rstrongove order
-    tbody
-      tr ng-repeat="dish in order.dishes"
-        td
-          | {{dish.user_name}}
-        td
-          | {{dish.description}}
-        td
-          | {{dish.price}} PLN
-        - if active
-          td
-            a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
-              span edit
-          td
-            a.text-danger ng-click="rstrongoveDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
-              span rstrongove
-    tfoot
-      tr ng-show="order.delivery_cost"
-        td
-        td
-          | Delivery cost
-        td
-          | {{order.delivery_cost}} PLN
-        - if active
-          td
-          td
-      tr
-        th
-          | Dishes: {{order.dishes.length}}
-        th
-        th
-          | Total cost: {{order.total_sum}} PLN
-        - if active
-          th
-            button.btn.btn-xs.btn-success ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order)" finalize
-          th
-  - unless active
-    .alert.alert-info ng-show="order.executor"
-      | Executor: {{ order.executor }}
+              | {{ order.dishes.length }}
+            th
+              - if active
+                button.btn.btn-info ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order)" Losuj
+              - else
+                | {{ order.executor }}
+            th
+              | {{ order.total_sum }} PLN
+            - if active
+              th
+              th
+    .order-header.col-md-3.col-md-pull-9.row
+      .order-header-column.col-xs-6.col-md-12.bullet-pointer
+        label Lokal:
+        strong 
+          a ng-href="{{ order.url }}" target="_blank"
+            |  {{ order.name }}
+      .order-header-column.col-xs-6.col-md-12.bullet-clock
+        label Czas zamówienia:
+        strong
+          |  {{ order.ordered_at | date:'H:mm' }}
+      .order-header-column.col-xs-6.col-md-12.bullet-paperclip
+        label Min. zamówienie:
+        strong  0 zł
+      .order-header-column.col-xs-6.col-md-12.bullet-truck ng-show="order.delivery_cost"
+        label Koszt dostawy:
+        strong
+          |  {{ order.delivery_cost }} zł

@@ -109,7 +109,12 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     var init = function(){
         $scope.anyActiveOrders = false;
         $scope.anyFinalizedOrders = false;
-        $scope.orders = Order.query(initializeActiveAndFinalized);
+        Order.query(
+            {},
+            function(data) {
+                $scope.orders = data;
+                initializeActiveAndFinalized();
+            });
     };
 
     ($scope.refreshOrders = function() {
