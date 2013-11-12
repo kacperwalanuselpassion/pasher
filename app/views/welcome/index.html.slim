@@ -14,6 +14,7 @@ div ng-app="app"
           = link_to 'Report a problem', 'https://github.com/godot/pasher/issues/new', title: 'Report an issue on GitHub', target: '_blank'
         li.dropdown
           a.dropdown-toggle data-toggle='dropdown' href='#'
+            = image_tag current_user.gravatar_url, class: 'user-avatar'
             = current_user.name
             b.caret
           ul.dropdown-menu
