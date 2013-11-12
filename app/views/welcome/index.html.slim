@@ -5,6 +5,7 @@ div ng-app="app"
       button.navbar-toggle type='button' data-toggle='collapse' data-target='.navbar-pasher-collapse'
       a href='#'
         = image_tag image_path('pasher_logo_small.png'), class: 'pasher-logo'
+        | BETA
     .collapse.navbar-collapse.navbar-pasher-collapse
       ul.nav.navbar-nav.navbar-right
         li
@@ -22,19 +23,19 @@ div ng-app="app"
   .pasher-wrapper
     div ng-controller="OrdersController"
 
-      .new-order-wrapper.no-display
+      .new-order-wrapper.bordered-box.padded-box.no-display
         .new-order.text-center
           = render partial: 'orders/add_order_form'
 
-      .edit-order-wrapper.no-display
+      .edit-order-wrapper.bordered-box.padded-box.no-display
         .edit-order.text-center
           = render partial: 'orders/edit_order_form'
 
-      .add-dish-wrapper.no-display ng-controller="DishesController"
+      .add-dish-wrapper.bordered-box.padded-box.no-display ng-controller="DishesController"
         .add-dish.text-center
           = render partial: 'dishes/add_dish_form'
 
-      .edit-dish-wrapper.no-display ng-controller="DishesController"
+      .edit-dish-wrapper.bordered-box.padded-box.no-display ng-controller="DishesController"
         .add-dish.text-center
           = render partial: 'dishes/edit_dish_form'
 
