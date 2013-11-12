@@ -120,7 +120,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     ($scope.refreshOrders = function() {
         init();
         setTimeout($scope.refreshOrders, CONFIG.orders.polling_interval);
-    });
+    })();
 
     $rootScope.$on('DISH_ADDED', function(event,order) {
         $('.add-dish-wrapper').slideUp('slow');
@@ -195,7 +195,9 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
     };
 
     var chatPolling = function() {
-        $scope.chatMessages = ChatMessageDAO.index();
+        ChatMessageDAO.index({}, function(data) {
+            $scope.chatMessages = data;
+        });
         setTimeout(chatPolling, CONFIG.chat.polling_interval);
     };
 

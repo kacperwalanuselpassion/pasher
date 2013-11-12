@@ -2,7 +2,11 @@ module Storage
   class ChatMessage
     class << self
 
-      def all(limit = 50)
+      def all
+        collection.find().sort({_id: -1}).map { |response| ::ChatMessage.new(response) }
+      end
+
+      def last(limit = 50)
         collection.find().sort({_id: -1}).limit(limit).map { |response| ::ChatMessage.new(response) }
       end
 

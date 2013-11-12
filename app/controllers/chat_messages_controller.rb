@@ -2,7 +2,7 @@ class ChatMessagesController < ApplicationController
   respond_to :json
 
   def index
-    @chat_messages = Storage::ChatMessage.all
+    @chat_messages = Storage::ChatMessage.last
     respond_with @chat_messages, root: false
   end
 

@@ -10,7 +10,7 @@ div ng-app="app"
         li
           = button_tag 'Add new order', class: 'btn-add-order btn btn-primary navbar-btn'
         li
-          = link_to 'Report a problem', 'https://github.com/godot/pasher/issues/new', title: 'Report an issue on GitHub'
+          = link_to 'Report a problem', 'https://github.com/godot/pasher/issues/new', title: 'Report an issue on GitHub', target: '_blank'
         li.dropdown
           a.dropdown-toggle data-toggle='dropdown' href='#'
             = current_user.name
