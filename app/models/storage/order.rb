@@ -6,6 +6,10 @@ module Storage
         collection.find().sort({_id: -1}).map { |response| ::Order.new(response) }
       end
 
+      def last(limit = 5)
+        active + last_inactive(5)
+      end
+
       def find id
         response = collection.find_one(_id: BSON::ObjectId(id))
 
@@ -28,6 +32,14 @@ module Storage
       private
       def collection
         Storage::Driver.db['orders']
+      end
+
+      def active
+        collection.find({active: true}).sort({_id: -1}).map { |response| ::Order.new(response) }
+      end
+
+      def last_inactive(limit)
+        collection.find({active: false}).sort({_id: -1}).limit(limit).map { |response| ::Order.new(response) }
       end
     end
   end

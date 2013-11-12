@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   respond_to :json
 
   def index
-    @orders = Storage::Order.all
+    @orders = Storage::Order.last
     respond_with @orders, root: false
   end
 

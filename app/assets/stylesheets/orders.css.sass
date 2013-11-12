@@ -16,8 +16,22 @@
       padding-top: 3em
       &.active-order
         background: #F4F4F4
+        td:nth-child(1), th:nth-child(1)
+          width: 57%
+        td:nth-child(2), th:nth-child(2)
+          width: 25%
+        td:nth-child(3), th:nth-child(3)
+          width: 10%
+        td:nth-child(4), th:nth-child(4), td:nth-child(5), th:nth-child(5)
+          width: 4%
       &.finalized-order
         background: #ECECEC
+        td:nth-child(1), th:nth-child(1)
+          width: 57%
+        td:nth-child(2), th:nth-child(2)
+          width: 33%
+        td:nth-child(3), th:nth-child(3)
+          width: 10%
 
       .order-header
         text-align: left
