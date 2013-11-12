@@ -30,6 +30,10 @@ module Storage
         collection.remove(_id: BSON::ObjectId(dish.attributes[:uid]))
       end
 
+      def remove_by_order_uid(order_uid)
+        collection.remove(order_uid: order_uid)
+      end
+
       private
 
       def collection

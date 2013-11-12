@@ -13,5 +13,12 @@ class OrderManager
   def remove(order_id)
     order = Storage::Order.find(order_id)
     Storage::Order.remove(order_id) if order.founder_uid.eql? @user.uid
+    remove_dishes(order_id)
+  end
+
+  protected
+
+  def remove_dishes(order_id)
+    Storage::Dish.remove_by_order_uid(order_id)
   end
 end
