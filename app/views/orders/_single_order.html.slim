@@ -58,7 +58,8 @@
           |  {{ order.ordered_at | date:'H:mm' }}
       .order-header-column.col-xs-6.col-md-12.bullet-paperclip
         label Min. zamówienie:
-        strong  0 zł
+        strong
+          |  {{ order.min_order_price }} zł
       .order-header-column.col-xs-6.col-md-12.bullet-truck ng-show="order.delivery_cost"
         label Koszt dostawy:
         strong
