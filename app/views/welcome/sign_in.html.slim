@@ -1,4 +1,6 @@
 div.welcome-to-pasher.text-center
-  | Welcome to Pasher! Sign in to begin the biggest adventure of your life!
+  = image_tag 'pasher_logo.png', class: 'welcome-logo'
+  .welcome-text
+    p Welcome to Pasher! Sign in to begin the biggest adventure of your life!
   div
-    a.btn.btn-success.btn-lg href='/auth/google_login' Sign in!
+    a.btn.btn-welcome.btn-success.btn-lg href='/auth/google_login' Sign in!
