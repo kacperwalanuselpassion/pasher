@@ -7,4 +7,9 @@ class OrderMailer < ActionMailer::Base
     @order = order
     mail(to: PasherConfig::CONFIG[:emails][:users], subject: "#{creator.name} chce zamówić paszę w #{order.name} o #{order.ordered_at}")
   end
+
+  def executor_email(executor, order)
+    @order = order
+    mail(to: executor.email, subject: 'Zostałeś egzekutorem - dzwoń po paszę!')
+  end
 end

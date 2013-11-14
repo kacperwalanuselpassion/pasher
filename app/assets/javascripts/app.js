@@ -173,7 +173,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         $scope.$emit('EDITING_DISH', dish);
     };
 
-    $scope.finalize = function (id) {
+    $scope.finalize = function(id) {
         $.ajax({
             url: 'order_finalize',
             data: {id: id}

@@ -14,9 +14,11 @@ class OrderManager
 
   def finalize(order_id)
     order = Storage::Order.find(order_id)
-    order.executor = Order.new(order.attributes).executor
+    executor = Order.new(order.attributes).draw_executor
+    order.executor = executor.name
     order.active = false
     Storage::Order.update(order)
+    OrderMailer.executor_email(executor, order).deliver
     order
   end
 

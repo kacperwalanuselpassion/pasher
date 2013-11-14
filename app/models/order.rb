@@ -38,8 +38,8 @@ class Order
     @url = parse_url(attributes['url'])
   end
 
-  def executor
-    dishes.map{ |dish| dish.user.name }.sample
+  def draw_executor
+    dishes.map(&:user).sample
   end
 
   protected
