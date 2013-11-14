@@ -12,7 +12,9 @@ class PasherConfig
 
     config[:emails] = {}.tap do |emails|
       raise 'env var [USERS_EMAIL] not set' if ENV['USERS_EMAIL'].blank?
+      raise 'env var [PASHER_EMAIL] not set' if ENV['PASHER_EMAIL'].blank?
       emails[:users] = ENV['USERS_EMAIL']
+      emails[:pasher] = ENV['PASHER_EMAIL']
     end
 
   end

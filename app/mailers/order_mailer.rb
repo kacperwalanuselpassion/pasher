@@ -1,6 +1,6 @@
 # encoding: utf-8
 class OrderMailer < ActionMailer::Base
-  default from: 'elpasher@elpassion.com'
+  default from: PasherConfig::CONFIG[:emails][:pasher]
 
   def new_order_email(creator, order)
     @creator = creator
