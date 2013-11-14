@@ -30,15 +30,9 @@ class OrdersController < ApplicationController
   end
 
   def finalize
-    @order = Storage::Order.find(params[:id])
 
-    members = @order.dishes.map{ |dish| dish.user.name }
-
-    @order.executor = members.sample
-    @order.active = false
-
-    if Storage::Order.update(@order)
-      render json: {executor: @order.executor}
+    if finalized_order = OrderManager.new(current_user).finalize(params[:id])
+      render json: {executor: finalized_order.executor}
     else
       render json: {error: 'Eror saving order.'}
     end

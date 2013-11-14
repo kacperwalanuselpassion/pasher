@@ -38,6 +38,10 @@ class Order
     @url = parse_url(attributes['url'])
   end
 
+  def executor
+    dishes.map{ |dish| dish.user.name }.sample
+  end
+
   protected
 
   def parse_url(url)

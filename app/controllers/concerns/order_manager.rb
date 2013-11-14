@@ -11,6 +11,14 @@ class OrderManager
     order
   end
 
+  def finalize(order_id)
+    order = Storage::Order.find(order_id)
+    order.executor = Order.new(order.attributes).executor
+    order.active = false
+    Storage::Order.update(order)
+    order
+  end
+
   def remove(order_id)
     order = Storage::Order.find(order_id)
     Storage::Order.remove(order_id) if order.founder_uid.eql? @user.uid

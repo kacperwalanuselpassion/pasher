@@ -21,9 +21,10 @@ module Storage
       end
 
       def update(order)
-        collection.update({_id: BSON::ObjectId(order._id)}, order.attributes)
+        attributes = order.attributes
+        attributes.delete(:_id)
+        collection.update({_id: BSON::ObjectId(order._id)}, attributes)
       end
-
 
       def remove(id)
         collection.remove(_id: BSON::ObjectId(id))
