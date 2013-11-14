@@ -1,19 +1,19 @@
-h2 New order
-a.pull-right.btn-close-new-order close
+h2 Nowe zamówienie
+a.pull-right.btn-close-new-order zamknij
 .row
   form#new-order-form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
     .form-group
-      input.form-control ng-model="order.name" placeholder="Where do you order?" type="text" required=''
+      input.form-control ng-model="order.name" placeholder="Dostarczyciel paszy" type="text" required=''
     .form-group
-      input.form-control ng-model="order.url" placeholder="Link to restaurant site, facebook page, menu, etc."
+      input.form-control ng-model="order.url" placeholder="Strona WWW dostarczyciela paszy"
     .form-group
-      input.form-control ng-model="order.delivery_cost" placeholder="Delivery cost" type="number" step="any"
+      input.form-control ng-model="order.delivery_cost" placeholder="Koszt dostarczenia paszy" type="number" step="any"
     .form-group
-      input.form-control ng-model="order.min_order_price" placeholder="Min. order price" type="number" step="any"
+      input.form-control ng-model="order.min_order_price" placeholder="Minimalna cena zamówienia" type="number" step="any"
     .form-group
       .input-group
-        input.form-control bs-timepicker="" ng-model="order.ordered_at" placeholder="Estimated time of ordering" type="text" required=''
+        input.form-control bs-timepicker="" ng-model="order.ordered_at" placeholder="Godzina, o której pasza zostanie zamówiona" type="text" required=''
         span.input-group-addon.required data-toggle="timepicker" data-show-meridian="false" type="button"
           span.glyphicon.glyphicon-time
     .form-group
-      input.btn-create-order.btn.btn-success name="create-order" type="submit" value="Create order"
+      input.btn-create-order.btn.btn-success name="create-order" type="submit" value="Zapisz"

@@ -3,7 +3,7 @@
     .col-md-9.col-md-push-3
       .inline-buttons
         - if active
-          button.btn.btn-success.pull-left ng-click="show(order)" Dodaj danie
+          button.btn.btn-success.pull-left ng-click="show(order)" Dodaj posiłek
           button.btn.btn-default.pull-left ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" Edytuj zamówienie
         button.btn.btn-danger.pull-left ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" Usuń zamówienie
       h5.pull-right

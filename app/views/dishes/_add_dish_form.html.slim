@@ -1,13 +1,13 @@
 h2
-  | Add dish to
+  | Zamów posiłek w
   strong.text-info
     |  {{order.name}}
-a.pull-right.btn-close-new-dish close
+a.pull-right.btn-close-new-dish zamknij
 .row
   form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
     .form-group
-      textarea.form-control ng-model="dish.description" placeholder="What do you order?" required=''
+      textarea.form-control ng-model="dish.description" placeholder="Co zamawiasz?" required=''
     .form-group
-      input.form-control ng-model="dish.price" placeholder="Price of your meal" type="number" step="any" required=''
+      input.form-control ng-model="dish.price" placeholder="Ile to będzie kosztować?" type="number" step="any" required=''
     .form-group
-      input.btn.btn-success name="add-dish-to-order" type="submit" value="Add dish to order"
+      input.btn.btn-success name="add-dish-to-order" type="submit" value="Zapisz"
