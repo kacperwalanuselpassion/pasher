@@ -34,6 +34,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'postmark-rails', '~> 0.5.2'
 end
 
 gem 'haml'
