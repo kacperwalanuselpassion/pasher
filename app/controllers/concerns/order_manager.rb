@@ -8,6 +8,7 @@ class OrderManager
     order.active = true
     order.founder_uid = @user.uid
     Storage::Order.save(order)
+    OrderMailer.new_order_email(@user, order).deliver
     order
   end
 

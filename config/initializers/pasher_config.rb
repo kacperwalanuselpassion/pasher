@@ -10,5 +10,10 @@ class PasherConfig
       orders[:polling_interval] = ENV['ORDERS_POLLING_INTERVAL'].to_i
     end
 
+    config[:emails] = {}.tap do |emails|
+      raise 'env var [USERS_EMAIL] not set' if ENV['USERS_EMAIL'].blank?
+      emails[:users] = ENV['USERS_EMAIL']
+    end
+
   end
 end
