@@ -8,7 +8,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = OrderManager.new(current_user).save(params[:order])
-    @order.active = true
     respond_with @order
   end
 

@@ -4,10 +4,11 @@ class OrderManager
   end
 
   def save(order_params)
-    @order = Order.new(order_params)
-    @order.founder_uid = @user.uid
-    Storage::Order.save(@order)
-    @order
+    order = Order.new(order_params)
+    order.active = true
+    order.founder_uid = @user.uid
+    Storage::Order.save(order)
+    order
   end
 
   def remove(order_id)
