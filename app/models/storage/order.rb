@@ -10,7 +10,7 @@ module Storage
         active + last_inactive(5)
       end
 
-      def find id
+      def find(id)
         response = collection.find_one(_id: BSON::ObjectId(id))
 
         ::Order.new(response)

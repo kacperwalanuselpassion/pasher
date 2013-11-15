@@ -8,8 +8,8 @@ class OrderMailer < ActionMailer::Base
     mail(to: PasherConfig::CONFIG[:emails][:users], subject: "#{creator.name} chce zamówić paszę w #{order.name} o #{order.ordered_at}")
   end
 
-  def executor_email(executor, order)
+  def executor_email(executor_email, order)
     @order = order
-    mail(to: executor.email, subject: 'Zostałeś egzekutorem - dzwoń po paszę!')
+    mail(to: executor_email, subject: 'Zostałeś egzekutorem - dzwoń po paszę!')
   end
 end
