@@ -1,6 +1,6 @@
 CONFIG = $('#pasher-config').data('config');
 
-var app = angular.module('app', ['flash', '$strap.directives', 'ngResource']);
+var app = angular.module('app', ['flash', '$strap.directives', 'ngResource', 'filters']);
 
 // app.config( ['$routeProvider', function ($routeProvider) {
 //     $routeProvider.when('/', { templateUrl: '/assets/patents/index.html', controller: 'OrdersController' });
@@ -191,20 +191,32 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', function ($scope, $rootScope, ChatMessageDAO) {
     var init = function() {
         $scope.chatMessageText = '';
+        $scope.chatShown = true;
         chatPolling();
+    };
+
+    var scrollChat = function() {
+        var chatMessagesDiv = document.getElementById('chat-message-list');
+        chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
     };
 
     var chatPolling = function() {
         ChatMessageDAO.index({}, function(data) {
             $scope.chatMessages = data;
+            scrollChat();
         });
         setTimeout(chatPolling, CONFIG.chat.polling_interval);
     };
 
     $scope.sendMessage = function() {
         ChatMessageDAO.create({text: $scope.chatMessageText}, function(data) {
-            init();
-        })
+            scrollChat();
+        });
+        $scope.chatMessageText = '';
+    };
+
+    $scope.toggleChat = function() {
+        $scope.chatShown = !$scope.chatShown;
     };
 
     if(CONFIG.chat.on) { init(); }

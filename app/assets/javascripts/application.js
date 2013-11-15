@@ -15,9 +15,8 @@
 //= require ng/angular-resource.min
 //= require ng/angular-strap.min
 //= require ng/angular-flash
+//= require ng/filters
 //= require twitter/bootstrap
 //= require ng/bootstrap-timepicker
 //= require app
 //= require orders
-//= require chat
-//= require chat_toggler

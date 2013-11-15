@@ -1,15 +1,20 @@
 #chat ng-controller='ChatController'
-  form method='post' ng-submit='sendMessage()'
-    .input-wrapper
-      input.form-control type='text' ng-model='chatMessageText'
-  a.chat-toggler
-    span.glyphicon.glyphicon-open
-  ul
-    li ng-repeat='message in chatMessages'
-      .message-created-at
-        | [{{ message.timestamp }}]
-      .message-author
-        | {{ message.sender_name }}:
-      .message-text
-        | {{ message.text }}
+  .chat-bar ng-click='toggleChat()'
+    h5 El Pasher Chat
+    .pull-right
+      button.close aria-hidden='true' type='button' &times;
+    .clearfix
 
+  .chat-messages ng-show='chatShown'
+    ul#chat-message-list
+      li ng-repeat='message in chatMessages | reverse'
+        .message-created-at
+          | [{{ message.timestamp }}]
+        .message-author
+          | {{ message.sender_name }}:
+        .message-text
+          | {{ message.text }}
+
+  .chat-input ng-show='chatShown'
+    form method='post' ng-submit='sendMessage()'
+      input.form-control type='text' ng-model='chatMessageText'
