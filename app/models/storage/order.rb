@@ -1,29 +1,30 @@
 module Storage
   class Order
     class << self
-
+      def mapper
+        Storage::Order::Mapper
+      end
+      
       def all
-        collection.find().sort({_id: -1}).map { |response| ::Order.new(response) }
+        collection.find().sort({_id: -1}).map { |response| mapper.to_object(response) }
       end
 
       def last(limit = 5)
-        active + last_inactive(5)
+        active + last_inactive(limit)
       end
 
       def find(id)
         response = collection.find_one(_id: BSON::ObjectId(id))
 
-        ::Order.new(response)
+        mapper.to_object(response)
       end
 
       def save(order)
-        collection.save(order.attributes)
+        collection.save(mapper.to_storage(order))
       end
 
-      def update(order)
-        attributes = order.attributes
-        attributes.delete(:_id)
-        collection.update({_id: BSON::ObjectId(order._id)}, attributes)
+      def update(id, order)
+        collection.update({_id: BSON::ObjectId(id)}, mapper.to_storage(order))
       end
 
       def remove(id)
@@ -31,16 +32,17 @@ module Storage
       end
 
       private
+
       def collection
         Storage::Driver.db['orders']
       end
 
       def active
-        collection.find({active: true}).sort({_id: -1}).map { |response| ::Order.new(response) }
+        collection.find({active: true}).sort({_id: -1}).map { |response| mapper.to_object(response) }
       end
 
       def last_inactive(limit)
-        collection.find({active: false}).sort({_id: -1}).limit(limit).map { |response| ::Order.new(response) }
+        collection.find({active: false}).sort({_id: -1}).limit(limit).map { |response| mapper.to_object(response) }
       end
     end
   end
