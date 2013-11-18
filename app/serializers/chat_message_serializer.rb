@@ -1,7 +1,7 @@
 class ChatMessageSerializer < ActiveModel::Serializer
   self.root = false
 
-  attributes :text, :sender_name, :sender_uid, :_id, :timestamp
+  attributes :text, :sender_name, :sender_uid, :_id, :timestamp, :sender_avatar
 
   def timestamp
     return '' unless object.created_at
@@ -16,5 +16,9 @@ class ChatMessageSerializer < ActiveModel::Serializer
     else
       "#{minutes_ago / 60 / 24} days ago"
     end
+  end
+
+  def sender_avatar
+    User.find_by_uid(sender_uid).gravatar_url
   end
 end
