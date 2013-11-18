@@ -4,7 +4,7 @@ class OrderManager
   end
 
   def save(order_params)
-    order = Order.new(order_params)
+    order = Storage::Order::Mapper.to_object(order_params)
     order.active = true
     order.founder_uid = @user.uid
     Storage::Order.save(order)
@@ -12,11 +12,16 @@ class OrderManager
     order
   end
 
+  def update(order_id, order_params)
+    order = Storage::Order::Mapper.to_object(order_params)
+    Storage::Order.update(order_id, order)
+  end
+
   def finalize(order_id)
     order = Storage::Order.find(order_id)
     order.draw_executor
     order.active = false
-    Storage::Order.update(order)
+    Storage::Order.update(order_id, order)
     OrderMailer.executor_email(order.executor_email, order).deliver
     order
   end

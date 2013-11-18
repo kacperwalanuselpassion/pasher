@@ -12,10 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Storage::Order.find(params[:id])
-    @order.update_attributes(params[:order])
-
-    Storage::Order.update(@order)
+    OrderManager.new(current_user).update(params[:id], params[:order])
     head :no_content
   end
 
@@ -30,7 +27,6 @@ class OrdersController < ApplicationController
   end
 
   def finalize
-
     if finalized_order = OrderManager.new(current_user).finalize(params[:id])
       render json: {executor: finalized_order.executor}
     else
