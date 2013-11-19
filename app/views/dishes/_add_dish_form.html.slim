@@ -6,7 +6,8 @@ a.pull-right.btn-close-new-dish zamknij
 .row
   form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
     .form-group
-      textarea.form-control ng-model="dish.description" placeholder="Co zamawiasz?" required=''
+      input.dish-description-field data-placeholder="Co zamawiasz?" required=''
+
     .form-group
       input.form-control ng-model="dish.price" placeholder="Ile to będzie kosztować?" type="number" step="any" required=''
     .form-group
