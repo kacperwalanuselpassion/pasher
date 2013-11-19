@@ -200,10 +200,20 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
         chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
     };
 
+    var fillOmitHeaderFields = function() {
+        var chatMessagesCount = $scope.chatMessages.length - 1;
+        $scope.chatMessages[chatMessagesCount].omitHeader = false;
+        for (var message = 1; message <= chatMessagesCount; ++message) {
+            $scope.chatMessages[message].omitHeader =
+                ($scope.chatMessages[message].sender_uid == $scope.chatMessages[message - 1].sender_uid);
+        }
+    };
+
     var chatPolling = function() {
         ChatMessageDAO.index({}, function(data) {
             $scope.chatMessages = data;
-            scrollChat();
+            fillOmitHeaderFields();
+//            scrollChat();
         });
         setTimeout(chatPolling, CONFIG.chat.polling_interval);
     };

@@ -34,24 +34,33 @@
         padding: 0
         min-height: 4em
         li
-          border-bottom: 1px solid #D4DCE2
+          border-top: 1px solid #D4DCE2
           padding: .5em .9em
           color: #36536E
           word-wrap: break-word
+          &.no-border
+            border: 0
           .message-created-at
-            margin-left: .3em
-            margin-bottom: .3em
+            margin: .6em
             font-size: .7em
             color: dimgray
-            float: right
             width: 8em
           .message-author
             display: inline
             font-weight: bold
+            .sender-avatar
+              width: 32px
+              height: 32px
+              border-radius: 16px
+              -webkit-border-radius: 16px
+              -moz-border-radius: 16px
+              vertical-align: middle
+              display: inline-block
+              margin-right: .6em
           .message-text
             margin-left: .4em
             display: inline
     .chat-input
-      border-top: 1px solid #D4DCE2
+      border-bottom: 1px solid #D4DCE2
       input
         border: 0

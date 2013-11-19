@@ -2,19 +2,21 @@
   .chat-bar ng-click='toggleChat()'
     h5 El Pasher Chat
     .pull-right
-      button.close aria-hidden='true' type='button' &times;
+      button.close aria-hidden='true' type='button' _
     .clearfix
-
-  .chat-messages ng-show='chatShown'
-    ul#chat-message-list
-      li ng-repeat='message in chatMessages | reverse'
-        .message-created-at
-          | [{{ message.timestamp }}]
-        .message-author
-          | {{ message.sender_name }}:
-        .message-text
-          | {{ message.text }}
 
   .chat-input ng-show='chatShown'
     form method='post' ng-submit='sendMessage()'
       input.form-control type='text' ng-model='chatMessageText'
+
+  .chat-messages ng-show='chatShown'
+    ul#chat-message-list
+      li ng-repeat='message in chatMessages' ng-class="{'no-border':message.omitHeader}"
+        .message-created-at.pull-right
+          | [{{ message.timestamp }}]
+        .message-author.pull-left ng-hide="message.omitHeader"
+          img.sender-avatar ng-src="{{ message.sender_avatar }}"
+          | {{ message.sender_name }}
+        .clearfix ng-hide="message.omitHeader"
+        .message-text
+          | {{ message.text }}
