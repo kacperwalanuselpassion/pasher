@@ -220,7 +220,7 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
 
     $scope.sendMessage = function() {
         ChatMessageDAO.create({text: $scope.chatMessageText}, function(data) {
-            scrollChat();
+//            scrollChat();
         });
         $scope.chatMessageText = '';
     };
