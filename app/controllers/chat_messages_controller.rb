@@ -2,7 +2,7 @@ class ChatMessagesController < ApplicationController
   respond_to :json
 
   def index
-    @chat_messages = Storage::ChatMessage.last
+    @chat_messages = Storage::Mongo::ChatMessage.last
     respond_with @chat_messages, root: false
   end
 
@@ -12,10 +12,10 @@ class ChatMessagesController < ApplicationController
   end
 
   def update
-    @chat_message = Storage::ChatMessage.find(params[:id])
+    @chat_message = Storage::Mongo::ChatMessage.find(params[:id])
     @chat_message.update_attributes(params[:chat_message])
 
-    Storage::ChatMessage.update(@chat_message)
+    Storage::Mongo::ChatMessage.update(@chat_message)
     head :no_content
   end
 

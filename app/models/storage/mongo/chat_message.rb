@@ -1,4 +1,4 @@
-module Storage
+module Storage::Mongo
   class ChatMessage
     class << self
 
@@ -24,7 +24,7 @@ module Storage
 
       private
       def collection
-        Storage::Driver::db['chat_messages']
+        Storage::Mongo::Driver::db['chat_messages']
       end
     end
   end

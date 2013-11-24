@@ -1,4 +1,4 @@
-module Storage
+module Storage::Mongo
   module Driver
     class << self
       def db

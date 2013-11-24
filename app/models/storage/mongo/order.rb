@@ -1,8 +1,8 @@
-module Storage
+module Storage::Mongo
   class Order
     class << self
       def mapper
-        Storage::Order::Mapper
+        Storage::Mongo::Order::Mapper
       end
       
       def all
@@ -34,7 +34,7 @@ module Storage
       private
 
       def collection
-        Storage::Driver.db['orders']
+        Storage::Mongo::Driver.db['orders']
       end
 
       def active

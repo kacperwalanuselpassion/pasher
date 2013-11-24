@@ -6,11 +6,11 @@ class DishManager
   def save(dish_params)
     @dish = Dish.new(dish_params)
     @dish.user_uid = @user.uid
-    Storage::Dish.save(@dish)
+    Storage::Mongo::Dish.save(@dish)
     @dish
   end
 
   def remove(dish)
-    Storage::Dish.remove(dish) if dish.user_uid.eql? @user.uid
+    Storage::Mongo::Dish.remove(dish) if dish.user_uid.eql? @user.uid
   end
 end

@@ -6,7 +6,7 @@ class Order
                 :min_order_price
 
   def dishes
-    Storage::Dish.find_all_by :order_uid, self._id
+    Storage::Mongo::Dish.find_all_by :order_uid, self._id
   end
 
   def draw_executor

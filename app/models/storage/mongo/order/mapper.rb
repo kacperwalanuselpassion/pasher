@@ -1,4 +1,4 @@
-module Storage
+module Storage::Mongo
   class Order
     class Mapper
       def self.to_object(response)

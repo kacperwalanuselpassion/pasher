@@ -2,7 +2,7 @@ class DishesController < ApplicationController
   respond_to :json
 
   #def index
-  #  @dishes = Storage::Dish.all
+  #  @dishes = Storage::Mongo::Dish.all
   #  respond_with @dishes, root: false
   #end
 
@@ -12,20 +12,20 @@ class DishesController < ApplicationController
   end
 
   def update
-    @dish = Storage::Dish.find(params[:id])
+    @dish = Storage::Mongo::Dish.find(params[:id])
     @dish.update_attributes(params[:dish])
 
-    Storage::Dish.update(@dish)
+    Storage::Mongo::Dish.update(@dish)
     head :no_content
   end
 
   #def show
-  #  @dish = Storage::Dish.find(params[:id])
+  #  @dish = Storage::Mongo::Dish.find(params[:id])
   #  respond_with @dish
   #end
 
   def destroy
-    DishManager.new(current_user).remove(Storage::Dish.find(params[:id]))
+    DishManager.new(current_user).remove(Storage::Mongo::Dish.find(params[:id]))
     head :no_content
   end
 end

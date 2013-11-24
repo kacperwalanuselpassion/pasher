@@ -1,4 +1,4 @@
-module Storage
+module Storage::Mongo
   class Dish
     class << self
       def all
@@ -37,7 +37,7 @@ module Storage
       private
 
       def collection
-        Storage::Driver.db['dishes']
+        Storage::Mongo::Driver.db['dishes']
       end
     end
   end
