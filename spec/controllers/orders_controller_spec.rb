@@ -5,7 +5,7 @@ describe OrdersController do
   context 'CREATE order' do
 
     it 'creates order from params' do
-      Storage::Mongo::Order.should_receive(:save)
+      Order.storage.should_receive(:save)
       post 'create', order: {name: 'dupa'}
     end
 
