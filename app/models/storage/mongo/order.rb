@@ -31,18 +31,18 @@ module Storage::Mongo
         collection.remove(_id: BSON::ObjectId(id))
       end
 
-      private
-
-      def collection
-        Storage::Mongo::Driver.db['orders']
-      end
-
       def active
         collection.find({active: true}).sort({_id: -1}).map { |response| mapper.to_object(response) }
       end
 
       def last_inactive(limit)
         collection.find({active: false}).sort({_id: -1}).limit(limit).map { |response| mapper.to_object(response) }
+      end
+
+      private
+
+      def collection
+        Storage::Mongo::Driver.db['orders']
       end
     end
   end
