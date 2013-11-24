@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   respond_to :json
 
   def index
-    @orders = Order.storage.last
+    @orders = Order.last
     respond_with @orders, root: false
   end
 
@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.storage.find(params[:id])
+    @order = Order.find(params[:id])
     respond_with @order
   end
 
