@@ -1,4 +1,5 @@
 class Dish
+  include Dish::StorageDelegator
   extend ActiveModel::Naming
   include ActiveModel::SerializerSupport
 

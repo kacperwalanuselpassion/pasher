@@ -12,10 +12,10 @@ class DishesController < ApplicationController
   end
 
   def update
-    @dish = Dish.new.storage.find(params[:id])
+    @dish = Dish.new.find(params[:id])
     @dish.update_attributes(params[:dish])
 
-    Dish.new.storage.update(@dish)
+    Dish.new.update(@dish)
     head :no_content
   end
 
@@ -25,7 +25,7 @@ class DishesController < ApplicationController
   #end
 
   def destroy
-    dish = Dish.new.storage.find(params[:id])
+    dish = Dish.new.find(params[:id])
     DishManager.new(current_user).remove(dish._id, dish.user_uid)
     head :no_content
   end
