@@ -25,7 +25,8 @@ class DishesController < ApplicationController
   #end
 
   def destroy
-    DishManager.new(current_user).remove(Storage::Mongo::Dish.find(params[:id]))
+    dish = Storage::Mongo::Dish.find(params[:id])
+    DishManager.new(current_user).remove(dish._id, dish.user_uid)
     head :no_content
   end
 end
