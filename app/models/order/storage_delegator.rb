@@ -1,5 +1,5 @@
 module Order::StorageDelegator
-  DELEGATED_METHODS = %w(mapper all last find save update remove active last_inactive)
+  DELEGATED_METHODS = %w(mapper all last find save update remove active last_inactive dishes)
 
   def storage
     Storage::Mongo::Order

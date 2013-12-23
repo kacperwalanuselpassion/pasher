@@ -39,6 +39,10 @@ module Storage::Mongo
         collection.find({active: false}).sort({_id: -1}).limit(limit).map { |response| mapper.to_object(response) }
       end
 
+      def dishes(id)
+        Storage::Mongo::Dish.find_all_by :order_uid, id
+      end
+
       private
 
       def collection
