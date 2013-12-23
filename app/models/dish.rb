@@ -10,6 +10,6 @@ class Dish
   end
 
   def user
-    User.find_by_uid(user_uid)
+    storage.user(self.user_uid)
   end
 end
