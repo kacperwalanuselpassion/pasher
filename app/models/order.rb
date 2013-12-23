@@ -1,13 +1,17 @@
 class Order
-  extend Order::StorageDelegator
+  include Order::StorageDelegator
   extend ActiveModel::Naming
   include ActiveModel::SerializerSupport
 
   attr_accessor :_id, :name, :delivery_cost, :founder_uid, :_id, :ordered_at, :active, :executor, :executor_email, :url,
-                :min_order_price
+                :min_order_price, :storage
+
+  def initialize
+    self.storage = Storage::Mongo::Order
+  end
 
   def dishes
-    self.class.dishes self._id
+    storage.dishes self._id
   end
 
   def draw_executor
