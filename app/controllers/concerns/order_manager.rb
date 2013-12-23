@@ -35,6 +35,6 @@ class OrderManager
   protected
 
   def remove_dishes(order_id)
-    Storage::Mongo::Dish.remove_by_order_uid(order_id)
+    Dish.new.storage.remove_by_order_uid(order_id)
   end
 end
