@@ -49,17 +49,12 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
         $scope.dish  = {};
     };
 
-    $scope.getDescriptionFromSelect2Field = function() {
-        return $('.dish-description-field').select2('data').text;
-    }
-
     $rootScope.$on('ORDER_SELECTED', function(event, order) {
         $scope.order = order;
     });
 
     $scope.add = function() {
         $scope.dish.order_uid = $scope.order._id
-        $scope.dish.description = $scope.getDescriptionFromSelect2Field()
         Dish.save($scope.dish, function(data){ $scope.$emit('DISH_ADDED'); });
         initEmpty();
     };

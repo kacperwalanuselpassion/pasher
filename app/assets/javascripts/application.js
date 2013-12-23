@@ -18,8 +18,5 @@
 //= require ng/filters
 //= require twitter/bootstrap
 //= require ng/bootstrap-timepicker
-//= require select2.min
 //= require app
 //= require orders
-//= require dish_form_select2
-
