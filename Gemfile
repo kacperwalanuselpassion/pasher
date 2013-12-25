@@ -24,6 +24,8 @@ end
 group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'
+  gem 'debugger', '>= 1.6.2'
+  gem 'debugger-xml', '>= 0.3.2'
   gem 'pry-debugger'
   gem 'pry'
   gem 'dotenv'

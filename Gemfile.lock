@@ -51,12 +51,15 @@ GEM
     coffee-script-source (1.6.3)
     columnize (0.3.6)
     debug_inspector (0.0.2)
-    debugger (1.6.1)
+    debugger (1.6.3)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.3)
+      debugger-ruby_core_source (~> 1.2.4)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.3)
+    debugger-ruby_core_source (1.2.4)
+    debugger-xml (0.3.3)
+      builder (>= 2.0.0)
+      debugger (>= 1.6.2)
     diff-lcs (1.2.4)
     dotenv (0.8.0)
     dotenv-rails (0.8.0)
@@ -205,6 +208,8 @@ DEPENDENCIES
   bootstrap-sass-rails
   bson_ext
   coffee-rails (~> 4.0.0)
+  debugger (>= 1.6.2)
+  debugger-xml (>= 0.3.2)
   dotenv
   dotenv-rails
   haml
