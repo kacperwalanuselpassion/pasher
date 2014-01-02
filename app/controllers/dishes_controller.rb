@@ -12,10 +12,7 @@ class DishesController < ApplicationController
   end
 
   def update
-    @dish = Dish.new.find(params[:id])
-    @dish.update_attributes(params[:dish])
-
-    Dish.new.update(@dish)
+    DishManager.new(current_user).update(params[:id], params[:dish])
     head :no_content
   end
 

@@ -26,8 +26,8 @@ module Storage::Mongo
         collection.save(mapper.to_storage(dish))
       end
 
-      def update(dish)
-        collection.update({_id: BSON::ObjectId(dish._id)}, dish.attributes)
+      def update(id, dish)
+        collection.update({_id: BSON::ObjectId(id)}, mapper.to_storage(dish))
       end
 
       def remove(id)
