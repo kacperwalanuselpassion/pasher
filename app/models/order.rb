@@ -4,7 +4,7 @@ class Order
   include ActiveModel::SerializerSupport
 
   attr_accessor :_id, :name, :delivery_cost, :founder_uid, :_id, :ordered_at, :active, :executor, :executor_email, :url,
-                :min_order_price, :storage
+                :min_order_price, :storage, :bitcoin_wallet
 
   def initialize
     self.storage = Storage::Mongo::Order

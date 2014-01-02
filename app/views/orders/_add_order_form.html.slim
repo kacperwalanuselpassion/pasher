@@ -16,4 +16,14 @@ a.pull-right.btn-close-new-order zamknij
         span.input-group-addon.required data-toggle="timepicker" data-show-meridian="false" type="button"
           span.glyphicon.glyphicon-time
     .form-group
+      .input-group
+        span.input-group-addon type="button"
+          label.no-margin for="bitcoin_wallet_input"
+            img src="/assets/bitcoin.svg" width="20" height="20"
+        input.form-control id="bitcoin_wallet_input" ng-model="order.bitcoin_wallet" placeholder="Adres portfela bitcoin"
+        span.input-group-addon
+          label for="bitcoin_wallet_remember"
+            input#bitcoin_wallet_remember type="checkbox"
+            | zapamiętaj
+    .form-group
       input.btn-create-order.btn.btn-success name="create-order" type="submit" value="Zapisz"

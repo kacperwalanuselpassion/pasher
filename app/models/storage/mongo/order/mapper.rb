@@ -13,6 +13,7 @@ module Storage::Mongo
         order.executor = response['executor']
         order.executor_email = response['executor_email']
         order.url = ::Order.parse_url(response['url'])
+        order.bitcoin_wallet = response['bitcoin_wallet']
         order
       end
 
@@ -26,7 +27,8 @@ module Storage::Mongo
             active: order.active,
             executor: order.executor,
             executor_email: order.executor_email,
-            url: order.url
+            url: order.url,
+            bitcoin_wallet: order.bitcoin_wallet
         }
       end
     end

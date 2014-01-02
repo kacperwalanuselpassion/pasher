@@ -64,3 +64,6 @@
         label Koszt dostawy:
         strong
           |  {{ order.delivery_cost }} zł
+      .order-header-column.col-xs-6.col-md-12.bullet-bitcoin ng-show="order.bitcoin_wallet"
+        label
+          a ng-href="/bitcoin_wallets/{{ order._id }}" target="_blank" Pay in BTC

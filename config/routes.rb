@@ -9,6 +9,7 @@ Gapi::Application.routes.draw do
   resources :orders, defaults: { format: 'json' }
   resources :dishes, defaults: { format: 'json' }
   resources :chat_messages, defaults: { format: 'json' }
+  resources :bitcoin_wallets, only: %w(show)
 
   root to: 'welcome#index'
 end
