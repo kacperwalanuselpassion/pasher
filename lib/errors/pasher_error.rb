@@ -2,7 +2,7 @@ module Errors
   class PasherError < StandardError
 
     def to_hash
-      { message: self.message }
+      { error: {message: self.message} }
     end
 
   end

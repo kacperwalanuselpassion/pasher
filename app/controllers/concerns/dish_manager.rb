@@ -15,7 +15,11 @@ class DishManager
     Dish.new.update(dish_id, dish)
   end
 
-  def remove(dish_id, user_id)
-    Dish.new.remove(dish_id) if user_id.eql? @user.uid
+  def remove(dish_id, users_ids)
+    if @user.uid.in?(users_ids)
+      Dish.new.remove(dish_id)
+    else
+      raise Errors::Api::UnauthorizedError
+    end
   end
 end
