@@ -12,4 +12,9 @@ class Dish
   def user
     storage.user(self.user_uid)
   end
+
+  def order
+    storage.order(self.order_uid)
+  end
+
 end

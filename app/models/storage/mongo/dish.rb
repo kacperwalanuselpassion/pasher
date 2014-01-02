@@ -42,6 +42,10 @@ module Storage::Mongo
         User.find_by_uid(user_id)
       end
 
+      def order(order_id)
+        Order.new.storage.find(order_id)
+      end
+
       private
 
       def collection

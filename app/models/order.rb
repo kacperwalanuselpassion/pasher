@@ -14,6 +14,14 @@ class Order
     storage.dishes self._id
   end
 
+  def users
+    dishes.flat_map(&:user).uniq
+  end
+
+  def user_delivery_cost
+    users.count == 0 ? Float::NAN : self.delivery_cost / users.count
+  end
+
   def draw_executor
     sample = dishes.map(&:user).sample
     self.executor = sample.name

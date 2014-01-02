@@ -21,9 +21,9 @@
                 | {{ dish.description }}
             td
               | {{ dish.user_name }}
-            td
+            td.price
               strong
-                | {{dish.price}}
+                | {{dish.price}} (+{{order.user_delivery_cost}})
               |  PLN
             - if active
               td
