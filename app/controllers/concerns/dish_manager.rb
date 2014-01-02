@@ -5,7 +5,7 @@ class DishManager
 
   def save(dish_params)
     @dish = Dish.new.mapper.to_object(dish_params)
-    @dish.user_uid = @user.uid
+    @dish.users_uids = [@user.uid]
     Dish.new.save(@dish)
     @dish
   end

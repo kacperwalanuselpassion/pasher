@@ -18,5 +18,6 @@
 //= require ng/filters
 //= require twitter/bootstrap
 //= require ng/bootstrap-timepicker
+//= require extensions
 //= require app
 //= require orders

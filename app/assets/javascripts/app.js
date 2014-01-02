@@ -90,7 +90,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     }
 
     $scope.dishBelongsToCurrentUser = function(dish) {
-        return dish.user_uid == $scope.currentUser;
+        return dish.users_uids.contains($scope.currentUser);
     }
 
     $scope.isFinalized = function(order) {

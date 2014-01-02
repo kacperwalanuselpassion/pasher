@@ -23,7 +23,7 @@ class DishesController < ApplicationController
 
   def destroy
     dish = Dish.new.find(params[:id])
-    DishManager.new(current_user).remove(dish._id, dish.user_uid)
+    DishManager.new(current_user).remove(dish._id, dish.users_uids)
     head :no_content
   end
 end
