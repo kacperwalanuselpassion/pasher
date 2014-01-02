@@ -23,7 +23,8 @@
               | {{ dish.users_names }}
             td.price
               strong
-                span {{dish.price}}
+                span
+                  | {{dish.price}}
               span ng-show="order.user_delivery_cost"
                 |  (+{{order.user_delivery_cost}})
               strong  PLN
