@@ -20,6 +20,11 @@ class Order
     self.executor_email = sample.email
   end
 
+  def total_sum
+    return if dishes.nil?
+    dishes.map{ |dish| dish.price || 0 }.sum + (delivery_cost || 0)
+  end
+
   def self.parse_url(url)
     if url.nil? || url[/:\/\//]
       url
