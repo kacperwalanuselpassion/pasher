@@ -191,7 +191,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
 app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', function ($scope, $rootScope, ChatMessageDAO) {
     var init = function() {
         $scope.chatMessageText = '';
-        $scope.chatShown = true;
+        $scope.chatShown = localStorage['chatShown'];
         chatPolling();
     };
 
@@ -226,7 +226,7 @@ app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', func
     };
 
     $scope.toggleChat = function() {
-        $scope.chatShown = !$scope.chatShown;
+        localStorage['chatShown'] = $scope.chatShown = !$scope.chatShown;
     };
 
     if(CONFIG.chat.on) { init(); }
