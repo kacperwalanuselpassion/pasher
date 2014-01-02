@@ -1,9 +1,9 @@
 class DishSerializer < ActiveModel::Serializer
   self.root = false
 
-  attributes :_id, :name, :description, :price, :user_name, :user_uid, :order_uid
+  attributes :_id, :name, :description, :price, :users_names, :users_uids, :order_uid
 
-  def user_name
-    object.user.name
+  def users_names
+    object.users.map(&:name).join(', ')
   end
 end

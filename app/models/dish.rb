@@ -3,13 +3,18 @@ class Dish
   extend ActiveModel::Naming
   include ActiveModel::SerializerSupport
 
-  attr_accessor :_id, :name, :description, :price, :user_uid, :order_uid, :storage
+  attr_accessor :_id, :name, :description, :price, :users_uids, :order_uid, :storage
 
   def initialize
     self.storage = Storage::Mongo::Dish
   end
 
-  def user
-    storage.user(self.user_uid)
+  def users
+    [storage.user(self.users_uids)]
   end
+
+  def order
+    storage.order(self.order_uid)
+  end
+
 end

@@ -7,7 +7,7 @@ module Storage::Mongo
         dish.name = response['name']
         dish.description = response['description']
         dish.price = response['price']
-        dish.user_uid = response['user_uid']
+        dish.users_uids = response['users_uids']
         dish.order_uid = response['order_uid']
         dish
       end
@@ -17,7 +17,7 @@ module Storage::Mongo
             name: dish.name,
             description: dish.description,
             price: dish.price,
-            user_uid: dish.user_uid,
+            users_uids: dish.users_uids,
             order_uid: dish.order_uid
         }
       end
