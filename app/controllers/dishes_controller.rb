@@ -9,12 +9,12 @@ class DishesController < ApplicationController
   #end
 
   def create
-    @dish = DishManager.new(current_user).save(params[:dish]) rescue raise(Errors::Api::CreateError.new)
+    @dish = DishManager.new(current_user).save(params[:dish])
     respond_with @dish
   end
 
   def update
-    DishManager.new(current_user).update(params[:id], params[:dish]) rescue raise(Errors::Api::UpdateError.new)
+    DishManager.new(current_user).update(params[:id], params[:dish])
     head :no_content
   end
 
@@ -25,7 +25,7 @@ class DishesController < ApplicationController
 
   def destroy
     dish = Dish.new.find(params[:id])
-    DishManager.new(current_user).remove(dish._id, dish.users_uids) rescue raise(Errors::Api::DestroyError.new)
+    DishManager.new(current_user).remove(dish._id, dish.users_uids)
     head :no_content
   end
 
@@ -38,7 +38,7 @@ class DishesController < ApplicationController
   protected
 
   def pasher_error_handler(e)
-    render json: e
+    render json: e, status: 422
   end
 
 end

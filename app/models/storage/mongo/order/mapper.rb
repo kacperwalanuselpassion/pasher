@@ -23,13 +23,17 @@ module Storage::Mongo
             delivery_cost: order.delivery_cost,
             min_order_price: order.min_order_price,
             founder_uid: order.founder_uid,
-            ordered_at: order.ordered_at,
+            ordered_at: ordered_at(order.ordered_at),
             active: order.active,
             executor: order.executor,
             executor_email: order.executor_email,
             url: order.url,
             bitcoin_wallet: order.bitcoin_wallet
         }
+      end
+
+      def self.ordered_at(ordered_at)
+        ordered_at.is_a?(String) ? TimeUtils.parse(ordered_at) : ordered_at
       end
     end
   end

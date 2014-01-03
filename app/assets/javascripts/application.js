@@ -19,5 +19,6 @@
 //= require ng/ui-bootstrap.min
 //= require ng/ui-bootstrap-tpls.min
 //= require extensions
+//= require angular-timer-master/app/js/timer
 //= require app
 //= require orders

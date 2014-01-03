@@ -9,13 +9,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = OrderManager.new(current_user).save(params[:order]) rescue raise(Errors::Api::CreateError.new)
+    @order = OrderManager.new(current_user).save(params[:order])
     remember_bitcoin_wallet if params['bitcoin_wallet_remember']
     respond_with @order
   end
 
   def update
-    OrderManager.new(current_user).update(params[:id], params[:order]) rescue raise(Errors::Api::UpdateError.new)
+    OrderManager.new(current_user).update(params[:id], params[:order])
     remember_bitcoin_wallet if params['bitcoin_wallet_remember']
     head :no_content
   end
@@ -26,7 +26,8 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    OrderManager.new(current_user).remove(params[:id]) rescue raise(Errors::Api::DestroyError.new)
+    OrderManager.new(current_user).remove(params[:id])
+    head :no_content
   end
 
   def finalize
@@ -44,7 +45,7 @@ class OrdersController < ApplicationController
   end
 
   def pasher_error_handler(e)
-    render json: e
+    render json: e, status: 422
   end
 
 
