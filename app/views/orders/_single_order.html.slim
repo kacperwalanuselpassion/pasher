@@ -26,10 +26,9 @@
             td.price
               span
                 strong
-                  | {{dish.price}}
+                  | {{dish.price}} PLN
                 span ng-show="order.user_delivery_cost"
-                  |  (+{{order.user_delivery_cost}})
-                strong  PLN
+                  |  + {{order.user_delivery_cost}} PLN
             - if active
               td
                 a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"

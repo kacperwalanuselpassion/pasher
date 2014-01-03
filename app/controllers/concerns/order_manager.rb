@@ -14,11 +14,15 @@ class OrderManager
 
   def update(order_id, order_params)
     order = Order.new.mapper.to_object(order_params)
+    not_authorized unless order.founder_uid.eql? @user.uid
+
     Order.new.update(order_id, order)
   end
 
   def finalize(order_id)
     order = Order.new.find(order_id)
+    not_authorized unless order.founder_uid.eql? @user.uid
+
     order.draw_executor
     order.active = false
     Order.new.update(order_id, order)
@@ -28,7 +32,9 @@ class OrderManager
 
   def remove(order_id)
     order = Order.new.find(order_id)
-    Order.new.remove(order_id) if order.founder_uid.eql? @user.uid
+    not_authorized unless order.founder_uid.eql? @user.uid
+
+    Order.new.remove(order_id)
     remove_dishes(order_id)
   end
 
@@ -36,5 +42,11 @@ class OrderManager
 
   def remove_dishes(order_id)
     Dish.new.remove_by_order_uid(order_id)
+  end
+
+  private
+
+  def not_authorized
+    raise Errors::Api::NotAuthorizedError.new
   end
 end
