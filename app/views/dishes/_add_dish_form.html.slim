@@ -10,4 +10,9 @@ a.pull-right.btn-close-new-dish zamknij
     .form-group
       input.form-control ng-model="dish.price" placeholder="Ile to będzie kosztować?" type="number" step="any" required=''
     .form-group
+      Czy inni mogą dołączyć do Twojego zamówienia?
+      input.form-control ng-model="dish.joinable" type="checkbox"
+    .form-group
+      input.form-control ng-model="dish.participants_limit" placeholder="Ile ludzi może dołączyć?" min="1" type="number" step="any"
+    .form-group
       input.btn.btn-success name="add-dish-to-order" type="submit" value="Zapisz"

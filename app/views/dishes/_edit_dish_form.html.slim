@@ -9,6 +9,11 @@ a.pull-right.btn-close-edit-dish zamknij
       textarea.form-control ng-model="dish.description" placeholder="Co zamawiasz?" required=''
     .form-group
       input.form-control ng-model="dish.price" placeholder="Ile to będzie kosztować?" type="number" step="any" required=''
+    .form-group
+      Czy inni mogą dołączyć do Twojego zamówienia?
+      input.form-control ng-model="dish.joinable" type="checkbox"
+    .form-group
+      input.form-control ng-model="dish.participants_limit" placeholder="Ile ludzi może dołączyć?" min="1" type="number" step="any"
     .form-group.no-display
       input ng-model="dish._id"
     .form-group
