@@ -9,6 +9,8 @@ module Storage::Mongo
         dish.price = response['price']
         dish.users_uids = response['users_uids']
         dish.order_uid = response['order_uid']
+        dish.joinable = response['joinable']
+        dish.participants_limit = response['participants_limit'].to_i
         dish
       end
 
@@ -18,7 +20,9 @@ module Storage::Mongo
             description: dish.description,
             price: dish.price,
             users_uids: dish.users_uids,
-            order_uid: dish.order_uid
+            order_uid: dish.order_uid,
+            joinable: dish.joinable,
+            participants_limit: dish.participants_limit
         }
       end
     end

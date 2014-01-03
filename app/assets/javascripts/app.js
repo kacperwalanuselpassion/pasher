@@ -189,6 +189,14 @@ app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order'
         $scope.$emit('EDITING_DISH', dish);
     };
 
+    $scope.joinToDish = function(dish) {
+        $.ajax({
+            url: 'dishes/' + dish._id + '/join',
+            method: 'put'
+        }).done(function (data) { init(); }
+        ).fail(function(jqXHR, textStatus) { console.log(jqXHR, textStatus) });
+    }
+
     $scope.finalize = function(id) {
         $.ajax({
             url: 'order_finalize',

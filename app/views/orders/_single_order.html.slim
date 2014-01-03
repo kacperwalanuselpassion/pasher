@@ -20,14 +20,16 @@
               strong
                 | {{ dish.description }}
             td
-              | {{ dish.users_names }}
+              ul.list-type-style-none
+                li.user-name ng-repeat="user_name in dish.users_names"
+                  | {{ user_name }}
             td.price
-              strong
-                span
+              span
+                strong
                   | {{dish.price}}
-              span ng-show="order.user_delivery_cost"
-                |  (+{{order.user_delivery_cost}})
-              strong  PLN
+                span ng-show="order.user_delivery_cost"
+                  |  (+{{order.user_delivery_cost}})
+                strong  PLN
             - if active
               td
                 a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
@@ -35,6 +37,10 @@
               td
                 a ng-click="removeDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
                   span.glyphicon.glyphicon-trash
+              td.no-wrap
+                a ng-click="joinToDish(dish)" ng-show="dish.joinable"
+                  span Dołącz
+                span ng-show="dish.joinable"  ({{dish.users_uids.length}}/{{dish.participants_limit + 1}})
         tfoot
           tr
             th
@@ -47,6 +53,7 @@
             th
               | {{ order.total_sum }} PLN
             - if active
+              th
               th
               th
     .order-header.col-md-3.col-md-pull-9.row

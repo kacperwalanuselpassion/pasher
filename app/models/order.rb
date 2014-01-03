@@ -28,7 +28,7 @@ class Order
   end
 
   def draw_executor
-    drawn_user = dishes.map(&:users).sample
+    drawn_user = users.sample
     self.executor = drawn_user.name
     self.founder_uid = drawn_user.uid
     self.executor_email = drawn_user.email
