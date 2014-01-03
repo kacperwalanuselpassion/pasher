@@ -171,7 +171,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order'
     $scope.add = function() {
         $scope.order.active = true;
 
-        if (!$scope.order.orderet_at)
+        if (!$scope.order.ordered_at)
             $scope.order.ordered_at = new Date();
 
         Order.save($scope.order,
