@@ -32,6 +32,10 @@ div ng-app="app"
         .edit-order.text-center
           = render partial: 'orders/edit_order_form'
 
+      .add-bitcoin-address-wrapper.bordered-box.padded-box.no-display
+        .add-bitcoin-address.text-center
+          = render partial: 'orders/add_bitcoin_address'
+
       .add-dish-wrapper.bordered-box.padded-box.no-display ng-controller="DishesController"
         .add-dish.text-center
           = render partial: 'dishes/add_dish_form'
