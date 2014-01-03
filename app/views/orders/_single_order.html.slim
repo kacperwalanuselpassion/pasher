@@ -26,10 +26,9 @@
             td.price
               span
                 strong
-                  | {{dish.price}}
+                  | {{dish.price}} PLN
                 span ng-show="order.user_delivery_cost"
-                  |  (+{{order.user_delivery_cost}})
-                strong  PLN
+                  |  + {{order.user_delivery_cost}} PLN
             - if active
               td
                 a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
@@ -67,7 +66,7 @@
         strong
           span ng-show="order.ordered_at_int"
             timer end-time="order.ordered_at_int"
-             | {{ hours }}h, {{ minutes }}min, {{ seconds }}s
+             | {{ hours }}h {{ minutes }}min {{ seconds }}s
           span.text-danger ng-hide="order.ordered_at_int" already passed
       .order-header-column.col-xs-6.col-md-12.bullet-paperclip
         label Min. zamówienie:
