@@ -3,7 +3,7 @@ class BitcoinWalletsController < ApplicationController
 
   def show
     @order = Order.new.find(params[:id])
-    @wallet = @order.bitcoin_wallet
+    @wallet = @order.bitcoin_wallet['address']
     respond_to do |format|
       format.html
       format.svg  { render qrcode: @wallet, level: :h, unit: 6, offset: 10 }

@@ -10,11 +10,13 @@ class OrdersController < ApplicationController
 
   def create
     @order = OrderManager.new(current_user).save(params[:order]) rescue raise(Errors::Api::CreateError.new)
+    remember_bitcoin_wallet if params['bitcoin_wallet_remember']
     respond_with @order
   end
 
   def update
     OrderManager.new(current_user).update(params[:id], params[:order]) rescue raise(Errors::Api::UpdateError.new)
+    remember_bitcoin_wallet if params['bitcoin_wallet_remember']
     head :no_content
   end
 
@@ -36,6 +38,10 @@ class OrdersController < ApplicationController
   end
 
   protected
+
+  def remember_bitcoin_wallet
+    BitcoinWalletManager.new(current_user).save(params[:bitcoin_wallet])
+  end
 
   def pasher_error_handler(e)
     render json: e
