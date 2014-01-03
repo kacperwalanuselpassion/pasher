@@ -1,6 +1,6 @@
 CONFIG = $('#pasher-config').data('config');
 
-var app = angular.module('app', ['flash', '$strap.directives', 'ngResource', 'filters']);
+var app = angular.module('app', ['flash', '$strap.directives', 'ngResource', 'filters', 'timer']);
 
 // app.config( ['$routeProvider', function ($routeProvider) {
 //     $routeProvider.when('/', { templateUrl: '/assets/patents/index.html', controller: 'OrdersController' });
@@ -92,8 +92,8 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
     initEmpty();
 }]);
 
-app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', 'ErrorHandler',
-    function ($scope, $rootScope, $location, Order, ErrorHandler) {
+app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', 'ErrorHandler', function ($scope, $rootScope, $location, Order) {
+    $scope.timerRunning = true;
     $scope.order = {};
     $scope.currentUser = $('#data').data('user-uid');
 

@@ -63,14 +63,19 @@
           a ng-href="{{ order.url }}" target="_blank"
             |  {{ order.name }}
       .order-header-column.col-xs-6.col-md-12.bullet-clock
-        label Czas zamówienia:
-        span
-          strong
-            | {{ order.ordered_at | date:'H:mm EEE' }}
+        label Czas do końca:
+        strong
+          span ng-show="order.ordered_at_int"
+            timer end-time="order.ordered_at_int"
+             | {{ hours }}h, {{ minutes }}min, {{ seconds }}s
+          span.text-danger ng-hide="order.ordered_at_int" Already ordered
       .order-header-column.col-xs-6.col-md-12.bullet-paperclip
         label Min. zamówienie:
         strong
-          |  {{ order.min_order_price }} zł
+          span ng-show="order.min_order_price"
+            |  {{ order.min_order_price }} zł
+          span ng-hide="order.min_order_price"
+            |  -
       .order-header-column.col-xs-6.col-md-12.bullet-truck ng-show="order.delivery_cost"
         label Koszt dostawy:
         strong

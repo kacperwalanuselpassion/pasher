@@ -19,5 +19,6 @@
 //= require twitter/bootstrap
 //= require ng/bootstrap-timepicker
 //= require extensions
+//= require angular-timer-master/app/js/timer
 //= require app
 //= require orders
