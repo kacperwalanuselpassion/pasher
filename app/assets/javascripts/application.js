@@ -13,11 +13,11 @@
 //= require ng/jquery.min
 //= require ng/angular.min
 //= require ng/angular-resource.min
-//= require ng/angular-strap.min
 //= require ng/angular-flash
 //= require ng/filters
 //= require twitter/bootstrap
-//= require ng/bootstrap-timepicker
+//= require ng/ui-bootstrap.min
+//= require ng/ui-bootstrap-tpls.min
 //= require extensions
 //= require app
 //= require orders

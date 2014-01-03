@@ -47,7 +47,7 @@
               | {{ order.dishes.length }}
             th
               - if active
-                button.btn.btn-info ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order)" Losuj
+                button.btn.btn-info ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order) && order.dishes.length > 0" Losuj
               - else
                 | {{ order.executor }}
             th

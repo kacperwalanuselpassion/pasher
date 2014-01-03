@@ -1,6 +1,6 @@
 CONFIG = $('#pasher-config').data('config');
 
-var app = angular.module('app', ['flash', '$strap.directives', 'ngResource', 'filters']);
+var app = angular.module('app', ['flash', 'ui.bootstrap', 'ngResource', 'filters']);
 
 // app.config( ['$routeProvider', function ($routeProvider) {
 //     $routeProvider.when('/', { templateUrl: '/assets/patents/index.html', controller: 'OrdersController' });
