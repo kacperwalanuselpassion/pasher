@@ -22,6 +22,6 @@ class Dish
   end
 
   def participants_limit_exceeded?
-    self.participants_limit && self.participants_limit < self.users_uids.size - 1
+    self.participants_limit && self.participants_limit <= self.users_uids.size - 1
   end
 end

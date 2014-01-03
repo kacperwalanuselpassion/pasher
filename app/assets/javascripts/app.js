@@ -92,7 +92,7 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
     initEmpty();
 }]);
 
-app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', 'ErrorHandler', function ($scope, $rootScope, $location, Order) {
+app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', 'ErrorHandler', function ($scope, $rootScope, $location, Order, ErrorHandler) {
     $scope.timerRunning = true;
     $scope.order = {};
     $scope.currentUser = $('#data').data('user-uid');
