@@ -16,11 +16,7 @@ class DishManager
   end
 
   def remove(dish_id, users_ids)
-    if @user.uid.in?(users_ids)
-      Dish.new.remove(dish_id)
-    else
-      raise Errors::Api::UnauthorizedError
-    end
+    Dish.new.remove(dish_id) if @user.uid.in?(users_ids)
   end
 
   def join(dish)

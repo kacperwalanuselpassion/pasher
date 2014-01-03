@@ -43,6 +43,12 @@ app.factory('ChatMessageDAO', ['$resource', function ($resource) {
     return service;
 }]);
 
+app.service('ErrorHandler', ['$resource', function($resource) {
+    this.displayAlert = function(responseText) {
+        alert(responseText.error.message)
+    }
+}]);
+
 app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($scope, $rootScope, Dish) {
     var initEmpty = function() {
         $scope.order = {};
@@ -55,18 +61,27 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
 
     $scope.add = function() {
         $scope.dish.order_uid = $scope.order._id
-        Dish.save($scope.dish, function(data){ $scope.$emit('DISH_ADDED'); });
+        Dish.save($scope.dish,
+            function(data){
+                $scope.$emit('DISH_ADDED');
+            });
         initEmpty();
     };
 
     $scope.edit = function() {
-        Dish.update({id: $scope.dish._id},{dish: $scope.dish}, function(data){ $scope.$emit('DISH_UPDATED'); });
+        Dish.update({id: $scope.dish._id},{dish: $scope.dish},
+            function(data){
+                $scope.$emit('DISH_UPDATED');
+            });
         initEmpty();
     };
 
     $rootScope.$on('REMOVING_DISH', function(event, dish) {
         $('.add-dish-wrapper').slideUp('slow');
-        Dish.remove({id: dish._id}, function(data){ $scope.$emit('DISH_REMOVED'); });
+        Dish.remove({id: dish._id},
+            function(data){
+                $scope.$emit('DISH_REMOVED');
+            });
     });
 
     $rootScope.$on('EDITING_DISH', function(event, dish) {
@@ -77,7 +92,8 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
     initEmpty();
 }]);
 
-app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', function ($scope, $rootScope, $location, Order) {
+app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', 'ErrorHandler',
+    function ($scope, $rootScope, $location, Order, ErrorHandler) {
     $scope.order = {};
     $scope.currentUser = $('#data').data('user-uid');
 
@@ -154,12 +170,18 @@ app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order'
 
     $scope.add = function() {
         $scope.order.active = true;
-        Order.save($scope.order, function(data){ init(); });
+        Order.save($scope.order,
+            function(data){
+                init();
+            });
         $scope.order = {};
     };
 
     $scope.edit = function() {
-        Order.update({id: $scope.order._id}, {order: $scope.order}, function(data){ init(); });
+        Order.update({id: $scope.order._id}, {order: $scope.order},
+            function(data){
+                init();
+            });
         $scope.order = {};
         $('.edit-order-wrapper').slideUp('slow')
     };
@@ -176,7 +198,10 @@ app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order'
 
     $scope.removeOrder = function(order) {
         if (confirm('Are you sure you want to remove order ' + order.name + '?'))
-            Order.remove({id:order._id}, function(data){ init(); });
+            Order.remove({id:order._id},
+                function(data){
+                    init();
+                });
     };
 
     $scope.removeDish = function(dish) {
@@ -193,9 +218,14 @@ app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order'
         $.ajax({
             url: 'dishes/' + dish._id + '/join',
             method: 'put'
-        }).done(function (data) { init(); }
-        ).fail(function(jqXHR, textStatus) { console.log(jqXHR, textStatus) });
-    }
+        }).done(function (data) {
+                init();
+            }
+        ).fail(function(jqXHR){
+                var responseText = jQuery.parseJSON((jqXHR.responseText))
+                ErrorHandler.displayAlert(responseText)
+            });
+    };
 
     $scope.finalize = function(id) {
         $.ajax({
