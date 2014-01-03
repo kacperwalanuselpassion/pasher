@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
 
   def destroy
     OrderManager.new(current_user).remove(params[:id])
+    head :no_content
   end
 
   def finalize
