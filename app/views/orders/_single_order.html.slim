@@ -38,9 +38,9 @@
                 a ng-click="removeDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
                   span.glyphicon.glyphicon-trash
               td.no-wrap
-                a ng-click="joinToDish(dish)" ng-show="dish.joinable"
+                a ng-click="joinToDish(dish)" ng-show="canJoinToDish(dish)"
                   span Dołącz
-                span ng-show="dish.joinable"  ({{dish.users_uids.length}}/{{dish.participants_limit + 1}})
+                span ng-show="canJoinToDish(dish)"  ({{dish.users_uids.length}}/{{dish.participants_limit + 1}})
         tfoot
           tr
             th
