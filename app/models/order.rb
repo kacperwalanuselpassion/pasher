@@ -24,7 +24,7 @@ class Order
   end
 
   def draw_executor
-    sample = dishes.map(&:users).sample
+    sample = users.sample
     self.executor = sample.name
     self.executor_email = sample.email
   end
