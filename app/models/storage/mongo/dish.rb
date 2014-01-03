@@ -38,8 +38,8 @@ module Storage::Mongo
         collection.remove(order_uid: order_uid)
       end
 
-      def user(user_id)
-        User.find_by_uid(user_id)
+      def users(users_ids)
+        User.where(uid: users_ids)
       end
 
       def order(order_id)

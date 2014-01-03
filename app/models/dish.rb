@@ -10,11 +10,18 @@ class Dish
   end
 
   def users
-    [storage.user(self.users_uids)]
+    storage.users(self.users_uids)
   end
 
   def order
     storage.order(self.order_uid)
   end
 
+  def can_join?
+    self.joinable && !participants_limit_exceeded?
+  end
+
+  def participants_limit_exceeded?
+    self.participants_limit && self.participants_limit > self.users_uids.size - 1
+  end
 end

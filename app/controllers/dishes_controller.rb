@@ -29,6 +29,12 @@ class DishesController < ApplicationController
     head :no_content
   end
 
+  def join
+    dish = Dish.new.find(params[:id])
+    DishManager.new(current_user).join(dish)
+    head :no_content
+  end
+
   protected
 
   def pasher_error_handler(e)

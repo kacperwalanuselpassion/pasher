@@ -7,7 +7,11 @@ Gapi::Application.routes.draw do
 
   get 'order_finalize', to: 'orders#finalize'
   resources :orders, defaults: { format: 'json' }
-  resources :dishes, defaults: { format: 'json' }
+  resources :dishes, defaults: { format: 'json' } do
+    member do
+      put :join
+    end
+  end
   resources :chat_messages, defaults: { format: 'json' }
   resources :bitcoin_wallets, only: %w(show)
 

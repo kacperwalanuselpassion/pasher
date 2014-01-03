@@ -13,6 +13,6 @@ a.pull-right.btn-close-new-dish zamknij
       Czy inni mogą dołączyć do Twojego zamówienia?
       input.form-control ng-model="dish.joinable" type="checkbox"
     .form-group
-      input.form-control ng-model="dish.participants_limit" placeholder="Ile ludzi może dołączyć?" min="1" type="number" step="any"
+      input.form-control ng-model="dish.participants_limit" placeholder="Ile ludzi może dołączyć?" min="{{dish.users_uids.length}}" type="number" step="any"
     .form-group
       input.btn.btn-success name="add-dish-to-order" type="submit" value="Zapisz"

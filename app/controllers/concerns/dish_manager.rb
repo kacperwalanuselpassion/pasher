@@ -22,4 +22,13 @@ class DishManager
       raise Errors::Api::UnauthorizedError
     end
   end
+
+  def join(dish)
+    if dish.can_join?
+      dish.users_uids << @user.uid if !@user.uid.in? dish.users_uids
+      Dish.new.update(dish._id, dish)
+    else
+      raise Errors::Api::Dish::ParticipantsLimitExceeded
+    end
+  end
 end
