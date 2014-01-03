@@ -56,18 +56,24 @@
               th
               th
     .order-header.col-md-3.col-md-pull-9.row
+      .order-header-column.col-xs-6.col-md-12
+        .label.label-success ng-show="order.active"
+          | ACTIVE ORDER
+        .label.label-default ng-show="!order.active"
+          | FINALIZED
       .order-header-column.col-xs-6.col-md-12.bullet-pointer
         label Lokal:
         strong 
           a ng-href="{{ order.url }}" target="_blank"
             |  {{ order.name }}
       .order-header-column.col-xs-6.col-md-12.bullet-clock
-        label Czas do końca:
-        strong
-          span ng-show="order.ordered_at_int"
-            timer end-time="order.ordered_at_int"
-             | {{ hours }}h {{ minutes }}min {{ seconds }}s
-          span.text-danger ng-hide="order.ordered_at_int" already passed
+        div ng-show="order.active"
+          label Czas do końca:
+          strong
+            span ng-show="order.ordered_at_int"
+              timer end-time="order.ordered_at_int"
+               | {{ hours }}h {{ minutes }}min {{ seconds }}s
+            span.text-danger ng-hide="order.ordered_at_int" already passed
       .order-header-column.col-xs-6.col-md-12.bullet-paperclip
         label Min. zamówienie:
         strong
