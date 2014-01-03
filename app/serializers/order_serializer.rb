@@ -15,6 +15,6 @@ class OrderSerializer < ActiveModel::Serializer
 
   def ordered_at_int
     ordered_at = object.ordered_at
-    object.ordered_at.getutc if Time.now.utc < ordered_at
+    TimeUtils.to_timestamp(object.ordered_at) if TimeUtils.now < ordered_at
   end
 end
