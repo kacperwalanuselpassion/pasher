@@ -33,7 +33,7 @@ module Storage::Mongo
       end
 
       def self.ordered_at(ordered_at)
-        ordered_at.is_a?(String) ? Time.parse(ordered_at).utc : ordered_at
+        ordered_at.is_a?(String) ? TimeUtils.parse(ordered_at) : ordered_at
       end
     end
   end

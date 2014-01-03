@@ -10,11 +10,7 @@ a.pull-right.btn-close-new-order zamknij
       input.form-control ng-model="order.delivery_cost" placeholder="Koszt dostarczenia paszy" type="number" step="any"
     .form-group
       input.form-control ng-model="order.min_order_price" placeholder="Minimalna cena zamówienia" type="number" step="any"
-    .form-group
-      .input-group
-        input.form-control bs-timepicker="" ng-model="order.ordered_at" placeholder="Godzina, o której pasza zostanie zamówiona" type="text" required=''
-        span.input-group-addon.required data-toggle="timepicker" data-show-meridian="false" type="button"
-          span.glyphicon.glyphicon-time
+    = render partial: 'orders/form_timepicker'
     /.form-group
     /  .input-group
     /    span.input-group-addon type="button"
