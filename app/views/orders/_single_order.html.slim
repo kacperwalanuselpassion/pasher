@@ -64,8 +64,9 @@
             |  {{ order.name }}
       .order-header-column.col-xs-6.col-md-12.bullet-clock
         label Czas zamówienia:
-        strong
-          |  {{ order.ordered_at | date:'H:mm' }}
+        span
+          strong
+            | {{ order.ordered_at | date:'H:mm EEE' }}
       .order-header-column.col-xs-6.col-md-12.bullet-paperclip
         label Min. zamówienie:
         strong
