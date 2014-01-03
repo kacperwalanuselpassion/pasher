@@ -18,15 +18,20 @@ class Order
     dishes.flat_map(&:users).uniq
   end
 
+  def add_bitcoin_address_url
+    (ENV['ROOT_URL'] || '') + "#/add_bitcoin_address/#{self._id}"
+  end
+
   def user_delivery_cost
     return Float::NAN if !self.delivery_cost || users.count == 0
     self.delivery_cost / users.count
   end
 
   def draw_executor
-    sample = dishes.map(&:users).sample
-    self.executor = sample.name
-    self.executor_email = sample.email
+    drawn_user = dishes.map(&:users).sample
+    self.executor = drawn_user.name
+    self.founder_uid = drawn_user.uid
+    self.executor_email = drawn_user.email
   end
 
   def total_sum

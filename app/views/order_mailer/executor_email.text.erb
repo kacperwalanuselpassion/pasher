@@ -1,5 +1,8 @@
-Zostałeś wylosowany na egzekutora zamówienia. Spoczywa na Tobie teraz wielka odpowiedzialność,
-bo musisz zamówić paszę z <%= @order.name %>.
+You have been chosen by lot to be the order executor of <%= @order.name %>.
+
 <% if @order.url %>
-  Strona WWW: <%= @order.url %>
+  Restaurant's webiste: <%= @order.url %>
 <% end %>
+
+Did you know you can charge bitcoin for the meals you execute?
+In order for others to see your wallet address on Pasher, please fill it here: <%= @order.add_bitcoin_address_url %>.

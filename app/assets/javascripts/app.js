@@ -77,7 +77,7 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
     initEmpty();
 }]);
 
-app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($scope, $rootScope, Order) {
+app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', function ($scope, $rootScope, $location, Order) {
     $scope.order = {};
     $scope.currentUser = $('#data').data('user-uid');
 
@@ -106,9 +106,25 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
         }
     };
 
+    var handleRoutes = function(path) {
+        var pathMembers = path.replace(/^\/+|\/+$/g, '').split('/');
+        if (pathMembers[0] == 'edit' && pathMembers.length > 1) {
+            Order.get({id: pathMembers[1]}, function(order) {
+                angular.copy(order, $scope.order);
+                $('.edit-order-wrapper').show();
+            });
+        } else if (pathMembers[0] == 'add_bitcoin_address' && pathMembers.length > 1) {
+            Order.get({id: pathMembers[1]}, function(order) {
+                angular.copy(order, $scope.order);
+                $('.add-bitcoin-address-wrapper').show();
+            });
+        };
+    };
+
     var init = function(){
         $scope.anyActiveOrders = false;
         $scope.anyFinalizedOrders = false;
+
         Order.query(
             {},
             function(data) {
@@ -186,6 +202,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', 'Order', function ($
     };
 
     init();
+    handleRoutes($location.path());
 }]);
 
 app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', function ($scope, $rootScope, ChatMessageDAO) {

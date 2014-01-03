@@ -4,6 +4,7 @@ class window.Order
     @editOrderDiv = $('.edit-order-wrapper'),
     @editDishDiv = $('.edit-dish-wrapper'),
     @newDishDiv = $('.add-dish-wrapper'),
+    @addBitcoinAddressDiv = $('.add-bitcoin-address-wrapper'),
     @newOrderForm = $('#new-order-form')[0],
     @newOrderButton = $('.btn-add-order'),
     @createOrderButton = $('.btn-create-order'),
@@ -11,6 +12,8 @@ class window.Order
     @closeEditOrderButton = $('.btn-close-edit-order'),
     @closeNewDishButton = $('.btn-close-new-dish'),
     @closeEditDishButton = $('.btn-close-edit-dish'),
+    @closeAddBitcoinAddressButton = $('.btn-close-add-bitcoin-address'),
+    @addBitcoinAddressButton = $('.btn-add-bitcoin-address')
   ) ->
     @newOrderButton.on 'click', (event) =>
       @newOrderButton.addClass('hide')
@@ -34,6 +37,12 @@ class window.Order
 
     @closeEditDishButton.on 'click', (event) =>
       @editDishDiv.slideUp('slow')
+
+    @closeAddBitcoinAddressButton.on 'click', (event) =>
+      @addBitcoinAddressDiv.slideUp('slow')
+
+    @addBitcoinAddressButton.on 'click', (event) =>
+      @addBitcoinAddressDiv.slideUp('slow')
 
 $ ->
   new Order

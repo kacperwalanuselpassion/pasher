@@ -1,0 +1,16 @@
+h2 Add bitcoin address for order {{ order.name }}
+a.pull-right.btn-close-add-bitcoin-address close
+.row
+  form#new-order-form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="edit()"
+    .form-group
+      .input-group
+        span.input-group-addon type="button"
+          label.no-margin for="bitcoin_wallet_input"
+            img src="/assets/bitcoin.svg" width="20" height="20"
+        input.form-control id="bitcoin_wallet_input" ng-model="order.bitcoin_wallet.address" placeholder="Adres portfela bitcoin" maxlength="34"
+        span.input-group-addon
+          label for="bitcoin_wallet_remember"
+            input#bitcoin_wallet_remember ng-model="order.bitcoin_wallet_remember" type="checkbox"
+            | zapamiętaj
+    .form-group
+      input.btn-add-bitcoin-address.btn.btn-success name="edit-order" type="submit" value="Add address"
