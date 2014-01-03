@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
 
   def destroy
     OrderManager.new(current_user).remove(params[:id]) rescue raise(Errors::Api::DestroyError.new)
+    head :no_content
   end
 
   def finalize
