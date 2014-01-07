@@ -26,10 +26,9 @@
             td.price
               span
                 strong
-                  | {{dish.price}}
+                  | {{dish.price}} PLN
                 span ng-show="order.user_delivery_cost"
-                  |  (+{{order.user_delivery_cost}})
-                strong  PLN
+                  |  + {{order.user_delivery_cost}} PLN
             - if active
               td
                 a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
@@ -38,9 +37,9 @@
                 a ng-click="removeDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
                   span.glyphicon.glyphicon-trash
               td.no-wrap
-                a ng-click="joinToDish(dish)" ng-show="dish.joinable"
+                a ng-click="joinToDish(dish)" ng-show="canJoinToDish(dish)"
                   span Dołącz
-                span ng-show="dish.joinable"  ({{dish.users_uids.length}}/{{dish.participants_limit + 1}})
+                span ng-show="canJoinToDish(dish)"  ({{dish.users_uids.length}}/{{dish.participants_limit + 1}})
         tfoot
           tr
             th
@@ -57,18 +56,24 @@
               th
               th
     .order-header.col-md-3.col-md-pull-9.row
+      .order-header-column.col-xs-6.col-md-12
+        .label.label-success ng-show="order.active"
+          | ACTIVE ORDER
+        .label.label-default ng-show="!order.active"
+          | FINALIZED
       .order-header-column.col-xs-6.col-md-12.bullet-pointer
         label Lokal:
         strong 
           a ng-href="{{ order.url }}" target="_blank"
             |  {{ order.name }}
       .order-header-column.col-xs-6.col-md-12.bullet-clock
-        label Czas do końca:
-        strong
-          span ng-show="order.ordered_at_int"
-            timer end-time="order.ordered_at_int"
-             | {{ hours }}h {{ minutes }}min {{ seconds }}s
-          span.text-danger ng-hide="order.ordered_at_int" already passed
+        div ng-show="order.active"
+          label Czas do końca:
+          strong
+            span ng-show="order.ordered_at_int"
+              timer end-time="order.ordered_at_int"
+               | {{ hours }}h {{ minutes }}min {{ seconds }}s
+            span.text-danger ng-hide="order.ordered_at_int" already passed
       .order-header-column.col-xs-6.col-md-12.bullet-paperclip
         label Min. zamówienie:
         strong
@@ -82,4 +87,4 @@
           |  {{ order.delivery_cost }} zł
       .order-header-column.col-xs-6.col-md-12.bullet-bitcoin ng-show="order.bitcoin_wallet.address"
         label
-          a ng-href="/bitcoin_wallets/{{ order._id }}" target="_blank" Pay in BTC
+          a ng-href="/bitcoin_wallets/{{ order._id }}" target="_blank" Pay executor with BTC

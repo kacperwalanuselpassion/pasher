@@ -18,10 +18,10 @@ class Dish
   end
 
   def can_join?
-    self.joinable && !participants_limit_exceeded?
+    self.joinable && !participants_limit_met_or_exceeded?
   end
 
-  def participants_limit_exceeded?
+  def participants_limit_met_or_exceeded?
     self.participants_limit && self.participants_limit <= self.users_uids.size - 1
   end
 end

@@ -133,6 +133,14 @@ app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order'
             return order.active;
         };
 
+        $scope.canJoinToDish = function(dish) {
+            return (dish.joinable && dish.participants_limit > dish.users_uids.length - 1);
+        }
+
+        $scope.belongsToCurrentUser = function(order) {
+            return order.founder_uid == $scope.currentUser;
+        }
+
         $scope.belongsToCurrentUser = function(order) {
             return order.founder_uid == $scope.currentUser;
         }
