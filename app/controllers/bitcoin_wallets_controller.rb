@@ -9,4 +9,9 @@ class BitcoinWalletsController < ApplicationController
       format.svg  { render qrcode: @wallet, level: :h, unit: 6, offset: 10 }
     end
   end
+
+  def index
+    @wallets = Storage::Mongo::BitcoinWallet.all_by_user(current_user).map{|w| w.address}
+    render json: @wallets
+  end
 end

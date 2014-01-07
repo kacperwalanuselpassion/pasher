@@ -11,15 +11,6 @@ a.pull-right.btn-close-new-order zamknij
     .form-group
       input.form-control ng-model="order.min_order_price" placeholder="Minimalna cena zamówienia" type="number" step="any"
     = render partial: 'orders/form_timepicker'
-    /.form-group
-    /  .input-group
-    /    span.input-group-addon type="button"
-    /      label.no-margin for="bitcoin_wallet_input"
-    /        img src="/assets/bitcoin.svg" width="20" height="20"
-    /    input.form-control id="bitcoin_wallet_input" ng-model="order.bitcoin_wallet.address" placeholder="Adres portfela bitcoin" maxlength="34"
-    /    span.input-group-addon
-    /      label for="bitcoin_wallet_remember"
-    /        input#bitcoin_wallet_remember ng-model="order.bitcoin_wallet_remember" type="checkbox"
-    /        | zapamiętaj
+
     .form-group
       input.btn-create-order.btn.btn-success name="create-order" type="submit" value="Zapisz"

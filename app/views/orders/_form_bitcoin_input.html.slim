@@ -1,0 +1,10 @@
+.form-group
+  .input-group
+    span.input-group-addon type="button"
+      label.no-margin for="bitcoin_wallet_input"
+        = image_tag "bitcoin.svg",  width: 20, height: 20
+    input#bitcoin_wallet_input.form-control ui-select2='bitcoinSelect2Options' ng-model="order.bitcoin_wallet.address" data-placeholder="Adres portfela bitcoin"
+    span.input-group-addon
+      label for="bitcoin_wallet_remember"
+        input#bitcoin_wallet_remember ng-model="order.bitcoin_wallet_remember" type="checkbox"
+        | zapamiętaj

@@ -20,5 +20,7 @@
 //= require ng/ui-bootstrap-tpls.min
 //= require extensions
 //= require angular-timer-master/app/js/timer
+//= require select2
+//= require angular-ui-select2
 //= require app
 //= require orders

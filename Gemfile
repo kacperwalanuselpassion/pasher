@@ -51,3 +51,5 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'bootstrap-sass-rails'
 gem 'rqrcode-rails3'
+gem "select2-rails"
+gem 'angular-ui-select2-rails'

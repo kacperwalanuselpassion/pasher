@@ -1,6 +1,6 @@
 CONFIG = $('#pasher-config').data('config');
 
-var app = angular.module('app', ['flash', 'ui.bootstrap', 'ngResource', 'filters', 'timer']);
+var app = angular.module('app', ['flash', 'ui.bootstrap', 'ngResource', 'filters', 'timer', 'ui.select2']);
 
 // app.config( ['$routeProvider', function ($routeProvider) {
 //     $routeProvider.when('/', { templateUrl: '/assets/patents/index.html', controller: 'OrdersController' });
@@ -38,6 +38,17 @@ app.factory('ChatMessageDAO', ['$resource', function ($resource) {
             index: { method: 'GET', isArray: true },
             create: { method: 'POST' },
             destroy: { method: 'DELETE' }
+        }
+    );
+    return service;
+}]);
+
+app.factory('BitcoinWallet', ['$resource', function ($resource) {
+    var service = $resource(
+        '/bitcoin_wallets/:id',
+        {id: '@id'},
+        {
+            index: { method: 'GET' }
         }
     );
     return service;
@@ -92,159 +103,182 @@ app.controller('DishesController', ['$scope', '$rootScope', 'Dish', function ($s
     initEmpty();
 }]);
 
-app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', 'ErrorHandler', function ($scope, $rootScope, $location, Order, ErrorHandler) {
-    $scope.timerRunning = true;
-    $scope.order = {};
-    $scope.currentUser = $('#data').data('user-uid');
-
-    $scope.isActive = function(order) {
-        return order.active;
-    };
-
-    $scope.belongsToCurrentUser = function(order) {
-        return order.founder_uid == $scope.currentUser;
-    }
-
-    $scope.dishBelongsToCurrentUser = function(dish) {
-        return dish.users_uids.contains($scope.currentUser);
-    }
-
-    $scope.isFinalized = function(order) {
-        return !order.active;
-    }
-
-    var initializeActiveAndFinalized = function() {
-        for (order in $scope.orders) {
-            if ($scope.orders[order].active)
-                $scope.anyActiveOrders = true;
-            else
-                $scope.anyFinalizedOrders = true;
-        }
-    };
-
-    var handleRoutes = function(path) {
-        var pathMembers = path.replace(/^\/+|\/+$/g, '').split('/');
-        if (pathMembers[0] == 'edit' && pathMembers.length > 1) {
-            Order.get({id: pathMembers[1]}, function(order) {
-                angular.copy(order, $scope.order);
-                $('.edit-order-wrapper').show();
-            });
-        } else if (pathMembers[0] == 'add_bitcoin_address' && pathMembers.length > 1) {
-            Order.get({id: pathMembers[1]}, function(order) {
-                angular.copy(order, $scope.order);
-                $('.add-bitcoin-address-wrapper').show();
-            });
+app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order', 'ErrorHandler', 'BitcoinWallet',
+    function ($scope, $rootScope, $location, Order, ErrorHandler, BitcoinWallet) {
+        $scope.bitcoinSelect2Options = {
+            simple_tags: true,
+            maximumSelectionSize: 1,
+            maximumInputLength: 34,
+            tags: [],
+            ajax: {
+                url: 'http://localhost:3000/bitcoin_wallets.json',
+                dataType: 'json',
+                results: function(data, page) {
+                    return {
+                        results: $.map(data.bitcoin_wallets,
+                            function(value, index) { return {id: value, text: value}; })
+                    }
+                }
+            },
+            createSearchChoice: function(term) {
+                return { id: term, text: term };
+            }
         };
-    };
 
-    var init = function(){
-        $scope.anyActiveOrders = false;
-        $scope.anyFinalizedOrders = false;
-
-        Order.query(
-            {},
-            function(data) {
-                $scope.orders = data;
-                initializeActiveAndFinalized();
-            });
-    };
-
-    ($scope.refreshOrders = function() {
-        init();
-        setTimeout($scope.refreshOrders, CONFIG.orders.polling_interval);
-    })();
-
-    $rootScope.$on('DISH_ADDED', function(event,order) {
-        $('.add-dish-wrapper').slideUp('slow');
-        init();
-    });
-
-    $rootScope.$on('DISH_UPDATED', function(event,order) {
-        $('.edit-dish-wrapper').slideUp('slow');
-        init();
-    });
-
-    $rootScope.$on('DISH_REMOVED', function(event) {
-        init();
-    });
-
-    $scope.add = function() {
-        $scope.order.active = true;
-
-        if (!$scope.order.ordered_at)
-            $scope.order.ordered_at = new Date();
-
-        Order.save($scope.order,
-            function(data){
-                init();
-            });
+        $scope.timerRunning = true;
         $scope.order = {};
-    };
+        $scope.currentUser = $('#data').data('user-uid');
 
-    $scope.edit = function() {
-        Order.update({id: $scope.order._id}, {order: $scope.order},
-            function(data){
-                init();
-            });
-        $scope.order = {};
-        $('.edit-order-wrapper').slideUp('slow')
-    };
+        $scope.isActive = function(order) {
+            return order.active;
+        };
 
-    $scope.editOrder = function(order) {
-        $scope.order = order;
-        $('.edit-order-wrapper').slideDown('slow')
-    }
+        $scope.belongsToCurrentUser = function(order) {
+            return order.founder_uid == $scope.currentUser;
+        }
 
-    $scope.show = function(order) {
-        $('.add-dish-wrapper').slideDown('slow');
-        $scope.$emit('ORDER_SELECTED', order);
-    };
+        $scope.dishBelongsToCurrentUser = function(dish) {
+            return dish.users_uids.contains($scope.currentUser);
+        }
 
-    $scope.removeOrder = function(order) {
-        if (confirm('Are you sure you want to remove order ' + order.name + '?'))
-            Order.remove({id:order._id},
+        $scope.isFinalized = function(order) {
+            return !order.active;
+        }
+
+        var initializeActiveAndFinalized = function() {
+            for (order in $scope.orders) {
+                if ($scope.orders[order].active)
+                    $scope.anyActiveOrders = true;
+                else
+                    $scope.anyFinalizedOrders = true;
+            }
+        };
+
+        var handleRoutes = function(path) {
+            var pathMembers = path.replace(/^\/+|\/+$/g, '').split('/');
+            if (pathMembers[0] == 'edit' && pathMembers.length > 1) {
+                Order.get({id: pathMembers[1]}, function(order) {
+                    angular.copy(order, $scope.order);
+                    $('.edit-order-wrapper').show();
+                });
+            } else if (pathMembers[0] == 'add_bitcoin_address' && pathMembers.length > 1) {
+                Order.get({id: pathMembers[1]}, function(order) {
+                    angular.copy(order, $scope.order);
+                    $('.add-bitcoin-address-wrapper').show();
+                });
+            };
+        };
+
+        var init = function(){
+            $scope.anyActiveOrders = false;
+            $scope.anyFinalizedOrders = false;
+
+            Order.query(
+                {},
+                function(data) {
+                    $scope.orders = data;
+                    initializeActiveAndFinalized();
+                });
+        };
+
+        ($scope.refreshOrders = function() {
+            init();
+            setTimeout($scope.refreshOrders, CONFIG.orders.polling_interval);
+        })();
+
+        $rootScope.$on('DISH_ADDED', function(event,order) {
+            $('.add-dish-wrapper').slideUp('slow');
+            init();
+        });
+
+        $rootScope.$on('DISH_UPDATED', function(event,order) {
+            $('.edit-dish-wrapper').slideUp('slow');
+            init();
+        });
+
+        $rootScope.$on('DISH_REMOVED', function(event) {
+            init();
+        });
+
+        $scope.add = function() {
+            $scope.order.active = true;
+
+            if (!$scope.order.ordered_at)
+                $scope.order.ordered_at = new Date();
+
+            Order.save($scope.order,
                 function(data){
                     init();
                 });
-    };
+            $scope.order = {};
+        };
 
-    $scope.removeDish = function(dish) {
-        if (confirm('Are you sure you want to remove dish ' + dish.description + '?')) {
-            $scope.$emit('REMOVING_DISH', dish);
+        $scope.edit = function() {
+            Order.update({id: $scope.order._id}, {order: $scope.order},
+                function(data){
+                    init();
+                });
+            $scope.order = {};
+            $('.edit-order-wrapper').slideUp('slow')
+        };
+
+        $scope.editOrder = function(order) {
+            $scope.order = order;
+            $scope.order.bitcoin_wallet_remember = false;
+
+            $('.edit-order-wrapper').slideDown('slow')
         }
-    };
 
-    $scope.editDish = function(dish) {
-        $scope.$emit('EDITING_DISH', dish);
-    };
+        $scope.show = function(order) {
+            $('.add-dish-wrapper').slideDown('slow');
+            $scope.$emit('ORDER_SELECTED', order);
+        };
 
-    $scope.joinToDish = function(dish) {
-        $.ajax({
-            url: 'dishes/' + dish._id + '/join',
-            method: 'put'
-        }).done(function (data) {
-                init();
+        $scope.removeOrder = function(order) {
+            if (confirm('Are you sure you want to remove order ' + order.name + '?'))
+                Order.remove({id:order._id},
+                    function(data){
+                        init();
+                    });
+        };
+
+        $scope.removeDish = function(dish) {
+            if (confirm('Are you sure you want to remove dish ' + dish.description + '?')) {
+                $scope.$emit('REMOVING_DISH', dish);
             }
-        ).fail(function(jqXHR){
-                var responseText = jQuery.parseJSON((jqXHR.responseText))
-                ErrorHandler.displayAlert(responseText)
-            });
-    };
+        };
 
-    $scope.finalize = function(id) {
-        $.ajax({
-            url: 'order_finalize',
-            data: {id: id}
-        }).done(function (data) { init(); }
-        ).fail(function(jqXHR, textStatus) { console.log(jqXHR, textStatus) });
-    };
+        $scope.editDish = function(dish) {
+            $scope.$emit('EDITING_DISH', dish);
+        };
 
-    $scope.save = function(order) {
-        Order.update({id:order._id}, {order: order}, function(data){ init(); });
-    };
+        $scope.joinToDish = function(dish) {
+            $.ajax({
+                url: 'dishes/' + dish._id + '/join',
+                method: 'put'
+            }).done(function (data) {
+                    init();
+                }
+            ).fail(function(jqXHR){
+                    var responseText = jQuery.parseJSON((jqXHR.responseText))
+                    ErrorHandler.displayAlert(responseText)
+                });
+        };
 
-    init();
-    handleRoutes($location.path());
+        $scope.finalize = function(id) {
+            $.ajax({
+                url: 'order_finalize',
+                data: {id: id}
+            }).done(function (data) { init(); }
+            ).fail(function(jqXHR, textStatus) { console.log(jqXHR, textStatus) });
+        };
+
+        $scope.save = function(order) {
+            Order.update({id:order._id}, {order: order}, function(data){ init(); });
+        };
+
+        init();
+        handleRoutes($location.path());
 }]);
 
 app.controller('ChatController', ['$scope', '$rootScope', 'ChatMessageDAO', function ($scope, $rootScope, ChatMessageDAO) {
