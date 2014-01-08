@@ -111,7 +111,7 @@ app.controller('OrdersController', ['$scope', '$rootScope', '$location', 'Order'
             maximumInputLength: 34,
             tags: [],
             ajax: {
-                url: 'http://localhost:3000/bitcoin_wallets.json',
+                url: '/bitcoin_wallets.json',
                 dataType: 'json',
                 results: function(data, page) {
                     return {
