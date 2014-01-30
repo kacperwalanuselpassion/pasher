@@ -13,8 +13,24 @@ class OrderSerializer < ActiveModel::Serializer
     }
   end
 
+  def delivery_cost
+    NumberFormatter.new.number_to_pln(object.delivery_cost)
+  end
+
+  def user_delivery_cost
+    NumberFormatter.new.number_to_pln(object.user_delivery_cost)
+  end
+
   def ordered_at_int
     ordered_at = object.ordered_at
     TimeUtils.to_timestamp(object.ordered_at) if TimeUtils.now < ordered_at
+  end
+
+  def total_sum
+    NumberFormatter.new.number_to_pln(object.total_sum)
+  end
+
+  def min_order_price
+    NumberFormatter.new.number_to_pln(object.min_order_price)
   end
 end

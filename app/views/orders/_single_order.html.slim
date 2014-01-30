@@ -26,9 +26,9 @@
             td.price
               span
                 strong
-                  | {{dish.price}} PLN
+                  | {{dish.price}}
                 span ng-show="order.user_delivery_cost"
-                  |  + {{order.user_delivery_cost}} PLN
+                  |  + {{order.user_delivery_cost}}
             - if active
               td
                 a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
@@ -49,8 +49,11 @@
                 button.btn.btn-info ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order) && order.dishes.length > 0" Losuj
               - else
                 | {{ order.executor }}
-            th
-              | {{ order.total_sum }} PLN
+            th.no-wrap
+              span
+                | {{ order.total_sum }}
+              span ng-show="order.delivery_cost"
+                |  + {{order.delivery_cost}}
             - if active
               th
               th
@@ -78,13 +81,13 @@
         label Min. zamówienie:
         strong
           span ng-show="order.min_order_price"
-            |  {{ order.min_order_price }} zł
+            |  {{ order.min_order_price }}
           span ng-hide="order.min_order_price"
             |  -
       .order-header-column.col-xs-6.col-md-12.bullet-truck ng-show="order.delivery_cost"
         label Koszt dostawy:
         strong
-          |  {{ order.delivery_cost }} zł
+          |  {{ order.delivery_cost }}
       .order-header-column.col-xs-6.col-md-12.bullet-bitcoin ng-show="order.bitcoin_wallet.address"
         label
           a ng-href="/bitcoin_wallets/{{ order._id }}" target="_blank" Pay executor with BTC

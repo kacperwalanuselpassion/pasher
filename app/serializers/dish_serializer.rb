@@ -6,4 +6,8 @@ class DishSerializer < ActiveModel::Serializer
   def users_names
     object.users.map(&:name)
   end
+
+  def price
+    NumberFormatter.new.number_to_pln(object.price)
+  end
 end
