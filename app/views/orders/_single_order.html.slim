@@ -26,9 +26,9 @@
             td.price
               span
                 strong
-                  | {{dish.price}}
+                  | {{dish.price_to_pln}}
                 span ng-show="order.user_delivery_cost"
-                  |  + {{order.user_delivery_cost}}
+                  |  + {{order.user_delivery_cost_to_pln}}
             - if active
               td
                 a ng-click="editDish(dish)" ng-show="dishBelongsToCurrentUser(dish)"
@@ -51,9 +51,9 @@
                 | {{ order.executor }}
             th.no-wrap
               span
-                | {{ order.total_sum }}
+                | {{ order.total_sum_to_pln }}
               span ng-show="order.delivery_cost"
-                |  + {{order.delivery_cost}}
+                |  + {{order.delivery_cost_to_pln}}
             - if active
               th
               th
