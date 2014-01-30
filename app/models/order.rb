@@ -24,7 +24,7 @@ class Order
 
   def user_delivery_cost
     return Float::NAN if !self.delivery_cost || users.count == 0
-    self.delivery_cost / users.count
+    self.delivery_cost.to_f / users.count.to_f
   end
 
   def draw_executor
