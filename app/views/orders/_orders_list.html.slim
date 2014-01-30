@@ -1,7 +1,7 @@
-ul.orders-list ng-repeat="order in orders | filter:isActive"
+ul.orders-list ng-repeat="order in orders track by order._id | filter:isActive"
   li.active-order
     = render partial: 'orders/single_order', locals: {active: true}
 
-ul.orders-list ng-repeat="order in orders | filter:isFinalized"
+ul.orders-list ng-repeat="order in orders track by order._id | filter:isFinalized"
   li.finalized-order
     = render partial: 'orders/single_order', locals: {active: false}

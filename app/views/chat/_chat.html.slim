@@ -11,7 +11,7 @@
 
   .chat-messages ng-show='chatShown'
     ul#chat-message-list
-      li ng-repeat='message in chatMessages' ng-class="{'no-border':message.omitHeader}"
+      li ng-repeat='message in chatMessages track by message._id' ng-class="{'no-border':message.omitHeader}"
         .message-created-at.pull-right
           | [{{ message.timestamp }}]
         .message-author.pull-left ng-hide="message.omitHeader"

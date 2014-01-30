@@ -15,7 +15,7 @@
     .col-md-9.col-md-push-3
       table.order-details.table.table-bordered
         tbody
-          tr ng-repeat="dish in order.dishes"
+          tr ng-repeat="dish in order.dishes track by dish._id"
             td
               strong
                 | {{ dish.description }}
