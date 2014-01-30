@@ -1,4 +1,5 @@
 .form-group.text-center
   label Szacowany czas zamówienia
   div.text-center ng-model="order.ordered_at" required=''
-    timepicker hour-step="1" minute-step="10" show-meridian="false" style="display: inline;"
+    div.timepicker-container
+      timepicker hour-step="1" minute-step="10" show-meridian="false" style="display: inline;"
