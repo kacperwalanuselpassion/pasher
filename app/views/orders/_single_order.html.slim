@@ -81,13 +81,13 @@
         label Min. zamówienie:
         strong
           span ng-show="order.min_order_price"
-            |  {{ order.min_order_price }}
+            |  {{ order.min_order_price_to_pln }}
           span ng-hide="order.min_order_price"
             |  -
       .order-header-column.col-xs-6.col-md-12.bullet-truck ng-show="order.delivery_cost"
         label Koszt dostawy:
         strong
-          |  {{ order.delivery_cost }}
+          |  {{ order.delivery_cost_to_pln }}
       .order-header-column.col-xs-6.col-md-12.bullet-bitcoin ng-show="order.bitcoin_wallet.address"
         label
           a ng-href="/bitcoin_wallets/{{ order._id }}" target="_blank" Pay executor with BTC
