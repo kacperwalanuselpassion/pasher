@@ -1,16 +1,16 @@
-h2 Nowe zamówienie
-a.pull-right.btn-close-new-order zamknij
+h2 New order
+a.pull-right.btn-close-new-order close
 .row
   form#new-order-form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="add()"
     .form-group
-      input.form-control ng-model="order.name" placeholder="Dostarczyciel paszy" type="text" required=''
+      input.form-control ng-model="order.name" placeholder="Restaurant" type="text" required=''
     .form-group
-      input.form-control ng-model="order.url" placeholder="Strona WWW dostarczyciela paszy"
+      input.form-control ng-model="order.url" placeholder="Restaurant WWW"
     .form-group
-      input.form-control ng-model="order.delivery_cost" placeholder="Koszt dostarczenia paszy" type="number" step="any"
+      input.form-control ng-model="order.delivery_cost" placeholder="Delivery cost" type="number" step="any"
     .form-group
-      input.form-control ng-model="order.min_order_price" placeholder="Minimalna cena zamówienia" type="number" step="any"
+      input.form-control ng-model="order.min_order_price" placeholder="Minimal order price" type="number" step="any"
     = render partial: 'orders/form_timepicker'
 
     .form-group
-      input.btn-create-order.btn.btn-success name="create-order" type="submit" value="Zapisz"
+      input.btn-create-order.btn.btn-success name="create-order" type="submit" value="Save"

@@ -3,13 +3,13 @@ a.pull-right.btn-close-edit-order close
 .row
   form#new-order-form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group ng-submit="edit()"
     .form-group
-      input.form-control ng-model="order.name" placeholder="Where do you order?" type="text" required=''
+      input.form-control ng-model="order.name" placeholder="Restaurant" type="text" required=''
     .form-group
-      input.form-control ng-model="order.url" placeholder="Link to restaurant site, facebook page, menu, etc."
+      input.form-control ng-model="order.url" placeholder="Restaurant WWW"
     .form-group
       input.form-control ng-model="order.delivery_cost" placeholder="Delivery cost" type="number" step="any"
     .form-group
-      input.form-control ng-model="order.min_order_price" placeholder="Min. order price" type="number" step="any"
+      input.form-control ng-model="order.min_order_price" placeholder="Minimal order price" type="number" step="any"
     .form-group.no-display
       input.form-control ng-model="order._id"
 

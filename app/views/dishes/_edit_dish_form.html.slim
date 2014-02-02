@@ -1,21 +1,21 @@
 h2
-  | Edycja posiłku
+  | Edit your order
   strong.text-info
-    |  {{order.name}}
-a.pull-right.btn-close-edit-dish zamknij
+    |  {{ order.name }}
+a.pull-right.btn-close-edit-dish close
 .row
   form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group novalidate="" ng-submit="edit()"
     .form-group
-      textarea.form-control ng-model="dish.description" placeholder="Co zamawiasz?" required=''
+      textarea.form-control ng-model="dish.description" placeholder="Your meal" required=''
     .form-group
-      input.form-control ng-model="dish.price" placeholder="Ile to będzie kosztować?" type="number" step="any" required=''
+      input.form-control ng-model="dish.price" placeholder="Your meal price" type="number" step="any" required=''
     .form-group
       label.checkbox-inline
-        | Czy inni mogą dołączyć do Twojego dania?
+        | Split your meal with others
         input ng-model="dish.joinable" type="checkbox"
     .form-group
-      input.form-control ng-show="dish.joinable" ng-model="dish.participants_limit" placeholder="Ile ludzi może dołączyć?" min="{{dish.users_uids.length}}" type="number" step="any"
+      input.form-control ng-show="dish.joinable" ng-model="dish.participants_limit" placeholder="How many people can join to your meal?" min="{{dish.users_uids.length}}" type="number" step="any"
     .form-group.no-display
       input ng-model="dish._id"
     .form-group
-      input.btn.btn-success name="add-dish-to-order" type="submit" value="Zapisz"
+      input.btn.btn-success name="add-dish-to-order" type="submit" value="Save"

@@ -3,12 +3,13 @@
     .col-md-9.col-md-push-3
       .inline-buttons
         - if active
-          button.btn.btn-success.pull-left ng-click="show(order)" Dodaj posiłek
-          button.btn.btn-default.pull-left ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" Edytuj zamówienie
-        button.btn.btn-danger.pull-left ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" Usuń zamówienie
+          button.btn.btn-success.pull-left ng-click="show(order)"
+            | Join to {{ order.name }} order
+          button.btn.btn-default.pull-left ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" Edit order
+        button.btn.btn-danger.pull-left ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" Remove order
       h5.pull-right
         label ng-show="order.active"
-          | Utworzone przez:
+          | Created by:
         label ng-hide="order.active"
           | Executor:
         strong
@@ -41,7 +42,7 @@
                   span.glyphicon.glyphicon-trash
               td.no-wrap
                 a ng-click="joinToDish(dish)" ng-show="canJoinToDish(dish)"
-                  span Dołącz
+                  span Join
                 span ng-show="canJoinToDish(dish)"  ({{dish.users_uids.length}}/{{dish.participants_limit + 1}})
         tfoot
           tr
@@ -49,14 +50,12 @@
               | {{ order.dishes.length }}
             th
               - if active
-                button.btn.btn-info ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order) && order.dishes.length > 0" Losuj
+                button.btn.btn-info ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order) && order.dishes.length > 0" Draw executor
               - else
                 | Executor: {{ order.executor }}
             th.no-wrap
               span
                 | {{ order.total_sum_to_pln }}
-              span ng-show="order.delivery_cost"
-                |  + {{order.delivery_cost_to_pln}}
             - if active
               th
               th
@@ -68,27 +67,27 @@
         .label.label-default ng-show="!order.active"
           | FINALIZED
       .order-header-column.col-xs-6.col-md-12.bullet-pointer
-        label Lokal:
+        label Restaurant:
         strong 
           a ng-href="{{ order.url }}" target="_blank"
             |  {{ order.name }}
       .order-header-column.col-xs-6.col-md-12.bullet-clock
         div ng-show="order.active"
-          label Czas do końca:
+          label Time left:
           strong
             span ng-show="order.ordered_at_int"
               timer end-time="order.ordered_at_int"
                | {{ hours }}h {{ minutes }}min {{ seconds }}s
             span.text-danger ng-hide="order.ordered_at_int" already passed
       .order-header-column.col-xs-6.col-md-12.bullet-paperclip
-        label Min. zamówienie:
+        label Minimal order price:
         strong
           span ng-show="order.min_order_price"
             |  {{ order.min_order_price_to_pln }}
           span ng-hide="order.min_order_price"
             |  -
       .order-header-column.col-xs-6.col-md-12.bullet-truck ng-show="order.delivery_cost"
-        label Koszt dostawy:
+        label Delivery cost:
         strong
           |  {{ order.delivery_cost_to_pln }}
       .order-header-column.col-xs-6.col-md-12.bullet-bitcoin ng-show="order.bitcoin_wallet.address"
