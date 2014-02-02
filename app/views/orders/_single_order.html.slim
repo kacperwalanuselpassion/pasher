@@ -7,8 +7,11 @@
           button.btn.btn-default.pull-left ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" Edytuj zamówienie
         button.btn.btn-danger.pull-left ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" Usuń zamówienie
       h5.pull-right
-        label Utworzone przez:
-        strong 
+        label ng-show="order.active"
+          | Utworzone przez:
+        label ng-hide="order.active"
+          | Executor:
+        strong
           |  {{ order.founder.name }}
       .clearfix
   .row
@@ -48,7 +51,7 @@
               - if active
                 button.btn.btn-info ng-click="finalize(order._id)" ng-show="belongsToCurrentUser(order) && order.dishes.length > 0" Losuj
               - else
-                | {{ order.executor }}
+                | Executor: {{ order.executor }}
             th.no-wrap
               span
                 | {{ order.total_sum_to_pln }}
