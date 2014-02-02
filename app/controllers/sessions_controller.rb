@@ -1,13 +1,7 @@
 class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
-    user = User.where(:provider => auth["provider"], :uid => auth["uid"]).first_or_initialize(
-        :refresh_token => auth["credentials"]["refresh_token"],
-        :access_token => auth["credentials"]["token"],
-        :expires => auth["credentials"]["expires_at"],
-        :name => auth["info"]["name"],
-        :email => auth["info"]["email"]
-    )
+    user = User::UserCreatorService.new.create_from_google_oauth_request(auth)
     url = session[:return_to] || root_path
     session[:return_to] = nil
     url = root_path if url.eql?('/logout')
