@@ -1,7 +1,19 @@
-ul.orders-list ng-repeat="order in orders track by order._id | filter:isActive"
+/Should be:
+/order in orders track by order._id | filter:isFinalized
+/Is:
+/order in orders | filter:isActive
+/Why: In Angular 1.2.6 "track by" does not work with "filter".
+/"track by" is necessary to avoid DOM tree rebuilding.
+ul.orders-list ng-repeat="order in orders | filter:isActive"
   li.active-order
-    = render partial: 'orders/single_order', locals: {active: true}
+    = render 'orders/single_order', active: true
 
-ul.orders-list ng-repeat="order in orders track by order._id | filter:isFinalized"
+/Should be:
+/order in orders track by order._id | filter:isFinalized
+/Is:
+/order in orders | filter:isFinalized
+/Why: In Angular 1.2.6 "track by" does not work with "filter".
+/"track by" is necessary to avoid DOM tree rebuilding.
+ul.orders-list ng-repeat="order in orders | filter:isFinalized"
   li.finalized-order
-    = render partial: 'orders/single_order', locals: {active: false}
+    = render 'orders/single_order', active: false
