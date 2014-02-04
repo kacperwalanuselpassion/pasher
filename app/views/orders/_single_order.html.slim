@@ -4,7 +4,7 @@
       .inline-buttons
         - if active
           button.btn.btn-success.pull-left ng-click="show(order)"
-            | Join to {{ order.name }} order
+            | Join {{ order.name }} order
           button.btn.btn-default.pull-left ng-click="editOrder(order)" ng-show="belongsToCurrentUser(order)" Edit order
         button.btn.btn-danger.pull-left ng-click="removeOrder(order)" ng-show="belongsToCurrentUser(order)" Remove order
       h5.pull-right
