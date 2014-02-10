@@ -1,0 +1,12 @@
+form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group action='/pasher/sign_up' method='POST'
+  .form-group
+    input.form-control placeholder='Your name' required='' name='name'
+  .form-group
+    input.form-control placeholder='Your email' type='email' required='' name='email'
+  .form-group
+    input.form-control placeholder='Your password' required='' name='password' type='password'
+  .form-group
+    input.form-control placeholder='Confirm your password' required='' name='password_confirmation' type='password'
+  .form-group
+    input.btn.btn-success value='Create account' type='submit'
+  input.hidden name='from' value='sign_up_form'

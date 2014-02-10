@@ -1,6 +1,11 @@
-div.welcome-to-pasher.text-center
-  = image_tag 'pasher_logo.png', class: 'welcome-logo'
-  .welcome-text
-    p Welcome to Pasher! Sign in to begin the biggest adventure of your life!
-  div
-    a.btn.btn-welcome.btn-success.btn-lg href='/auth/google_login' Sign in!
+div.sign-in-page
+  div.welcome-to-pasher.text-center
+    = image_tag 'pasher_logo.png', class: 'welcome-logo'
+    .welcome-text
+      p Welcome to Pasher! Sign in to begin the biggest adventure of your life!
+    div.login-link-container
+      a.btn.btn-welcome.btn-success.btn-lg href='/auth/google_login' Sign in with Google Account
+    div.login-link-container
+      a.btn.btn-welcome.btn-success.btn-lg href='/auth/pasher_login' Sign in with Pasher Account
+    div.login-link-container
+      a.btn.btn-welcome.btn-success.btn-lg href='/users/new' Create your very own Pasher account

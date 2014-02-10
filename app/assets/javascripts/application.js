@@ -24,3 +24,4 @@
 //= require angular-ui-select2
 //= require app
 //= require orders
+//= require flash_notice

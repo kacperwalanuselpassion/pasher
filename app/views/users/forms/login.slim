@@ -1,0 +1,9 @@
+.users-login-page
+  form.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12.form-group action='/auth/pasher_login/callback' method='POST'
+    .form-group
+      input.form-control placeholder='Your email' type='email' required='' name='email'
+    .form-group
+      input.form-control placeholder='Your password' required='' name='password' type='password'
+    .form-group
+      input.btn.btn-success name='add-dish-to-order' value='Sign in' type='submit'
+    input.hidden name='from' value='login_form'

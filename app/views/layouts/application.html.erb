@@ -10,6 +10,13 @@
 <body>
 
     <%= render 'shared/config' %>
+    <% if flash[:notice] %>
+        <div class="flash-notice-container">
+            <div class="flash-notice">
+              <%= flash[:notice] %>
+            </div>
+        </div>
+    <% end %>
     <%= yield %>
 
 <%= javascript_include_tag "application" %>

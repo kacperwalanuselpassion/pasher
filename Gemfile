@@ -53,3 +53,4 @@ gem 'bootstrap-sass-rails'
 gem 'rqrcode-rails3'
 gem "select2-rails"
 gem 'angular-ui-select2-rails'
+gem 'bcrypt-ruby', :require => 'bcrypt'
